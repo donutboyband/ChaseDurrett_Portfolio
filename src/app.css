@@ -100,3 +100,13 @@
 	font-display: swap;
 	font-style: normal;
 }
+
+:global(body) {
+	background: #ffffff;
+	color: #000000;
+}
+
+:global(.dark body) {
+	background: #0b0f19;
+	color: #f8fafc;
+}

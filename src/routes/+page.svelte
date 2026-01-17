@@ -17,7 +17,7 @@
 			role: 'Frontend Developer',
 			company: 'Soup Agency',
 			years: '2023 — 2024',
-			summary: "Worked with marketing teams to create beautiful web experiences for their marketing campaigns. I had to adapt to client's tech stacks, so I became very skilled at picking up new languages and paradigms. I worked primarily in Wordpress, svelte, and regular ol' HTML.",
+			summary: "Worked with marketing teams to create beautiful web experiences for their campaigns. I had to adapt to client's tech stacks, so I became very skilled at picking up new languages and paradigms. I worked primarily in Wordpress, svelte, and regular ol' HTML.",
 			tags: ['Frontend', 'Marketing']
 		},
         	{
@@ -169,7 +169,7 @@
 </script>
 
 <div
-	class="w-full h-screen-100 flex flex-col justify-center items-center space-y-6"
+	class="w-full h-screen-100 flex flex-col justify-center items-center space-y-6 bg-white dark:bg-slate-950 text-black dark:text-white transition-colors"
 	role="region"
 	aria-label="Intro"
 >
@@ -177,7 +177,7 @@
 		hi<span class="text-blue-500 transition-opacity duration-150 {isDotActive ? 'opacity-0' : 'opacity-100'}" bind:this={heroInlineDot}>.</span>
 	</h1>
 	<svg
-		class="w-6 h-6 stroke-black/60 group-hover:stroke-black transition-colors duration-200"
+		class="w-6 h-6 stroke-black/60 dark:stroke-white/70 group-hover:stroke-black dark:group-hover:stroke-white transition-colors duration-200"
 		fill="none"
 		viewBox="0 0 24 24"
 		xmlns="http://www.w3.org/2000/svg"
@@ -199,22 +199,22 @@
 	</span>
 
 	<div class="w-full flex justify-center pt-6">
-		<div class="w-24 h-px bg-black/10" bind:this={heroBarrier}></div>
+		<div class="w-full h-px" bind:this={heroBarrier}></div>
 	</div>
 </div>
 
 <section
-	class="w-full bg-white text-black py-20 px-6 md:py-28 md:px-12 lg:px-20"
+	class="w-full bg-white dark:bg-slate-950 text-black dark:text-white py-20 px-6 md:py-28 md:px-12 lg:px-20 transition-colors"
 	id="journey"
 	bind:this={journeySection}
 >
 	<div class="max-w-6xl mx-auto grid md:grid-cols-[1fr,2fr] gap-10 md:gap-16">
 		<div class="space-y-6 md:sticky md:top-24 self-start">
-			<p class="font-link text-xs tracking-[0.25em] uppercase text-black/60">About</p>
+			<p class="font-link text-xs tracking-[0.25em] uppercase text-black/60 dark:text-white/60">About</p>
 			<h2 class="font-header text-5xl md:text-6xl leading-tight">
 				Experience + projects 
 			</h2>
-			<p class="font-cabinet text-xl text-black leading-relaxed">
+			<p class="font-cabinet text-xl text-black dark:text-white/80 leading-relaxed">
 				I love building things. And technology. I'm a lifelong learner (I don't know anything). I'm a full-stack developer who loves building clean and scaleable applications that focus on user experience and maintainability. Most recently I've been drawn into the world of data science and machine learning, and focused on solving some of the problems I've encountered in industries I've worked in.
 			</p>
 		</div>
@@ -222,26 +222,26 @@
 		<div class="relative">
 			<div class="flex flex-col gap-12 md:gap-10">
 				<div class="space-y-4">
-					<p class="font-link text-sm text-black/60">Work experience</p>
+					<p class="font-link text-sm text-black/60 dark:text-white/60">Work experience</p>
 					{#each experiences as exp}
 						<article
-							class="relative pl-8 md:pl-10 py-6 pr-6 border border-black/10 rounded-2xl bg-white/80 shadow-sm overflow-hidden group"
+							class="relative pl-8 md:pl-10 py-6 pr-6 border border-black/10 dark:border-white/10 rounded-2xl bg-white/80 dark:bg-slate-900/60 shadow-sm overflow-hidden group backdrop-blur"
 							data-journey-card
 						>
 							<div
 								class="absolute left-4 top-8 w-3 h-3 rounded-full bg-primary ring-4 ring-primary/20"
 							></div>
 							<div class="flex items-center gap-3 text-sm font-link uppercase tracking-[0.12em]">
-								<span class="px-3 py-1 bg-black text-white rounded-full">{exp.company}</span>
-								<span class="text-black/60">{exp.years}</span>
+								<span class="px-3 py-1 bg-black text-white rounded-full dark:bg-white dark:text-black">{exp.company}</span>
+								<span class="text-black/60 dark:text-white/70">{exp.years}</span>
 							</div>
 							<h3 class="font-header text-2xl md:text-3xl mt-3 mb-2">{exp.role}</h3>
-							<p class="font-cabinet text-base md:text-xl text-black leading-relaxed">
+							<p class="font-cabinet text-base md:text-xl text-black dark:text-white/80 leading-relaxed">
 								{exp.summary}
 							</p>
 							<div class="flex flex-wrap gap-2 mt-4">
 								{#each exp.tags as tag}
-									<span class="px-3 py-1 bg-tertiary/40 text-black text-sm font-link rounded-full">
+									<span class="px-3 py-1 bg-[#baff29] text-black text-sm font-link rounded-full">
 										{tag}
 									</span>
 								{/each}
@@ -251,25 +251,25 @@
 				</div>
 
 				<div class="space-y-4">
-					<p class="font-link text-sm text-black/60">Selected projects</p>
+					<p class="font-link text-sm text-black/60 dark:text-white/60">Selected projects</p>
 					{#each projects as project}
 						<article
-							class="relative pl-8 md:pl-10 py-6 pr-6 border border-black/10 rounded-2xl bg-white/80 shadow-sm overflow-hidden group"
+							class="relative pl-8 md:pl-10 py-6 pr-6 border border-black/10 dark:border-white/10 rounded-2xl bg-white/80 dark:bg-slate-900/60 shadow-sm overflow-hidden group backdrop-blur"
 							data-journey-card
 						>
 							<div
 								class="absolute left-2 md:left-1 top-8 w-3 h-3 rounded-full bg-secondary ring-4 ring-secondary/20 group-hover:ring-primary/30 transition-all duration-200"
 							></div>
 							<div class="flex items-center gap-3 text-sm font-link uppercase tracking-[0.12em]">
-								<span class="px-3 py-1 bg-black text-white rounded-full">{project.type}</span>
-								<span class="text-black/60">{project.metrics}</span>
+								<span class="px-3 py-1 bg-black text-white rounded-full dark:bg-white dark:text-black">{project.type}</span>
+								<span class="text-black/60 dark:text-white/70">{project.metrics}</span>
 							</div>
 							<h3 class="font-header text-2xl md:text-3xl mt-3 mb-2">{project.name}</h3>
-							<p class="font-cabinet text-base md:text-lg text-black/70 leading-relaxed">
+							<p class="font-cabinet text-base md:text-lg text-black/70 dark:text-white/80 leading-relaxed">
 								{project.description}
 							</p>
-							<div class="mt-4 flex items-center gap-3 font-link text-sm uppercase tracking-[0.12em] text-black">
-								<span class="px-3 py-1 bg-primary text-white rounded-full group-hover:bg-black transition-colors duration-200">View</span>
+							<div class="mt-4 flex items-center gap-3 font-link text-sm uppercase tracking-[0.12em] text-black dark:text-white">
+								<span class="px-3 py-1 bg-primary text-white rounded-full group-hover:bg-black dark:group-hover:bg-white dark:group-hover:text-black transition-colors duration-200">View</span>
 								<span class="group-hover:translate-x-1 transition-transform duration-200">&#8600;</span>
 							</div>
 						</article>

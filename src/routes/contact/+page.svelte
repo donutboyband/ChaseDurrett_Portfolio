@@ -204,23 +204,23 @@
 	});
 </script>
 
-<section class="w-full min-h-screen bg-white text-black py-16 px-6 md:py-20 md:px-12 lg:px-20">
+<section class="w-full min-h-screen bg-white dark:bg-slate-950 text-black dark:text-white py-16 px-6 md:py-20 md:px-12 lg:px-20 transition-colors">
 	<div class="max-w-6xl mx-auto grid lg:grid-cols-[1.1fr,1fr] gap-12">
 		<div>
 			<div class="space-y-6">
-				<p class="font-link text-xs tracking-[0.25em] uppercase text-black/60">Contact</p>
+				<p class="font-link text-xs tracking-[0.25em] uppercase text-black/60 dark:text-white/60">Contact</p>
 				<h1 class="font-header text-4xl md:text-5xl leading-tight">Let's get connected!</h1>
-				<p class="font-cabinet text-lg text-black leading-relaxed max-w-2xl">(if you want)</p>
+				<p class="font-cabinet text-lg text-black dark:text-white/70 leading-relaxed max-w-2xl">(if you want)</p>
 
 				<div class="grid sm:grid-cols-2 gap-4">
-					<div class="p-4 border border-black/10 rounded-2xl bg-white/80 shadow-sm">
-						<p class="font-link text-xs uppercase tracking-[0.18em] text-black/60">Email</p>
-						<p class="font-header text-xl mt-2 break-all">{recipientEmail}</p>
+					<div class="p-4 border border-black/10 dark:border-white/10 rounded-2xl bg-white/80 dark:bg-slate-900/60 shadow-sm">
+						<p class="font-link text-xs uppercase tracking-[0.18em] text-black/60 dark:text-white/60">Email</p>
+						<p class="font-header text-xl mt-2 break-all text-black dark:text-white">{recipientEmail}</p>
 					</div>
-					<div class="p-4 border border-black/10 rounded-2xl bg-white/80 shadow-sm">
-						<p class="font-link text-xs uppercase tracking-[0.18em] text-black/60">Based in</p>
-						<p class="font-header text-xl mt-2 flex items-center">
-							Remote — OKC <span><CowboyHat /></span>
+					<div class="p-4 border border-black/10 dark:border-white/10 rounded-2xl bg-white/80 dark:bg-slate-900/60 shadow-sm">
+						<p class="font-link text-xs uppercase tracking-[0.18em] text-black/60 dark:text-white/60">Based in</p>
+						<p class="font-header text-xl mt-2 flex items-center text-black dark:text-white">
+							OKC — Remote <span class="ml-1"><CowboyHat /></span>
 						</p>
 					</div>
 				</div>
@@ -230,17 +230,17 @@
 
 		<div class="flex items-center justify-center">
 		<form
-			class="p-6 md:p-8 border border-black/10 rounded-3xl bg-white/90 shadow-sm space-y-5 flex flex-col justify-center"
+			class="p-6 md:p-8 border border-black/10 dark:border-white/10 rounded-3xl bg-white/90 dark:bg-slate-900 shadow-sm space-y-5 flex flex-col justify-center transition-colors"
 			on:submit|preventDefault={handleSubmit}
 		>
 			<div class="space-y-2">
-				<label class="font-link text-xs uppercase tracking-[0.18em] text-black/60" for="email"
+				<label class="font-link text-xs uppercase tracking-[0.18em] text-black/60 dark:text-white/60" for="email"
 					>Email</label
 				>
 				<input
 					id="email"
 					type="email"
-					class="w-full bg-white border border-black/15 rounded-xl px-4 py-3 font-cabinet text-base focus:outline-none focus:border-black transition"
+					class="w-full bg-white dark:bg-slate-800 border border-black/15 dark:border-white/10 rounded-xl px-4 py-3 font-cabinet text-base text-black dark:text-white focus:outline-none focus:border-black dark:focus:border-white transition"
 					placeholder="you@email.com"
 					bind:value={form.email}
 					required
@@ -248,12 +248,12 @@
 			</div>
 
 			<div class="space-y-2">
-				<label class="font-link text-xs uppercase tracking-[0.18em] text-black/60" for="project"
+				<label class="font-link text-xs uppercase tracking-[0.18em] text-black/60 dark:text-white/60" for="project"
 					>Details</label
 				>
 				<textarea
 					id="project"
-					class="w-full bg-white border border-black/15 rounded-xl px-4 py-3 font-cabinet text-base focus:outline-none focus:border-black transition min-h-[140px]"
+					class="w-full bg-white dark:bg-slate-800 border border-black/15 dark:border-white/10 rounded-xl px-4 py-3 font-cabinet text-base text-black dark:text-white focus:outline-none focus:border-black dark:focus:border-white transition min-h-[140px]"
 					placeholder="Site, product launch, creative direction, motion..."
 					bind:value={form.project}
 					required
@@ -261,11 +261,11 @@
 			</div>
 			<button
 				type="submit"
-				class="w-full bg-black text-white font-link uppercase tracking-[0.2em] rounded-xl py-4 hover:bg-primary transition-colors"
+				class="w-full bg-black dark:bg-primary text-white hover:text-black dark:hover:text-white dark:hover:bg-primary font-link uppercase tracking-[0.2em] rounded-xl py-4 hover:bg-[#baff29] transition-colors"
 			>
 				Send email
 			</button>
-			<p class="font-cabinet text-sm text-black/90 text-center">
+			<p class="font-cabinet text-sm text-black/90 dark:text-white/70 text-center">
 				This opens your email client with the details pre-filled.
 			</p>
 		</form>
