@@ -8,6 +8,7 @@
 	export let itemsArr: any[] = [];
 	export let link: string = '';
 	export let borders: boolean = true;
+	export let href: string = '/';
 	let options = { loop: true };
 	let plugins = [
 		Autoplay(),
@@ -34,7 +35,7 @@ hover:text-black transition-all duration-200 group {borders
 	>
 		<div class="embla__container w-full h-full flex">
 			{#each itemsArr as item}
-				<a href={`/${link}`} class="embla__slide flex-center h-full">
+				<a href={href} class="embla__slide flex-center h-full">
 					<p class="opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out">
 						{item}
 					</p>
@@ -45,7 +46,7 @@ hover:text-black transition-all duration-200 group {borders
 	</div>
 	<a
 		class="w-full h-full flex-center transition-all duration-100 text-white group-hover:text-black"
-		href="/contact">{link}</a
+		href={href}>{link}</a
 	>
 </li>
 

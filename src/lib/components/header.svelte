@@ -1,7 +1,6 @@
 <script>
-	import { fade, slide } from 'svelte/transition';
+	import { slide, fly } from 'svelte/transition';
 	import { cubicInOut } from 'svelte/easing';
-	import Logo from '$lib/images/soup-logo-white.png';
 	import MenuItem from './menuItem.svelte';
 	let isOpen = false;
 
@@ -44,11 +43,14 @@
 </script>
 
 <header class="w-full h-16 sticky top-0 grid grid-cols-2 bg-white z-10">
-	<h1
-		class="h-full w-full font-header font-extrabold text-3xl flex justify-start items-center pl-4"
-	>
-		Chase Durrett <span class="text-blue-500">.</span>
-	</h1>
+	<a href="/">
+		<h1
+			class="h-full w-full font-header font-extrabold text-3xl flex justify-start items-center pl-4"
+			in:fly={{ y: -12, opacity: 0, duration: 250, delay: 100 }}
+		>
+			Chase Durrett <span class="text-blue-500">.</span>
+		</h1>
+	</a>
 	<div class="flex justify-end items-center">
 		<!-- Hamburger button -->
 		{#if !isOpen}
@@ -128,9 +130,9 @@
 			<ul
 				class="flex flex-col items-center justify-center flex-grow font-link text-5xl md:text-6xl lg:text-8xl"
 			>
-				<MenuItem itemsArr={workArr} link="WORK" borders={true}></MenuItem>
-				<MenuItem itemsArr={aboutArr} link="ABOUT" borders={false}></MenuItem>
-				<MenuItem itemsArr={contactArr} link="LET'S TALK" borders={true}></MenuItem>
+				<MenuItem itemsArr={workArr} link="WORK" href="/work" borders={true}></MenuItem>
+				<MenuItem itemsArr={aboutArr} link="ABOUT" href="/about" borders={false}></MenuItem>
+				<MenuItem itemsArr={contactArr} link="CONTACT" href="/contact" borders={true}></MenuItem>
 			</ul>
 		</div>
 	</div>
