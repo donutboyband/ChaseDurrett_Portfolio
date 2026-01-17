@@ -47,7 +47,7 @@
 	<h1
 		class="h-full w-full font-header font-extrabold text-3xl flex justify-start items-center pl-4"
 	>
-		soup agency <span class="text-blue-500">.</span>
+		Chase Durrett <span class="text-blue-500">.</span>
 	</h1>
 	<div class="flex justify-end items-center">
 		<!-- Hamburger button -->
@@ -98,7 +98,7 @@
 		<div class="relative w-full h-full z-30 flex flex-col">
 			<div class="grid grid-cols-2 pb-16">
 				<div class="flex justify-start items-center px-4">
-					<img in:fade={{ delay: 300 }} out:fade class="w-20 h-20" src={Logo} alt="" />
+					<!-- <img in:fade={{ delay: 300 }} out:fade class="w-20 h-20" src={Logo} alt="" /> -->
 				</div>
 				<div class="flex justify-end items-center px-4">
 					<button
