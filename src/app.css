@@ -110,3 +110,81 @@
 	background: #0b0f19;
 	color: #f8fafc;
 }
+
+/* Grid and dot background utilities */
+@layer utilities {
+  .bg-grid {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bg-grid::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,0,0,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,0,0,0.06) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-position: 0 0, 0 0;
+    pointer-events: none;
+    -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+    mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 10%, rgba(0,0,0,0) 100%);
+  }
+  /* grid fallback for browsers without mask support */
+  .bg-grid-fallback {
+    background-image:
+      linear-gradient(rgba(0,0,0,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,0,0,0.06) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-position: 0 0, 0 0;
+  }
+
+  .bg-grid {
+    /* empty - uses ::before for masked grid */
+  }
+
+  .bg-dots {
+    background-image: radial-gradient(currentColor 1px, transparent 1px);
+    background-size: 20px 20px;
+    color: rgba(0,0,0,0.06);
+  }
+
+  /* Dark mode variants */
+  .dark .bg-grid {
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  }
+  .dark .bg-dots {
+    color: rgba(255,255,255,0.03);
+  }
+}
+
+/* Radial hero background utilities (light + dark) */
+@layer utilities {
+  .hero-radial {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -2;
+    height: 100vh;
+    width: 100vw;
+    pointer-events: none;
+    background-repeat: no-repeat;
+    background-position: 50% -20%;
+    background-size: 80% 80%;
+  }
+
+  .hero-radial {
+    /* light theme */
+    background-color: transparent;
+    background-image: radial-gradient(ellipse 80% 80% at 50% -20%, rgba(120,119,198,0.30), rgba(255,255,255,0));
+  }
+
+  .dark .hero-radial {
+    /* dark theme override */
+    background-color: #0b0f19;
+    background-image: radial-gradient(ellipse 80% 80% at 50% -20%, rgba(120,119,198,0.18), rgba(0,0,0,0));
+  }
+}

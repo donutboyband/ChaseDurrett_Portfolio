@@ -9,16 +9,6 @@
 	export let link: string = '';
 	export let borders: boolean = true;
 	export let href: string = '/';
-	let options = { loop: true };
-	let plugins = [
-		Autoplay(),
-		AutoScroll({
-			playOnInit: true,
-			startDelay: 0,
-			speed: 1,
-			stopOnInteraction: false
-		})
-	];
 </script>
 
 <li
@@ -31,11 +21,10 @@ hover:text-black transition-all duration-200 group {borders
 >
 	<div
 		class="embla absolute w-0 h-full bg-tertiary inset-0 group-hover:w-full transition-all duration-200 ease-in-out opacity-0 group-hover:opacity-100 flex-center overflow-hidden"
-		use:emblaCarouselSvelte={{ options, plugins }}
 	>
 		<div class="embla__container w-full h-full flex">
 			{#each itemsArr as item}
-				<a href={href} class="embla__slide flex-center h-full">
+				<a {href} class="embla__slide flex-center h-full">
 					<p class="opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out">
 						{item}
 					</p>
@@ -46,7 +35,7 @@ hover:text-black transition-all duration-200 group {borders
 	</div>
 	<a
 		class="w-full h-full flex-center transition-all duration-100 text-white group-hover:text-black"
-		href={href}>{link}</a
+		{href}>{link}</a
 	>
 </li>
 

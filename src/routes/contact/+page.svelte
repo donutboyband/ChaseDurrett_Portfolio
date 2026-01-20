@@ -21,12 +21,7 @@
 	const handleSubmit = () => {
 		const subject = encodeURIComponent('New project inquiry');
 		const body = encodeURIComponent(
-			[
-				`Email: ${form.email}`,
-				'',
-				`Details:`,
-				form.project || 'I want to chat about...'
-			].join('\n')
+			[`Email: ${form.email}`, '', `Details:`, form.project || 'I want to chat about...'].join('\n')
 		);
 
 		const mailtoLink = `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
@@ -39,12 +34,11 @@
 			{ select, geoOrthographic, geoPath, geoGraticule10, timer, easeCubicOut },
 			topojson,
 			worldAtlas
-		] =
-			await Promise.all([
-				import('d3'),
-				import('topojson-client'),
-				import('world-atlas/countries-110m.json')
-			]);
+		] = await Promise.all([
+			import('d3'),
+			import('topojson-client'),
+			import('world-atlas/countries-110m.json')
+		]);
 
 		const worldData: any = (worldAtlas as any).default ?? worldAtlas;
 		const land = topojson.feature(worldData, worldData.objects.countries);
@@ -73,7 +67,11 @@
 			.attr('stroke', '#c7d2fe')
 			.attr('stroke-width', 1);
 
-		const landPath = svg.append('path').datum(land).attr('fill', '#0f172a').attr('fill-opacity', 0.72);
+		const landPath = svg
+			.append('path')
+			.datum(land)
+			.attr('fill', '#0f172a')
+			.attr('fill-opacity', 0.72);
 
 		const grid = svg
 			.append('path')
@@ -96,15 +94,15 @@
 			.attr('class', 'okc-dot')
 			.append('circle')
 			.attr('r', 4)
-			.attr('fill', '#3b82f6')
-			.attr('stroke', '#1d4ed8')
+			.attr('fill', '#4939C2')
+			.attr('stroke', '#4939C2')
 			.attr('stroke-width', 1.5);
 
 		const okcPulse = svg
 			.append('circle')
 			.attr('r', 6)
 			.attr('fill', 'none')
-			.attr('stroke', '#3b82f6')
+			.attr('stroke', '#4939C2')
 			.attr('stroke-width', 1.5)
 			.attr('stroke-opacity', 0.5);
 
@@ -204,71 +202,103 @@
 	});
 </script>
 
-<section class="w-full min-h-screen bg-white dark:bg-slate-950 text-black dark:text-white py-16 px-6 md:py-20 md:px-12 lg:px-20 transition-colors">
+<section
+	class="w-full min-h-screen text-black dark:text-white py-16 px-6 md:py-20 md:px-12 lg:px-20 transition-colors"
+>
 	<div class="max-w-6xl mx-auto grid lg:grid-cols-[1.1fr,1fr] gap-12">
 		<div>
 			<div class="space-y-6">
-				<p class="font-link text-xs tracking-[0.25em] uppercase text-black/60 dark:text-white/60">Contact</p>
+				<p class="font-link text-xs tracking-[0.25em] uppercase text-black/60 dark:text-white/60">
+					Contact
+				</p>
 				<h1 class="font-header text-4xl md:text-5xl leading-tight">Let's get connected!</h1>
-				<p class="font-cabinet text-lg text-black dark:text-white/70 leading-relaxed max-w-2xl">(if you want)</p>
+				<p class="font-cabinet text-lg text-black dark:text-white/70 leading-relaxed max-w-2xl">
+					(if you want)
+				</p>
 
 				<div class="grid sm:grid-cols-2 gap-4">
-					<div class="p-4 border border-black/10 dark:border-white/10 rounded-2xl bg-white/80 dark:bg-slate-900/60 shadow-sm">
-						<p class="font-link text-xs uppercase tracking-[0.18em] text-black/60 dark:text-white/60">Email</p>
-						<p class="font-header text-xl mt-2 break-all text-black dark:text-white">{recipientEmail}</p>
+					<div
+						class="p-4 border border-black/10 dark:border-white/10 rounded-2xl bg-white/80 dark:bg-slate-900/60 shadow-sm"
+					>
+						<div class="flex items-center justify-start gap-2">
+							<div
+								class="animate-pulse w-2 h-2 rounded-full bg-primary ring-2 ring-primary/20"
+							></div>
+							<p
+								class="font-link text-xs uppercase tracking-[0.18em] text-black/60 dark:text-white/60"
+							>
+								Email
+							</p>
+						</div>
+						<p class="font-header text-xl mt-2 break-all text-black dark:text-white">
+							{recipientEmail}
+						</p>
 					</div>
-					<div class="p-4 border border-black/10 dark:border-white/10 rounded-2xl bg-white/80 dark:bg-slate-900/60 shadow-sm">
-						<p class="font-link text-xs uppercase tracking-[0.18em] text-black/60 dark:text-white/60">Based in</p>
+					<div
+						class="p-4 border border-black/10 dark:border-white/10 rounded-2xl bg-white/80 dark:bg-slate-900/60 shadow-sm"
+					>
+						<div class="flex items-center justify-start gap-2">
+							<div
+								class="animate-pulse w-2 h-2 rounded-full bg-primary ring-2 ring-primary/20"
+							></div>
+							<p
+								class="font-link text-xs uppercase tracking-[0.18em] text-black/60 dark:text-white/60"
+							>
+								Based in
+							</p>
+						</div>
 						<p class="font-header text-xl mt-2 flex items-center text-black dark:text-white">
-							OKC — Remote <span class="ml-1"><CowboyHat /></span>
+							OKC — Remote
 						</p>
 					</div>
 				</div>
 			</div>
-				<div class="globe-wrapper" bind:this={globeRef}></div>
+			<div class="globe-wrapper" bind:this={globeRef}></div>
 		</div>
 
 		<div class="flex items-center justify-center">
-		<form
-			class="p-6 md:p-8 border border-black/10 dark:border-white/10 rounded-3xl bg-white/90 dark:bg-slate-900 shadow-sm space-y-5 flex flex-col justify-center transition-colors"
-			on:submit|preventDefault={handleSubmit}
-		>
-			<div class="space-y-2">
-				<label class="font-link text-xs uppercase tracking-[0.18em] text-black/60 dark:text-white/60" for="email"
-					>Email</label
-				>
-				<input
-					id="email"
-					type="email"
-					class="w-full bg-white dark:bg-slate-800 border border-black/15 dark:border-white/10 rounded-xl px-4 py-3 font-cabinet text-base text-black dark:text-white focus:outline-none focus:border-black dark:focus:border-white transition"
-					placeholder="you@email.com"
-					bind:value={form.email}
-					required
-				/>
-			</div>
-
-			<div class="space-y-2">
-				<label class="font-link text-xs uppercase tracking-[0.18em] text-black/60 dark:text-white/60" for="project"
-					>Details</label
-				>
-				<textarea
-					id="project"
-					class="w-full bg-white dark:bg-slate-800 border border-black/15 dark:border-white/10 rounded-xl px-4 py-3 font-cabinet text-base text-black dark:text-white focus:outline-none focus:border-black dark:focus:border-white transition min-h-[140px]"
-					placeholder="Site, product launch, creative direction, motion..."
-					bind:value={form.project}
-					required
-				></textarea>
-			</div>
-			<button
-				type="submit"
-				class="w-full bg-black dark:bg-primary text-white hover:text-black dark:hover:text-white dark:hover:bg-primary font-link uppercase tracking-[0.2em] rounded-xl py-4 hover:bg-[#baff29] transition-colors"
+			<form
+				class="p-6 md:p-8 border border-black/10 dark:border-white/10 rounded-3xl bg-white/90 dark:bg-slate-900 shadow-sm space-y-5 flex flex-col justify-center transition-colors"
+				on:submit|preventDefault={handleSubmit}
 			>
-				Send email
-			</button>
-			<p class="font-cabinet text-sm text-black/90 dark:text-white/70 text-center">
-				This opens your email client with the details pre-filled.
-			</p>
-		</form>
+				<div class="space-y-2">
+					<label
+						class="font-link text-xs uppercase tracking-[0.18em] text-black/60 dark:text-white/60"
+						for="email">Email</label
+					>
+					<input
+						id="email"
+						type="email"
+						class="w-full bg-white dark:bg-slate-800 border border-black/15 dark:border-white/10 rounded-xl px-4 py-3 font-cabinet text-base text-black dark:text-white focus:outline-none focus:border-black dark:focus:border-white transition"
+						placeholder="you@email.com"
+						bind:value={form.email}
+						required
+					/>
+				</div>
+
+				<div class="space-y-2">
+					<label
+						class="font-link text-xs uppercase tracking-[0.18em] text-black/60 dark:text-white/60"
+						for="project">Details</label
+					>
+					<textarea
+						id="project"
+						class="w-full bg-white dark:bg-slate-800 border border-black/15 dark:border-white/10 rounded-xl px-4 py-3 font-cabinet text-base text-black dark:text-white focus:outline-none focus:border-black dark:focus:border-white transition min-h-[140px]"
+						placeholder="Site, product launch, creative direction, motion..."
+						bind:value={form.project}
+						required
+					></textarea>
+				</div>
+				<button
+					type="submit"
+					class="w-full bg-black dark:bg-primary text-white hover:text-black dark:hover:text-white dark:hover:bg-primary font-link uppercase tracking-[0.2em] rounded-xl py-4 hover:bg-[#baff29] transition-colors"
+				>
+					Send email
+				</button>
+				<p class="font-cabinet text-sm text-black/90 dark:text-white/70 text-center">
+					This opens your email client with the details pre-filled.
+				</p>
+			</form>
 		</div>
 	</div>
 </section>

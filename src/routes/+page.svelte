@@ -3,109 +3,59 @@
 	import { gsap } from 'gsap';
 	import { ScrollTrigger } from 'gsap/ScrollTrigger';
 	import { fly } from 'svelte/transition';
-	import { BsCodeSlash } from "svelte-icons-pack/bs"; 
 
 	const experiences = [
 		{
 			role: 'Full-Stack Developer',
 			company: 'Baltimore Life Insurance',
 			years: '2024 — Present',
-			summary: "Currently, I'm a full-stack developer at Balitmore Life Insurance where I work on a team that plans, creates, and delivers enterprise-grade applications to solve business needs. I work with React, .NET, SQL, and a lot of other libraries and tools.",
+			summary:
+				"Currently, I'm a full-stack developer at Balitmore Life Insurance where I work on a team that plans, creates, and delivers enterprise-grade applications to solve business needs. I work with React, .NET, SQL, and a lot of other libraries and tools.",
 			tags: ['Engineering', 'Enterprise']
 		},
 		{
 			role: 'Frontend Developer',
 			company: 'Soup Agency',
 			years: '2023 — 2024',
-			summary: "Worked with marketing teams to create beautiful web experiences for their campaigns. I had to adapt to client's tech stacks, so I became very skilled at picking up new languages and paradigms. I worked primarily in Wordpress, svelte, and regular ol' HTML.",
+			summary:
+				"I partnered closely with marketing teams to turn campaign concepts into visually striking web experiences. Adapting to each client’s tech stack—whether it was WordPress, Svelte, or plain HTML—taught me to learn new languages and paradigms on the fly. My focus was always on delivering polished, engaging sites that amplified the brand’s message.",
 			tags: ['Frontend', 'Marketing']
 		},
-        	{
+		{
 			role: 'IT Analyst',
 			company: 'Audigent',
 			years: '2021 — 2023',
-			summary: "Rocketship startup where I did everything imagineable in IT. Cybersecurity? Did it. Compliance? Yes. Physical server maintenance? You guessed it, yes. Anything that plugged into a wall, connected to a network, or solved a business need in some way with technology--I was responsible.",
+			summary:
+				'At a high‑growth startup, I was the go‑to person for every IT challenge. From securing on-prem networks and ensuring regulatory compliance to maintaining on‑prem servers, I handled everything that plugged into a wall, connected to a network, or met a business need through technology.',
 			tags: ['IT', 'Many hats', 'Too many hats']
 		}
 	];
 
-	const projects = [
-		{
-			name: 'Project Aurora',
-			type: 'Interactive launch',
-			description: 'A product story built around atmospheric gradients, scroll-driven reveals, and live data.',
-			metrics: '10M impressions · 2.1x conversion lift'
-		},
-		{
-			name: 'Ghostline',
-			type: 'Portfolio refresh',
-			description: 'Rebuilt the design language with bold typography, responsive motion, and modular case studies.',
-			metrics: '7-week sprint · 40+ components'
-		},
-		{
-			name: 'Echo Atlas',
-			type: 'Web experience',
-			description: 'Immersive editorial site featuring cinematic transitions and tactile micro-interactions.',
-			metrics: 'Featured on Awwwards · Site of the Day finalist'
-		}
-	];
+	// const projects = [
+	// 	{
+	// 		name: 'Project Aurora',
+	// 		type: 'Interactive launch',
+	// 		description: 'A product story built around atmospheric gradients, scroll-driven reveals, and live data.',
+	// 		metrics: '10M impressions · 2.1x conversion lift'
+	// 	},
+	// 	{
+	// 		name: 'Ghostline',
+	// 		type: 'Portfolio refresh',
+	// 		description: 'Rebuilt the design language with bold typography, responsive motion, and modular case studies.',
+	// 		metrics: '7-week sprint · 40+ components'
+	// 	},
+	// 	{
+	// 		name: 'Echo Atlas',
+	// 		type: 'Web experience',
+	// 		description: 'Immersive editorial site featuring cinematic transitions and tactile micro-interactions.',
+	// 		metrics: 'Featured on Awwwards · Site of the Day finalist'
+	// 	}
+	// ];
 
 	let journeySection: HTMLElement | null = null;
 	let heroTitle: HTMLElement | null = null;
-	let heroArrow: SVGSVGElement | null = null;
-	let heroDot: HTMLElement | null = null;
-	let heroInlineDot: HTMLElement | null = null;
-	let heroBarrier: HTMLElement | null = null;
-	let isDotActive = false;
-	let barrierY = 0;
-	let currentHovered: HTMLElement | null = null;
-	let lastMouseEvent: MouseEvent | null = null;
-	const dotBaseSize = 24;
 
-	const updateBarrierY = () => {
-		if (!heroBarrier) return;
-		const rect = heroBarrier.getBoundingClientRect();
-		barrierY = rect.top + rect.height / 2 + window.scrollY;
-	};
-
-	const attachDot = (event: MouseEvent) => {
-		if (!heroDot) return;
-		isDotActive = true;
-		gsap.to(heroDot, {
-			x: event.clientX + 40,
-			y: event.clientY,
-			scale: 1,
-			opacity: 1,
-			duration: 0.18,
-			ease: 'power2.out'
-		});
-	};
-
-	const detachDot = () => {
-		if (!heroDot) return;
-		const inlineRect = heroInlineDot?.getBoundingClientRect();
-		const targetX = inlineRect ? inlineRect.left + inlineRect.width / 2 : 0;
-		const targetY = inlineRect ? inlineRect.top + inlineRect.height / 2 : 0;
-		gsap.to(heroDot, {
-			x: targetX,
-			y: targetY,
-			opacity: 0,
-			duration: 0.2,
-			ease: 'power2.out'
-		});
-		isDotActive = false;
-	};
-
-	const handleGlobalMouseMove = (event: MouseEvent) => {
-		lastMouseEvent = event;
-		if (currentHovered) return;
-		const cursorY = event.clientY + window.scrollY;
-		if (cursorY >= barrierY) {
-			attachDot(event);
-		} else if (isDotActive) {
-			detachDot();
-		}
-	};
+	let isVisible = false;
 
 	onMount(() => {
 		if (typeof window === 'undefined') return;
@@ -149,39 +99,32 @@
 			}
 		}, journeySection ?? undefined);
 
-		if (heroDot) {
-			gsap.set(heroDot, { xPercent: -50, yPercent: -50 });
-		}
-
-		updateBarrierY();
-		window.addEventListener('resize', updateBarrierY);
-		window.addEventListener('scroll', updateBarrierY);
-		window.addEventListener('mousemove', handleGlobalMouseMove);
-
 		return () => {
 			ctx.revert();
 			ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-			window.removeEventListener('resize', updateBarrierY);
-			window.removeEventListener('scroll', updateBarrierY);
-			window.removeEventListener('mousemove', handleGlobalMouseMove);
+			isVisible = true;
 		};
 	});
 </script>
 
 <div
-	class="w-full h-screen-100 flex flex-col justify-center items-center space-y-6 bg-white dark:bg-slate-950 text-black dark:text-white transition-colors"
+	class="w-full h-screen-100 flex flex-col justify-center items-center space-y-6 text-black dark:text-white transition-colors"
 	role="region"
 	aria-label="Intro"
 >
-	<h1 class="font-header text-9xl" in:fly={{delay: 200, duration: 150, y: 50}} bind:this={heroTitle}>
-		hi<span class="text-blue-500 transition-opacity duration-150 {isDotActive ? 'opacity-0' : 'opacity-100'}" bind:this={heroInlineDot}>.</span>
+	<h1
+		class="font-header text-9xl"
+		in:fly={{ delay: 200, duration: 150, y: 50 }}
+		bind:this={heroTitle}
+	>
+		hi<span class="text-blue-500 transition-opacity duration-150">.</span>
 	</h1>
+
 	<svg
 		class="w-6 h-6 stroke-black/60 dark:stroke-white/70 group-hover:stroke-black dark:group-hover:stroke-white transition-colors duration-200"
 		fill="none"
 		viewBox="0 0 24 24"
 		xmlns="http://www.w3.org/2000/svg"
-		bind:this={heroArrow}
 	>
 		<path
 			d="M12 5v14m0 0-5-5m5 5 5-5"
@@ -193,29 +136,31 @@
 
 	<span
 		class="fixed top-0 left-0 pointer-events-none font-header text-9xl text-blue-500 select-none transition-opacity duration-200 opacity-0"
-		bind:this={heroDot}
 	>
 		.
 	</span>
 
 	<div class="w-full flex justify-center pt-6">
-		<div class="w-full h-px" bind:this={heroBarrier}></div>
+		<div class="w-full h-px"></div>
 	</div>
 </div>
 
+<!-- bg-white dark:bg-slate-950 -->
 <section
-	class="w-full bg-white dark:bg-slate-950 text-black dark:text-white py-20 px-6 md:py-28 md:px-12 lg:px-20 transition-colors"
+	class="w-full text-black dark:text-white py-20 px-6 md:py-28 md:px-12 lg:px-20 transition-colors"
 	id="journey"
 	bind:this={journeySection}
 >
 	<div class="max-w-6xl mx-auto grid md:grid-cols-[1fr,2fr] gap-10 md:gap-16">
 		<div class="space-y-6 md:sticky md:top-24 self-start">
-			<p class="font-link text-xs tracking-[0.25em] uppercase text-black/60 dark:text-white/60">About</p>
-			<h2 class="font-header text-5xl md:text-6xl leading-tight">
-				Experience + projects 
-			</h2>
+			<p class="font-link text-xs tracking-[0.25em] uppercase text-black/60 dark:text-white/60">
+				About
+			</p>
+			<h2 class="font-header text-5xl md:text-6xl leading-tight">Experience + projects</h2>
 			<p class="font-cabinet text-xl text-black dark:text-white/80 leading-relaxed">
-				I love building things. And technology. I'm a lifelong learner (I don't know anything). I'm a full-stack developer who loves building clean and scaleable applications that focus on user experience and maintainability. Most recently I've been drawn into the world of data science and machine learning, and focused on solving some of the problems I've encountered in industries I've worked in.
+				I’m a lifelong learner who loves turning ideas into reality. As a full‑stack developer, I
+				build clean, scalable applications that prioritize user experience and maintainability.
+				Lately, I’ve ventured into data science and machine learning in my spare time, learning and applying those skills by solving challenges I've come across in the industries I’ve worked in.
 			</p>
 		</div>
 
@@ -229,14 +174,19 @@
 							data-journey-card
 						>
 							<div
-								class="absolute left-4 top-8 w-3 h-3 rounded-full bg-primary ring-4 ring-primary/20"
+								class="animate-pulse absolute left-4 top-8 w-3 h-3 rounded-full bg-primary ring-4 ring-primary/20"
 							></div>
 							<div class="flex items-center gap-3 text-sm font-link uppercase tracking-[0.12em]">
-								<span class="px-3 py-1 bg-black text-white rounded-full dark:bg-white dark:text-black">{exp.company}</span>
+								<span
+									class="px-3 py-1 bg-black text-white rounded-full dark:bg-white dark:text-black"
+									>{exp.company}</span
+								>
 								<span class="text-black/60 dark:text-white/70">{exp.years}</span>
 							</div>
 							<h3 class="font-header text-2xl md:text-3xl mt-3 mb-2">{exp.role}</h3>
-							<p class="font-cabinet text-base md:text-xl text-black dark:text-white/80 leading-relaxed">
+							<p
+								class="font-cabinet text-base md:text-xl text-black dark:text-white/80 leading-relaxed"
+							>
 								{exp.summary}
 							</p>
 							<div class="flex flex-wrap gap-2 mt-4">
@@ -250,7 +200,7 @@
 					{/each}
 				</div>
 
-				<div class="space-y-4">
+				<!-- <div class="space-y-4">
 					<p class="font-link text-sm text-black/60 dark:text-white/60">Selected projects</p>
 					{#each projects as project}
 						<article
@@ -274,7 +224,7 @@
 							</div>
 						</article>
 					{/each}
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>
