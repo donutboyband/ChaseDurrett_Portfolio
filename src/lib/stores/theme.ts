@@ -2,9 +2,24 @@ import { writable } from 'svelte/store';
 
 export type Theme = 'light' | 'dark';
 
-const createThemeStore = () => {
-	const { subscribe, set } = writable<Theme>('light');
-	let current: Theme = 'light';
+const resolveInitialTheme = (): Theme => {
+	if (typeof window !== 'undefined') {
+		const stored =
+			typeof localStorage !== 'undefined' && typeof localStorage.getItem === 'function'
+				? localStorage.getItem('theme')
+				: null;
+
+		if (stored === 'light' || stored === 'dark') return stored;
+		if (window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark';
+	}
+
+	return 'light';
+};
+
+export const createThemeStore = () => {
+	const initial = resolveInitialTheme();
+	const { subscribe, set } = writable<Theme>(initial);
+	let current: Theme = initial;
 
 	subscribe((value) => {
 		current = value;
@@ -16,33 +31,15 @@ const createThemeStore = () => {
 		if (typeof localStorage !== 'undefined' && typeof localStorage.setItem === 'function') {
 			try {
 				localStorage.setItem('theme', value);
-			} catch (err) {
-				// ignore persistence errors (e.g., SSR or blocked storage)
+			} catch {
+				// ignore persistence errors
 			}
 		}
 	});
 
 	const apply = (value: Theme) => set(value);
-
-	const toggle = () => {
-		const next = current === 'light' ? 'dark' : 'light';
-		set(next);
-	};
-
-	const init = () => {
-		if (typeof window === 'undefined') return;
-		const stored = typeof localStorage !== 'undefined' && typeof localStorage.getItem === 'function'
-			? localStorage.getItem('theme')
-			: null;
-		if (stored === 'light' || stored === 'dark') {
-			apply(stored);
-		} else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-			apply('dark');
-		} else {
-			apply('light');
-		}
-	};
-
+	const toggle = () => set(current === 'light' ? 'dark' : 'light');
+	const init = () => apply(resolveInitialTheme());
 	return { subscribe, toggle, init, set: apply };
 };
 

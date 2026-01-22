@@ -1,0 +1,26 @@
+{
+	"root": true,
+	"env": { "browser": true, "es2021": true },
+	"extends": [
+		"eslint:recommended",
+		"plugin:@typescript-eslint/recommended",
+		"plugin:svelte/recommended",
+		"prettier"
+	],
+	"plugins": ["@typescript-eslint", "svelte"],
+	"overrides": [
+		{ "files": ["*.svelte"], "processor": "svelte3/svelte3" }
+	],
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": { "ecmaVersion": 2021, "sourceType": "module" },
+	"ignorePatterns": [
+		"node_modules/",
+		"build/",
+		"dist/",
+		"static/fonts/",
+		".svelte-kit/",
+		".vercel/",
+		".netlify/"
+	],
+	"rules": { "@typescript-eslint/no-unused-vars": ["warn", { "args": "after-used", "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }], "no-unused-vars": "off" }
+}

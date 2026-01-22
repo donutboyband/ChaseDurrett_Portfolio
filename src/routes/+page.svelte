@@ -18,7 +18,7 @@
 			company: 'Soup Agency',
 			years: '2023 — 2024',
 			summary:
-				"I partnered closely with marketing teams to turn campaign concepts into visually striking web experiences. Adapting to each client’s tech stack—whether it was WordPress, Svelte, or plain HTML—taught me to learn new languages and paradigms on the fly. My focus was always on delivering polished, engaging sites that amplified the brand’s message.",
+				'I partnered closely with marketing teams to turn campaign concepts into visually striking web experiences. Adapting to each client’s tech stack—whether it was WordPress, Svelte, or plain HTML—taught me to learn new languages and paradigms on the fly. My focus was always on delivering polished, engaging sites that amplified the brand’s message.',
 			tags: ['Frontend', 'Marketing']
 		},
 		{
@@ -30,27 +30,6 @@
 			tags: ['IT', 'Many hats', 'Too many hats']
 		}
 	];
-
-	// const projects = [
-	// 	{
-	// 		name: 'Project Aurora',
-	// 		type: 'Interactive launch',
-	// 		description: 'A product story built around atmospheric gradients, scroll-driven reveals, and live data.',
-	// 		metrics: '10M impressions · 2.1x conversion lift'
-	// 	},
-	// 	{
-	// 		name: 'Ghostline',
-	// 		type: 'Portfolio refresh',
-	// 		description: 'Rebuilt the design language with bold typography, responsive motion, and modular case studies.',
-	// 		metrics: '7-week sprint · 40+ components'
-	// 	},
-	// 	{
-	// 		name: 'Echo Atlas',
-	// 		type: 'Web experience',
-	// 		description: 'Immersive editorial site featuring cinematic transitions and tactile micro-interactions.',
-	// 		metrics: 'Featured on Awwwards · Site of the Day finalist'
-	// 	}
-	// ];
 
 	let journeySection: HTMLElement | null = null;
 	let heroTitle: HTMLElement | null = null;
@@ -113,7 +92,7 @@
 	aria-label="Intro"
 >
 	<h1
-		class="font-header text-9xl"
+		class="font-header text-6xl sm:text-8xl md:text-9xl"
 		in:fly={{ delay: 200, duration: 150, y: 50 }}
 		bind:this={heroTitle}
 	>
@@ -153,14 +132,17 @@
 >
 	<div class="max-w-6xl mx-auto grid md:grid-cols-[1fr,2fr] gap-10 md:gap-16">
 		<div class="space-y-6 md:sticky md:top-24 self-start">
-			<p class="font-link text-xs tracking-[0.25em] uppercase text-black/60 dark:text-white/60">
-				About
-			</p>
-			<h2 class="font-header text-5xl md:text-6xl leading-tight">Experience + projects</h2>
+			<div>
+				<p class="font-link text-xl text-black/60 dark:text-white/60">Chase Durrett</p>
+				<p class="font-link text-md text-black/60 dark:text-white/40">Full Stack Developer</p>
+			</div>
+			<h2 class="font-header text-4xl md:text-6xl leading-tight">Experience</h2>
 			<p class="font-cabinet text-xl text-black dark:text-white/80 leading-relaxed">
 				I’m a lifelong learner who loves turning ideas into reality. As a full‑stack developer, I
 				build clean, scalable applications that prioritize user experience and maintainability.
-				Lately, I’ve ventured into data science and machine learning in my spare time, learning and applying those skills by solving challenges I've come across in the industries I’ve worked in.
+				Lately, I’ve ventured into data science and machine learning in my spare time, learning and
+				applying those skills by solving challenges I've come across in the industries I’ve worked
+				in.
 			</p>
 		</div>
 
@@ -174,11 +156,13 @@
 							data-journey-card
 						>
 							<div
-								class="animate-pulse absolute left-4 top-8 w-3 h-3 rounded-full bg-primary ring-4 ring-primary/20"
+								class="animate-pulse hidden md:block absolute left-4 top-8 w-3 h-3 rounded-full bg-primary ring-4 ring-primary/20"
 							></div>
-							<div class="flex items-center gap-3 text-sm font-link uppercase tracking-[0.12em]">
+							<div
+								class="flex flex-col items-start gap-1 text-sm font-link uppercase tracking-[0.12em] sm:flex-row sm:items-center sm:gap-3"
+							>
 								<span
-									class="px-3 py-1 bg-black text-white rounded-full dark:bg-white dark:text-black"
+									class="px-0 md:px-3 py-1 md:bg-black text-black md:text-white rounded-full md:dark:bg-white dark:text-white/60 md:dark:text-black"
 									>{exp.company}</span
 								>
 								<span class="text-black/60 dark:text-white/70">{exp.years}</span>
@@ -199,32 +183,6 @@
 						</article>
 					{/each}
 				</div>
-
-				<!-- <div class="space-y-4">
-					<p class="font-link text-sm text-black/60 dark:text-white/60">Selected projects</p>
-					{#each projects as project}
-						<article
-							class="relative pl-8 md:pl-10 py-6 pr-6 border border-black/10 dark:border-white/10 rounded-2xl bg-white/80 dark:bg-slate-900/60 shadow-sm overflow-hidden group backdrop-blur"
-							data-journey-card
-						>
-							<div
-								class="absolute left-2 md:left-1 top-8 w-3 h-3 rounded-full bg-secondary ring-4 ring-secondary/20 group-hover:ring-primary/30 transition-all duration-200"
-							></div>
-							<div class="flex items-center gap-3 text-sm font-link uppercase tracking-[0.12em]">
-								<span class="px-3 py-1 bg-black text-white rounded-full dark:bg-white dark:text-black">{project.type}</span>
-								<span class="text-black/60 dark:text-white/70">{project.metrics}</span>
-							</div>
-							<h3 class="font-header text-2xl md:text-3xl mt-3 mb-2">{project.name}</h3>
-							<p class="font-cabinet text-base md:text-lg text-black/70 dark:text-white/80 leading-relaxed">
-								{project.description}
-							</p>
-							<div class="mt-4 flex items-center gap-3 font-link text-sm uppercase tracking-[0.12em] text-black dark:text-white">
-								<span class="px-3 py-1 bg-primary text-white rounded-full group-hover:bg-black dark:group-hover:bg-white dark:group-hover:text-black transition-colors duration-200">View</span>
-								<span class="group-hover:translate-x-1 transition-transform duration-200">&#8600;</span>
-							</div>
-						</article>
-					{/each}
-				</div> -->
 			</div>
 		</div>
 	</div>

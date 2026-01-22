@@ -5,6 +5,7 @@
 	import { theme, type Theme } from '$lib/stores/theme';
 	import { onDestroy } from 'svelte';
 	import ChipButton from './ChipButton.svelte';
+	import { goto } from '$app/navigation';
 	// custom transitions defined inline
 	function slideDownIn(node: Element, { delay = 0, duration = 300, easing = cubicInOut } = {}) {
 		return {
@@ -20,6 +21,7 @@
 	let isOpen = false;
 	let currentTheme: Theme = 'light';
 	let unsubscribe = () => {};
+	let isNavigating = false;
 
 	if (typeof window !== 'undefined') {
 		unsubscribe = theme.subscribe((value) => {
@@ -28,43 +30,24 @@
 	}
 
 	const toggleTheme = () => theme.toggle();
+	const handleNavigate = (event: CustomEvent<{ href: string }>) => {
+		if (isNavigating) return;
+		isNavigating = true;
+		isOpen = false; // start closing animation
+		goto(event.detail.href).finally(() => {
+			isNavigating = false;
+		});
+	};
 
 	onDestroy(() => unsubscribe());
 
-	const workArr = [
-		'EDITS',
-		'WEBSITES',
-		'CREATIVE DIRECTION',
-		'PHOTOGRAPHY',
-		'EDITS',
-		'WEBSITES',
-		'CREATIVE DIRECTION',
-		'PHOTOGRAPHY'
-	];
+	const workArr = ['FRONTEND', 'BACKEND', 'FULLSTACK', 'FRONTEND', 'BACKEND', 'FULLSTACK'];
 
-	const aboutArr = [
-		'WHO WE ARE',
-		'WHAT WE DO',
-		'HOW WE WORK',
-		'HOW LONG IT TAKES',
-		'WHO MADE THIS SITE',
-		'WHAT IS OUR FAVORITE COLOR',
-		'HOW MUCH DO WE CHARGE',
-		'HOW WE CAN WORK TOGETHER'
-	];
-
-	const contactArr = [
-		'IDEAS',
-		'GOALS',
-		'DREAMS',
-		'IDEAS',
-		'GOALS',
-		'DREAMS'
-	];
+	const contactArr = ['IDEAS', 'GOALS', 'DREAMS', 'IDEAS', 'GOALS', 'DREAMS'];
 </script>
 
 <header
-	class="w-full h-16 sticky top-0 grid grid-cols-2 text-black dark:text-white z-10 transition-colors"
+	class="w-full h-16 sticky top-0 grid grid-cols-2 text-black dark:text-white z-10 transition-colors backdrop-blur"
 >
 	<div class="flex flex-row items-center gap-8">
 		<a href="/">
@@ -72,7 +55,7 @@
 				class="h-full w-full font-header font-extrabold text-3xl flex justify-start items-center pl-4"
 				in:fly={{ y: -12, opacity: 0, duration: 250, delay: 200 }}
 			>
-				Chase Durrett <span class="text-blue-500">.</span>
+				CD <span class="text-blue-500">.</span>
 			</h1>
 		</a>
 		<ChipButton
@@ -138,7 +121,11 @@
 
 <!-- Transparent Menu Container (conditionally rendered) -->
 {#if isOpen}
-	<div class="menu fixed top-0 left-0 w-screen h-screen z-20">
+	<div
+		class="menu fixed top-0 left-0 w-screen h-screen z-20"
+		in:fade={{ duration: 200 }}
+		out:fade={{ duration: 200 }}
+	>
 		<!-- Close button and Menu Items (z-index above background parts) -->
 		<div class="relative w-full h-full z-30 flex flex-col">
 			<div class="flex flex-row justify-between items-center">
@@ -152,13 +139,33 @@
 					}}
 					out:slide={{ duration: 300, easing: cubicInOut, axis: 'x' }}
 				>
-					<ChipButton tone="default" size="sm" href="/" ariaLabel="Toggle theme">
+					<ChipButton
+						tone="default"
+						size="sm"
+						href="https://open.spotify.com/artist/4e0F3Bqyp0BpE3VmNh4qKS?si=GsVBTZSeQwqUiRRwFmdTnw"
+						ariaLabel="Toggle theme"
+						target="_blank"
+					>
 						Spotify
 					</ChipButton>
-					<ChipButton tone="default" size="sm" href="/" ariaLabel="Toggle theme">
+					<ChipButton
+						tone="default"
+						size="sm"
+						href="https://www.linkedin.com/in/chasedurrett/"
+						ariaLabel="Toggle theme"
+						target="_blank"
+					>
 						LinkedIn
 					</ChipButton>
-					<ChipButton tone="default" size="sm" href="/" ariaLabel="Toggle theme">GitHub</ChipButton>
+					<ChipButton
+						tone="default"
+						size="sm"
+						href="https://github.com/donutboyband"
+						ariaLabel="Toggle theme"
+						target="_blank"
+					>
+						GitHub
+					</ChipButton>
 				</div>
 				<div
 					class="flex flex-row items-center gap-4 md:gap-6 text-white/75 text-sm font-link uppercase tracking-[0.16em]"
@@ -190,9 +197,22 @@
 			<ul
 				class="flex flex-col items-center justify-center flex-grow font-link text-5xl md:text-6xl lg:text-8xl"
 			>
-				<MenuItem itemsArr={workArr} link="WORK" href="/work" borders={true}></MenuItem>
-				<MenuItem itemsArr={aboutArr} link="ABOUT" href="/about" borders={false}></MenuItem>
-				<MenuItem itemsArr={contactArr} link="CONTACT" href="/contact" borders={true}></MenuItem>
+				<MenuItem
+					itemsArr={workArr}
+					link="WORK"
+					href="/work"
+					borders={true}
+					on:close={() => (isOpen = false)}
+					on:navigate={handleNavigate}
+				></MenuItem>
+				<MenuItem
+					itemsArr={contactArr}
+					link="CONTACT"
+					href="/contact"
+					borders={true}
+					on:close={() => (isOpen = false)}
+					on:navigate={handleNavigate}
+				></MenuItem>
 			</ul>
 			<div
 				class="flex flex-row justify-between items-center px-4 md:px-10 pb-10 text-white/75 text-sm font-cabinet"

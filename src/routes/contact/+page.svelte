@@ -284,7 +284,7 @@
 					<textarea
 						id="project"
 						class="w-full bg-white dark:bg-slate-800 border border-black/15 dark:border-white/10 rounded-xl px-4 py-3 font-cabinet text-base text-black dark:text-white focus:outline-none focus:border-black dark:focus:border-white transition min-h-[140px]"
-						placeholder="Site, product launch, creative direction, motion..."
+						placeholder="What's up?"
 						bind:value={form.project}
 						required
 					></textarea>

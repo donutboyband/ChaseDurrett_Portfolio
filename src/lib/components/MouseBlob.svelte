@@ -1,16 +1,18 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+
 	let x = 0,
 		y = 0;
 	let tx = 0,
 		ty = 0;
 	let cx = 0,
 		cy = 0;
-	let vx = 0, vy = 0;
-	let lastTS = 0;
-	let lastMove = 0;
-	const size = 420;
+	let vx = 0,
+		vy = 0;
+	let lastTS = 0,
+		lastMove = 0;
 	let raf = 0;
+	const size = 420;
 	const idleThreshold = 600;
 
 	// Physics parameters
@@ -131,9 +133,9 @@
 		pointer-events: none;
 		background: radial-gradient(
 			circle at center,
-			rgba(0,163,255,0.20) 0%,
-			rgba(0,163,255,0.10) 35%,
-			rgba(0,163,255,0.04) 60%,
+			rgba(0, 163, 255, 0.2) 0%,
+			rgba(0, 163, 255, 0.1) 35%,
+			rgba(0, 163, 255, 0.04) 60%,
 			transparent 100%
 		);
 		filter: blur(48px);
@@ -150,9 +152,9 @@
 	:global(.dark) .mouse-blob {
 		background: radial-gradient(
 			circle at center,
-			rgba(0,163,255,0.20) 0%,
-			rgba(0,163,255,0.10) 35%,
-			rgba(0,163,255,0.04) 60%,
+			rgba(0, 163, 255, 0.2) 0%,
+			rgba(0, 163, 255, 0.1) 35%,
+			rgba(0, 163, 255, 0.04) 60%,
 			transparent 100%
 		);
 		mix-blend-mode: screen;

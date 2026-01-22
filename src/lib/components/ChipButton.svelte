@@ -1,13 +1,10 @@
-<script lang="ts" context="module">
+<script context="module" lang="ts">
 	export type ChipTone = 'default' | 'primary' | 'ghost';
 	export type ChipSize = 'sm' | 'md';
 </script>
 
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
-
-	type ChipTone = 'default' | 'primary' | 'ghost';
-	type ChipSize = 'sm' | 'md';
 
 	export let label = '';
 	export let href: string | null = null;
@@ -38,7 +35,9 @@
 		'inline-flex items-center gap-2 rounded-full font-link uppercase tracking-[0.18em] transition-colors backdrop-blur',
 		toneClasses[tone],
 		sizeClasses[size],
-		active ? 'ring-2 ring-offset-2 ring-primary/70 ring-offset-white dark:ring-offset-slate-900' : '',
+		active
+			? 'ring-2 ring-offset-2 ring-primary/70 ring-offset-white dark:ring-offset-slate-900'
+			: '',
 		className
 	]
 		.filter(Boolean)
@@ -52,9 +51,9 @@
 {#if href}
 	<a
 		class={composedClasses}
-		href={href}
-		target={target}
-		rel={rel}
+		{href}
+		{target}
+		{rel}
 		aria-label={ariaLabel || label}
 		on:click={handleClick}
 	>
@@ -66,7 +65,7 @@
 		class={composedClasses}
 		aria-label={ariaLabel || label}
 		aria-pressed={active}
-		type={type}
+		{type}
 		on:click={handleClick}
 	>
 		<slot />
