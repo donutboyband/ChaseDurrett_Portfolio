@@ -43,7 +43,9 @@
 		const worldData: any = (worldAtlas as any).default ?? worldAtlas;
 		const land = topojson.feature(worldData, worldData.objects.countries);
 
-		const size = 400;
+		// Responsive size: smaller on mobile
+		const isMobile = window.innerWidth < 640;
+		const size = isMobile ? 280 : 400;
 		const svg = select(globeRef)
 			.append('svg')
 			.attr('viewBox', `0 0 ${size} ${size}`)
@@ -205,13 +207,13 @@
 <section
 	class="w-full min-h-screen text-black dark:text-white py-16 px-6 md:py-20 md:px-12 lg:px-20 transition-colors"
 >
-	<div class="max-w-6xl mx-auto grid lg:grid-cols-[1.1fr,1fr] gap-12">
-		<div>
+	<div class="max-w-6xl mx-auto grid lg:grid-cols-[1.1fr,1fr] gap-8 md:gap-12">
+		<div class="order-2 lg:order-1">
 			<div class="space-y-6">
 				<p class="font-link text-xs tracking-[0.25em] uppercase text-black/60 dark:text-white/60">
 					Contact
 				</p>
-				<h1 class="font-header text-4xl md:text-5xl leading-tight">Let's get connected!</h1>
+				<h1 class="font-header text-3xl sm:text-4xl md:text-5xl leading-tight">Let's get connected!</h1>
 				<p class="font-cabinet text-lg text-black dark:text-white/70 leading-relaxed max-w-2xl">
 					(if you want)
 				</p>
@@ -256,9 +258,9 @@
 			<div class="globe-wrapper" bind:this={globeRef}></div>
 		</div>
 
-		<div class="flex items-center justify-center">
+		<div class="flex items-center justify-center order-1 lg:order-2">
 			<form
-				class="p-6 md:p-8 border border-black/10 dark:border-white/10 rounded-3xl bg-white/90 dark:bg-slate-900 shadow-sm space-y-5 flex flex-col justify-center transition-colors"
+				class="w-full max-w-md p-6 md:p-8 border border-black/10 dark:border-white/10 rounded-3xl bg-white/90 dark:bg-slate-900 shadow-sm space-y-5 flex flex-col justify-center transition-colors"
 				on:submit|preventDefault={handleSubmit}
 			>
 				<div class="space-y-2">
@@ -309,11 +311,20 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		padding: 1rem 0;
 	}
 
 	:global(.globe-svg) {
-		max-width: 360px;
+		max-width: 100%;
+		width: auto;
+		height: auto;
 		filter: drop-shadow(0 12px 30px rgba(0, 0, 0, 0.1));
+	}
+
+	@media (max-width: 640px) {
+		:global(.globe-svg) {
+			max-width: 280px;
+		}
 	}
 
 	:global(.globe-arc) {

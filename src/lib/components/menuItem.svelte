@@ -20,7 +20,7 @@
 
 <button
 	type="button"
-	class="relative w-full flex-center py-2 cursor-pointer hover:text-black transition-all duration-200 group"
+	class="relative w-full flex-center py-4 sm:py-2 cursor-pointer hover:text-black transition-all duration-200 group min-h-[56px] sm:min-h-0"
 	class:border-b={borders}
 	class:border-t={borders}
 	class:border-white={borders}
