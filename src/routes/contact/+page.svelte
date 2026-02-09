@@ -208,7 +208,7 @@
 	class="w-full min-h-screen text-black dark:text-white py-16 px-6 md:py-20 md:px-12 lg:px-20 transition-colors"
 >
 	<div class="max-w-6xl mx-auto grid lg:grid-cols-[1.1fr,1fr] gap-8 md:gap-12">
-		<div class="order-2 lg:order-1">
+		<div class="order-1">
 			<div class="space-y-6">
 				<p class="font-link text-xs tracking-[0.25em] uppercase text-black/60 dark:text-white/60">
 					Contact
@@ -258,7 +258,7 @@
 			<div class="globe-wrapper" bind:this={globeRef}></div>
 		</div>
 
-		<div class="flex items-center justify-center order-1 lg:order-2">
+		<div class="flex items-center justify-center order-2">
 			<form
 				class="w-full max-w-md p-6 md:p-8 border border-black/10 dark:border-white/10 rounded-3xl bg-white/90 dark:bg-slate-900 shadow-sm space-y-5 flex flex-col justify-center transition-colors"
 				on:submit|preventDefault={handleSubmit}

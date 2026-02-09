@@ -1,40 +1,52 @@
-# create-svelte
+# Chase Durrett — Portfolio
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+Personal portfolio website built with **SvelteKit**, **TypeScript**, and **Tailwind CSS**.
 
-## Creating a project
+## Overview
 
-If you're seeing this, you've probably already done this step. Congrats!
+This site serves as a showcase for my work and experience. It features a custom design system using the **Cabinet Grotesk** variable font, dark mode support, and interactive data visualizations.
+
+### Key Features
+
+* **GitHub Integration:** The Work page dynamically fetches public repositories via the GitHub API. It filters out forks/private repos and implements server-side caching (`max-age=7200`) to manage rate limits.
+* **Interactive Globe:** The Contact page features a custom D3.js + TopoJSON orthographic globe that renders flight arcs to specific coordinates.
+* **Animations:**
+* **GSAP:** Used for scroll-triggered timeline animations on the homepage.
+* **Physics:** A custom `MouseBlob` component uses spring physics for cursor interaction.
+* **Transitions:** Native Svelte transitions (`fly`, `fade`, `slide`) for navigation.
+
+
+* **Theming:** Persisted light/dark mode with system preference detection.
+
+## Stack
+
+* **Framework:** SvelteKit (Svelte 4)
+* **Styling:** Tailwind CSS
+* **Visualization:** D3.js, TopoJSON
+* **Motion:** GSAP, Svelte Motion
+* **Type Safety:** TypeScript
+
+## Development
 
 ```bash
-# create a new project in the current directory
-npm create svelte@latest
+# Install dependencies
+npm install
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
+# Start development server
 npm run dev
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
+# Build for production
 npm run build
+
 ```
 
-You can preview the production build with `npm run preview`.
+## Project Structure
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+* `src/routes/work`: Server-side API fetching logic.
+* `src/routes/contact`: D3 globe implementation.
+* `src/lib/components`: Reusable UI components (ChipButton, Header, Footer).
+* `src/lib/stores`: State management (Theme store).
 
-# soupagency
+---
+
+© donutboyband
