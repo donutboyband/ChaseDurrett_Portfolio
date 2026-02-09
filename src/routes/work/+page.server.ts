@@ -23,6 +23,10 @@ export const load: PageServerLoad = async ({ fetch, setHeaders }) => {
 	});
 
 	return {
+		title: 'Work | Chase Durrett',
+		description:
+			'Explore my portfolio of web development projects, from enterprise applications to creative marketing sites built with React, Svelte, and .NET.',
+		keywords: 'Portfolio, Web Development Projects, React Projects, Svelte, Full Stack Projects',
 		repos: repos.map((repo: any) => ({
 			name: repo.name,
 			description: repo.description,

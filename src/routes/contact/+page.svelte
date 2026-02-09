@@ -1,5 +1,4 @@
 <script lang="ts">
-	import CowboyHat from '../../lib/images/CowboyHat.svelte';
 	import { onMount } from 'svelte';
 	const recipientEmail = 'chase@cdinfosec.com';
 	const okcCoords: [number, number] = [-97.5164, 35.4676];
