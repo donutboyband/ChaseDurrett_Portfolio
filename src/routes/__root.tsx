@@ -1,6 +1,7 @@
 import { createRootRoute, Outlet } from '@tanstack/react-router';
 import { ThemeProvider } from '../contexts/ThemeContext';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
+import Lenis from 'lenis';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import MouseBlob from '../components/MouseBlob';
@@ -11,6 +12,8 @@ export const Route = createRootRoute({
 
 // eslint-disable-next-line react-refresh/only-export-components
 function RootComponent() {
+	const lenisRef = useRef<Lenis | null>(null);
+
 	useEffect(() => {
 		// Set CSS variable for mobile viewport height
 		const setVh = () => {
@@ -21,6 +24,30 @@ function RootComponent() {
 		setVh();
 		window.addEventListener('resize', setVh);
 		return () => window.removeEventListener('resize', setVh);
+	}, []);
+
+	useEffect(() => {
+		// Initialize Lenis smooth scrolling
+		const lenis = new Lenis({
+			duration: 1.2,
+			easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+			smoothWheel: true,
+			wheelMultiplier: 1,
+			touchMultiplier: 2
+		});
+
+		lenisRef.current = lenis;
+
+		function raf(time: number) {
+			lenis.raf(time);
+			requestAnimationFrame(raf);
+		}
+
+		requestAnimationFrame(raf);
+
+		return () => {
+			lenis.destroy();
+		};
 	}, []);
 
 	return (
