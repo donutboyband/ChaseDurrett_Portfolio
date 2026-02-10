@@ -176,7 +176,7 @@ export default function BuildingEyeglass() {
 											font-header text-lg transition-all duration-300
 											${isActive
 												? 'bg-black dark:bg-white text-white dark:text-black scale-125 shadow-lg'
-												: 'bg-transparent border-2 border-black/30 dark:border-white/30 text-black/50 dark:text-white/50'
+												: 'bg-white dark:bg-black border-2 border-black/30 dark:border-white/30 text-black/50 dark:text-white/50'
 											}
 										`}
 									>
