@@ -204,3 +204,39 @@
 		);
 	}
 }
+
+/* MouseBlob component styles */
+.mouse-blob {
+position: fixed;
+left: 0;
+top: 0;
+z-index: 0;
+border-radius: 50%;
+pointer-events: none;
+background: radial-gradient(
+circle at center,
+rgba(0, 163, 255, 0.2) 0%,
+rgba(0, 163, 255, 0.1) 35%,
+rgba(0, 163, 255, 0.04) 60%,
+transparent 100%
+);
+filter: blur(48px);
+opacity: 0.95;
+transition:
+width 0.2s,
+height 0.2s;
+mix-blend-mode: screen;
+background-blend-mode: normal;
+will-change: transform;
+}
+
+.dark .mouse-blob {
+background: radial-gradient(
+circle at center,
+rgba(0, 163, 255, 0.2) 0%,
+rgba(0, 163, 255, 0.1) 35%,
+rgba(0, 163, 255, 0.04) 60%,
+transparent 100%
+);
+mix-blend-mode: screen;
+}
