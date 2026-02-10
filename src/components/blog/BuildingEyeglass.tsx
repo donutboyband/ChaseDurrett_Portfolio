@@ -108,7 +108,7 @@ export default function BuildingEyeglass() {
 			{/* Two Approaches */}
 			<div className="grid md:grid-cols-2 gap-4 my-8">
 				{/* First Approach - Failed */}
-				<div className="p-5 border border-black/20 dark:border-white/20 rounded-xl bg-white dark:bg-black">
+				<div className="p-5 border border-red-500/30 dark:border-red-400/30 rounded-xl bg-white dark:bg-black">
 					<div className="flex items-center gap-2 mb-3">
 						<span className="text-black/40 dark:text-white/40 text-xl">✕</span>
 						<span className="font-header text-black dark:text-white">Approach 1: MCP Sampling</span>
@@ -120,7 +120,7 @@ export default function BuildingEyeglass() {
 				</div>
 
 				{/* Second Approach - Success */}
-				<div className="p-5 border-2 border-black dark:border-white rounded-xl bg-white dark:bg-black">
+				<div className="p-5 border-2 border-green-500/30 dark:border-green-400/30 rounded-xl bg-white dark:bg-black">
 					<div className="flex items-center gap-2 mb-3">
 						<span className="text-black dark:text-white text-xl">✓</span>
 						<span className="font-header text-black dark:text-white">Approach 2: Long-Polling</span>
