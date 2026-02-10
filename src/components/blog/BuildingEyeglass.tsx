@@ -134,18 +134,10 @@ export default function BuildingEyeglass() {
 
 			{/* The Loop Diagram - Creative Circular */}
 			<div className="my-12 relative">
-				{/* Floating particles */}
-				<div className="particle particle-1" />
-				<div className="particle particle-2" />
-				<div className="particle particle-3" />
-
 				<div className="p-8 relative overflow-hidden">
 					{/* Hand-drawn style title */}
-					<p className="font-header text-black dark:text-white mb-2 text-center text-2xl">
+					<p className="font-header text-black dark:text-white mb-8 text-center text-xl">
 						The Loop
-					</p>
-					<p className="text-center text-black/50 dark:text-white/50 text-sm mb-10 italic">
-						it just keeps going...
 					</p>
 
 					{/* Circular visualization */}

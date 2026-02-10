@@ -2,11 +2,11 @@ export default function About() {
 	return (
 		<>
 			<p className="text-black dark:text-white/90">
-				I'm a full-stack developer based in Oklahoma City and I love technology. 
+				I'm a full-stack developer based in Oklahoma City. 
 			</p>
 
 			<p className="text-black dark:text-white/90">
-				But moreso, I am a builder that loves creating things in whatever medium I can--be it coding or music.
+				I am a builder that loves creating things in whatever medium I can--be it coding or music.
 			</p>
 
 			<p className="text-black dark:text-white/90">
