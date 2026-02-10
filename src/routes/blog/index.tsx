@@ -1,5 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 const blogPosts = [
 	{
@@ -112,6 +114,35 @@ const blogPosts = [
 
 function BlogPage() {
 	const [selectedPost, setSelectedPost] = useState(blogPosts[0]);
+	const contentRef = useRef<HTMLDivElement>(null);
+
+	useEffect(() => {
+		if (typeof window === 'undefined') return;
+		gsap.registerPlugin(ScrollTrigger);
+
+		const ctx = gsap.context(() => {
+			const elements = contentRef.current?.querySelectorAll('p, ul, li');
+			if (elements) {
+				gsap.from(elements, {
+					opacity: 0,
+					y: 20,
+					duration: 0.6,
+					stagger: 0.1,
+					ease: 'power2.out',
+					scrollTrigger: {
+						trigger: contentRef.current,
+						start: 'top 80%',
+						toggleActions: 'play none none reverse'
+					}
+				});
+			}
+		}, contentRef.current ?? undefined);
+
+		return () => {
+			ctx.revert();
+			ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+		};
+	}, [selectedPost]);
 
 	return (
 		<section className="w-full min-h-screen text-black dark:text-white py-16 px-6 md:py-20 md:px-12 lg:px-20 transition-colors">
@@ -136,7 +167,7 @@ function BlogPage() {
 				</aside>
 
 				{/* Main Content */}
-				<div className="flex-1 max-w-2xl">
+				<div className="flex-1 max-w-2xl" ref={contentRef}>
 					<div className="space-y-8 font-cabinet text-lg leading-relaxed">
 						<p className="text-black/50 dark:text-white/50 text-sm">
 							Updated {selectedPost.date}
