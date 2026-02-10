@@ -109,7 +109,7 @@ function IndexPage() {
 				aria-label="Intro"
 			>
 				<h1 className="font-header text-6xl sm:text-8xl md:text-9xl" ref={heroTitleRef}>
-					hi<span className="text-blue-500 transition-opacity duration-150 inline-block" ref={periodRef}>.</span>
+					hi<span className="inline-block overflow-hidden" style={{ width: '0.35em', height: '1em' }}><span className="text-blue-500 transition-opacity duration-150 inline-block" ref={periodRef}>.</span></span>
 				</h1>
 
 				<svg
