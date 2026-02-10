@@ -32,7 +32,7 @@ export default function MenuItem({
 	return (
 		<button
 			type="button"
-			className={`relative w-full flex items-center justify-center py-4 sm:py-2 cursor-pointer hover:text-black transition-all duration-200 group min-h-[56px] sm:min-h-0 ${
+			className={`relative w-full flex items-center justify-center py-4 sm:py-2 cursor-pointer md:hover:text-black transition-all duration-200 group min-h-[56px] sm:min-h-0 ${
 				borders ? 'border-b border-t border-white' : ''
 			} ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
 			style={{
@@ -40,11 +40,11 @@ export default function MenuItem({
 			}}
 			onClick={handleClick}
 		>
-			<div className="embla absolute w-0 h-full bg-tertiary inset-0 group-hover:w-full transition-all duration-200 ease-in-out opacity-0 group-hover:opacity-100 flex items-center justify-center overflow-hidden">
+			<div className="embla absolute w-0 h-full bg-tertiary inset-0 md:group-hover:w-full transition-all duration-200 ease-in-out opacity-0 md:group-hover:opacity-100 flex items-center justify-center overflow-hidden">
 				<div className="embla__container w-full h-full flex">
 					{itemsArr.map((item, index) => (
 						<div key={index} className="embla__slide flex items-center justify-center h-full">
-							<p className="opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out">
+							<p className="opacity-0 md:group-hover:opacity-100 transition-all duration-300 ease-in-out">
 								{item}
 							</p>
 							<span>&#8600;</span>
@@ -52,7 +52,7 @@ export default function MenuItem({
 					))}
 				</div>
 			</div>
-			<div className="w-full h-full flex items-center justify-center transition-all duration-100 text-white group-hover:text-black">
+			<div className="w-full h-full flex items-center justify-center transition-all duration-100 text-white md:group-hover:text-black">
 				{link}
 			</div>
 		</button>
