@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "eyeglass": {
+      "type": "local",
+      "command": "npx",
+      "args": [
+        "eyeglass-bridge"
+      ],
+      "tools": [
+        "*"
+      ]
+    }
+  }
+}
