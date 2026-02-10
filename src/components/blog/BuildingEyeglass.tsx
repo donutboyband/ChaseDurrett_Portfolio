@@ -481,6 +481,125 @@ export default function BuildingEyeglass() {
 					</pre>
 				)}
 			</Highlight>
+
+			{/* Deep Dive Section */}
+			<h2 className="font-header text-2xl md:text-3xl text-black dark:text-white mt-12 mb-6">
+				Under the Hood: The Fiber Walker
+			</h2>
+
+			<p className="text-black dark:text-white/90">
+				The most interesting part of the inspector is how it extracts React component information.
+				React doesn't expose its internals publicly, but there's a secret: every DOM element rendered
+				by React has a hidden property that links back to its <em>Fiber node</em>.
+			</p>
+
+			<div className="my-8 p-6 border border-black/10 dark:border-white/10 rounded-xl bg-black/[0.02] dark:bg-white/[0.02]">
+				<p className="font-mono text-sm text-black/80 dark:text-white/80 mb-4">
+					<span className="text-black/40 dark:text-white/40">// Every React element has this hidden key:</span>
+				</p>
+				<p className="font-mono text-sm text-black dark:text-white">
+					element[<span className="text-green-600 dark:text-green-400">"__reactFiber$..."</span>] → Fiber Node
+				</p>
+			</div>
+
+			<p className="text-black dark:text-white/90">
+				The Fiber is React's internal representation of a component instance. It contains everything:
+				the component name, props, parent chain, and crucially—<strong className="font-header">debug source info</strong>{' '}
+				that includes the file path and line number where the component was defined.
+			</p>
+
+			<p className="text-black dark:text-white/90">
+				But here's the catch: not every Fiber corresponds to a component <em>you</em> wrote.
+				React wraps your components in internal structures like Context.Provider, StrictMode, and
+				Suspense boundaries. The fiber-walker has to skip these and find the nearest{' '}
+				<em>user-defined</em> component:
+			</p>
+
+			<Highlight theme={themes.oneDark} code={`function isUserComponent(fiber: ReactFiber): boolean {
+  // Only function/class components (tags 0, 1, 11, 14, 15)
+  if (!COMPONENT_TAGS.has(fiber.tag)) return false;
+
+  const name = fiber.type.displayName || fiber.type.name;
+
+  // Skip React internals
+  if (name?.startsWith('Context') || name?.endsWith('Provider')) {
+    return false;
+  }
+
+  return true;
+}`} language="typescript">
+				{({ style, tokens, getLineProps, getTokenProps }) => (
+					<pre className="my-6 p-4 rounded-lg overflow-x-auto text-sm" style={style}>
+						{tokens.map((line, i) => (
+							<div key={i} {...getLineProps({ line })}>
+								{line.map((token, key) => (
+									<span key={key} {...getTokenProps({ token })} />
+								))}
+							</div>
+						))}
+					</pre>
+				)}
+			</Highlight>
+
+			<p className="text-black dark:text-white/90">
+				Once we find the right Fiber, we walk up the tree collecting the <strong className="font-header">ancestry chain</strong>—the
+				list of parent components. This gives the agent context like "this button is inside a Card
+				which is inside a Modal which is inside the App."
+			</p>
+
+			{/* Snapshot Capture Section */}
+			<h2 className="font-header text-2xl md:text-3xl text-black dark:text-white mt-12 mb-6">
+				Capturing the Snapshot
+			</h2>
+
+			<p className="text-black dark:text-white/90">
+				The semantic snapshot combines multiple sources of truth about an element:
+			</p>
+
+			<div className="my-8 grid gap-4">
+				{[
+					{
+						title: 'ARIA & Accessibility',
+						desc: 'Role, accessible name, labels, disabled/hidden state. We follow the same algorithm screen readers use.',
+					},
+					{
+						title: 'Framework Context',
+						desc: 'Component name, file path, line number, props. Works for React, Vue, and Svelte.',
+					},
+					{
+						title: 'Geometry',
+						desc: 'Bounding box coordinates. Tells the agent where the element is on screen.',
+					},
+					{
+						title: 'Computed Styles',
+						desc: 'Display, position, flex/grid properties, colors, fonts. The actual rendered values.',
+					},
+					{
+						title: 'DOM Neighborhood',
+						desc: 'Parent containers and their layout properties, children grouped by type. Layout context matters.',
+					},
+				].map((item, i) => (
+					<div
+						key={i}
+						className="flex gap-4 p-4 border border-black/5 dark:border-white/5 rounded-lg hover:border-black/10 dark:hover:border-white/10 transition-colors"
+					>
+						<div className="flex-shrink-0 w-8 h-8 rounded bg-black/5 dark:bg-white/5 flex items-center justify-center font-mono text-sm text-black/40 dark:text-white/40">
+							{i + 1}
+						</div>
+						<div>
+							<p className="font-header text-black dark:text-white text-sm">{item.title}</p>
+							<p className="text-black/60 dark:text-white/60 text-sm mt-1">{item.desc}</p>
+						</div>
+					</div>
+				))}
+			</div>
+
+			<p className="text-black dark:text-white/90">
+				The neighborhood context was a late addition but turned out to be crucial. An agent trying to
+				center a button needs to know if its parent is a flex container with{' '}
+				<code className="px-1.5 py-0.5 bg-black/5 dark:bg-white/10 rounded text-sm font-mono">justify-content: space-between</code>{' '}
+				vs a grid with explicit columns. Without this context, the agent is just guessing.
+			</p>
 		</>
 	);
 }
