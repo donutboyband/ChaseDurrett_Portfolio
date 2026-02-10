@@ -3,12 +3,12 @@ import ChipButton from './ChipButton';
 export default function Footer() {
 	return (
 		<footer className="w-full text-white px-6 md:px-12 lg:px-20 py-6">
-			<div className="max-w-6xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-t border-white/10 pt-4">
-				<p className="font-cabinet text-sm text-black dark:text-white">
+			<div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:items-center justify-between gap-4 border-t border-white/10 pt-4">
+				<p className="font-cabinet text-sm text-black dark:text-white text-center md:text-left">
 					Made by <span className="font-header text-blue-500">Chase</span> with React, D3, GSAP, &
 					Tailwind — Based in OKC.
 				</p>
-				<div className="flex flex-row items-end gap-2 font-header sm:px-8">
+				<div className="flex flex-row items-end gap-2 font-header sm:px-8 md:px-8">
 					<ChipButton tone="default" size="sm" href="/contact" ariaLabel="Contact">
 						<span className="hidden sm:inline">Contact</span>
 						<svg
