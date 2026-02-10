@@ -132,57 +132,179 @@ export default function BuildingEyeglass() {
 				</div>
 			</div>
 
-			{/* The Loop Diagram - Single Cycling Card */}
-			<div className="my-10 p-8 bg-white dark:bg-black rounded-xl border border-black/20 dark:border-white/20">
-				<p className="font-header text-black dark:text-white mb-8 text-center text-lg">The Eyeglass Loop</p>
+			{/* The Loop Diagram - Creative Circular */}
+			<div className="my-12 relative">
+				{/* Floating particles */}
+				<div className="particle particle-1" />
+				<div className="particle particle-2" />
+				<div className="particle particle-3" />
 
-				{/* Step indicators */}
-				<div className="flex justify-center gap-2 mb-6">
-					{LOOP_STEPS.map((_, idx) => (
-						<div
-							key={idx}
-							className={`w-2 h-2 rounded-full transition-all duration-300 ${
-								idx === currentStep
-									? 'bg-black dark:bg-white scale-125'
-									: 'bg-black/20 dark:bg-white/20'
-							}`}
-						/>
-					))}
-				</div>
+				<div className="p-8 relative overflow-hidden">
+					{/* Hand-drawn style title */}
+					<p className="font-header text-black dark:text-white mb-2 text-center text-2xl">
+						The Loop
+					</p>
+					<p className="text-center text-black/50 dark:text-white/50 text-sm mb-10 italic">
+						it just keeps going...
+					</p>
 
-				{/* Single card that cycles */}
-				<div className="relative h-32 flex items-center justify-center">
-					<div
-						key={currentStep}
-						className="absolute inset-0 flex items-center justify-center animate-fade-in"
-					>
-						<div className="text-center max-w-sm">
-							<div className="w-12 h-12 rounded-full border-2 border-black dark:border-white text-black dark:text-white flex items-center justify-center text-xl font-header mx-auto mb-4">
-								{LOOP_STEPS[currentStep].step}
-							</div>
-							<p className="text-black dark:text-white">
-								<strong className="font-header">{LOOP_STEPS[currentStep].actor}</strong>{' '}
-								<span className="text-black/70 dark:text-white/70">
+					{/* Circular visualization */}
+					<div className="relative w-72 h-72 mx-auto">
+						{/* Orbit ring */}
+						<div className="absolute inset-0 rounded-full border-2 border-dashed border-black/20 dark:border-white/20 orbit-spin" />
+
+						{/* The 4 nodes arranged in a circle */}
+						{LOOP_STEPS.map((step, idx) => {
+							const angle = (idx * 90 - 90) * (Math.PI / 180);
+							const radius = 120;
+							const x = Math.cos(angle) * radius;
+							const y = Math.sin(angle) * radius;
+							const isActive = idx === currentStep;
+
+							return (
+								<div
+									key={idx}
+									className="absolute transition-all duration-500"
+									style={{
+										left: `calc(50% + ${x}px - 24px)`,
+										top: `calc(50% + ${y}px - 24px)`,
+									}}
+								>
+									<div
+										className={`
+											w-12 h-12 rounded-full flex items-center justify-center
+											font-header text-lg transition-all duration-300
+											${isActive
+												? 'bg-black dark:bg-white text-white dark:text-black scale-125 shadow-lg'
+												: 'bg-transparent border-2 border-black/30 dark:border-white/30 text-black/50 dark:text-white/50'
+											}
+										`}
+									>
+										{step.step}
+									</div>
+									{/* Label that appears on active */}
+									<div
+										className={`
+											absolute whitespace-nowrap text-xs font-header
+											transition-all duration-300
+											${idx === 0 ? 'top-full mt-2 left-1/2 -translate-x-1/2' : ''}
+											${idx === 1 ? 'left-full ml-2 top-1/2 -translate-y-1/2' : ''}
+											${idx === 2 ? 'bottom-full mb-2 left-1/2 -translate-x-1/2' : ''}
+											${idx === 3 ? 'right-full mr-2 top-1/2 -translate-y-1/2' : ''}
+											${isActive ? 'opacity-100' : 'opacity-0'}
+										`}
+									>
+										<span className="highlight-text">{step.actor}</span>
+									</div>
+								</div>
+							);
+						})}
+
+						{/* Center content */}
+						<div className="absolute inset-0 flex items-center justify-center">
+							<div
+								key={currentStep}
+								className="text-center max-w-[140px] animate-fade-in"
+							>
+								<p className="text-sm text-black/70 dark:text-white/70 leading-relaxed">
 									{LOOP_STEPS[currentStep].action}
-								</span>
-							</p>
+								</p>
+							</div>
 						</div>
-					</div>
-				</div>
 
-				{/* Loop indicator */}
-				<div className="text-center mt-6 text-black/40 dark:text-white/40 text-sm">
-					step {currentStep + 1} of 4
+						{/* Traveling dot */}
+						<div
+							className="traveling-dot"
+							style={{
+								'--angle': `${currentStep * 90 - 90}deg`
+							} as React.CSSProperties}
+						/>
+					</div>
+
+					{/* Whimsical arrow */}
+					<div className="text-center mt-8 text-black/30 dark:text-white/30">
+						<span className="text-2xl wiggle">↻</span>
+					</div>
 				</div>
 			</div>
 
 			<style>{`
 				@keyframes fade-in {
-					from { opacity: 0; transform: translateY(8px); }
-					to { opacity: 1; transform: translateY(0); }
+					from { opacity: 0; transform: scale(0.95); }
+					to { opacity: 1; transform: scale(1); }
 				}
 				.animate-fade-in {
-					animation: fade-in 0.3s ease-out;
+					animation: fade-in 0.4s ease-out;
+				}
+
+				@keyframes float {
+					0%, 100% { transform: translateY(0) translateX(0); opacity: 0.3; }
+					50% { transform: translateY(-20px) translateX(10px); opacity: 0.6; }
+				}
+				.particle {
+					position: absolute;
+					width: 6px;
+					height: 6px;
+					border-radius: 50%;
+					background: currentColor;
+					opacity: 0.3;
+				}
+				.particle-1 {
+					top: 20%;
+					left: 10%;
+					animation: float 4s ease-in-out infinite;
+				}
+				.particle-2 {
+					top: 60%;
+					right: 15%;
+					animation: float 5s ease-in-out infinite 1s;
+				}
+				.particle-3 {
+					bottom: 20%;
+					left: 20%;
+					animation: float 6s ease-in-out infinite 2s;
+				}
+
+				@keyframes orbit {
+					from { transform: rotate(0deg); }
+					to { transform: rotate(360deg); }
+				}
+				.orbit-spin {
+					animation: orbit 20s linear infinite;
+				}
+
+				.highlight-text {
+					background: linear-gradient(120deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.05) 100%);
+					padding: 2px 8px;
+					border-radius: 4px;
+				}
+				:is(.dark) .highlight-text {
+					background: linear-gradient(120deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%);
+				}
+
+				.traveling-dot {
+					position: absolute;
+					width: 8px;
+					height: 8px;
+					background: black;
+					border-radius: 50%;
+					left: 50%;
+					top: 50%;
+					transform: rotate(var(--angle)) translateX(120px) translateY(-50%);
+					transition: transform 0.5s ease-in-out;
+				}
+				:is(.dark) .traveling-dot {
+					background: white;
+				}
+
+				@keyframes wiggle {
+					0%, 100% { transform: rotate(0deg); }
+					25% { transform: rotate(-10deg); }
+					75% { transform: rotate(10deg); }
+				}
+				.wiggle {
+					display: inline-block;
+					animation: wiggle 2s ease-in-out infinite;
 				}
 			`}</style>
 		</>
