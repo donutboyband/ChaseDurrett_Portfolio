@@ -1,4 +1,22 @@
+import { useState, useEffect } from 'react';
+
+const LOOP_STEPS = [
+	{ step: 1, actor: 'Agent', action: 'enters long-polling state, waiting for requests' },
+	{ step: 2, actor: 'Browser', action: 'sends user request via MCP server' },
+	{ step: 3, actor: 'Agent', action: 'completes work, communicates progress back' },
+	{ step: 4, actor: 'Loop', action: 'returns to step 1' },
+];
+
 export default function BuildingEyeglass() {
+	const [currentStep, setCurrentStep] = useState(0);
+
+	useEffect(() => {
+		const interval = setInterval(() => {
+			setCurrentStep((prev) => (prev + 1) % LOOP_STEPS.length);
+		}, 2000);
+		return () => clearInterval(interval);
+	}, []);
+
 	return (
 		<>
 			<h1 className="font-header text-4xl md:text-5xl text-black dark:text-white mb-4">
@@ -90,21 +108,21 @@ export default function BuildingEyeglass() {
 			{/* Two Approaches */}
 			<div className="grid md:grid-cols-2 gap-4 my-8">
 				{/* First Approach - Failed */}
-				<div className="p-5 border border-red-500/30 bg-red-500/5 dark:bg-red-500/10 rounded-xl">
+				<div className="p-5 border border-black/20 dark:border-white/20 rounded-xl bg-white dark:bg-black">
 					<div className="flex items-center gap-2 mb-3">
-						<span className="text-red-500 text-xl">✕</span>
+						<span className="text-black/40 dark:text-white/40 text-xl">✕</span>
 						<span className="font-header text-black dark:text-white">Approach 1: MCP Sampling</span>
 					</div>
-					<p className="text-sm text-black/70 dark:text-white/70">
+					<p className="text-sm text-black/60 dark:text-white/60">
 						The MCP protocol has nascent support for <em>sampling</em>, which allows an MCP server
 						to prompt an agent directly. However, even Claude Code doesn't support this yet.
 					</p>
 				</div>
 
 				{/* Second Approach - Success */}
-				<div className="p-5 border border-green-500/30 bg-green-500/5 dark:bg-green-500/10 rounded-xl">
+				<div className="p-5 border-2 border-black dark:border-white rounded-xl bg-white dark:bg-black">
 					<div className="flex items-center gap-2 mb-3">
-						<span className="text-green-500 text-xl">✓</span>
+						<span className="text-black dark:text-white text-xl">✓</span>
 						<span className="font-header text-black dark:text-white">Approach 2: Long-Polling</span>
 					</div>
 					<p className="text-sm text-black/70 dark:text-white/70">
@@ -114,92 +132,59 @@ export default function BuildingEyeglass() {
 				</div>
 			</div>
 
-			{/* The Loop Diagram - Animated */}
-			<style>{`
-				@keyframes pulse-step {
-					0%, 100% { opacity: 0.5; transform: scale(1); }
-					50% { opacity: 1; transform: scale(1.02); }
-				}
-				@keyframes flow-down {
-					0%, 100% { opacity: 0.2; height: 16px; }
-					50% { opacity: 0.8; height: 20px; }
-				}
-				@keyframes spin-slow {
-					from { transform: rotate(0deg); }
-					to { transform: rotate(-360deg); }
-				}
-				@keyframes glow-blue {
-					0%, 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
-					50% { box-shadow: 0 0 20px 4px rgba(59, 130, 246, 0.4); }
-				}
-				@keyframes glow-purple {
-					0%, 100% { box-shadow: 0 0 0 0 rgba(168, 85, 247, 0); }
-					50% { box-shadow: 0 0 20px 4px rgba(168, 85, 247, 0.4); }
-				}
-				@keyframes glow-orange {
-					0%, 100% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0); }
-					50% { box-shadow: 0 0 20px 4px rgba(249, 115, 22, 0.4); }
-				}
-				@keyframes glow-green {
-					0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
-					50% { box-shadow: 0 0 20px 4px rgba(34, 197, 94, 0.4); }
-				}
-				.step-1 { animation: pulse-step 4s ease-in-out infinite, glow-blue 4s ease-in-out infinite; animation-delay: 0s; }
-				.step-2 { animation: pulse-step 4s ease-in-out infinite, glow-purple 4s ease-in-out infinite; animation-delay: 1s; }
-				.step-3 { animation: pulse-step 4s ease-in-out infinite, glow-orange 4s ease-in-out infinite; animation-delay: 2s; }
-				.step-4 { animation: pulse-step 4s ease-in-out infinite, glow-green 4s ease-in-out infinite; animation-delay: 3s; }
-				.connector-1 { animation: flow-down 4s ease-in-out infinite; animation-delay: 0.5s; }
-				.connector-2 { animation: flow-down 4s ease-in-out infinite; animation-delay: 1.5s; }
-				.connector-3 { animation: flow-down 4s ease-in-out infinite; animation-delay: 2.5s; }
-				.loop-icon { animation: spin-slow 8s linear infinite; }
-			`}</style>
+			{/* The Loop Diagram - Single Cycling Card */}
+			<div className="my-10 p-8 bg-white dark:bg-black rounded-xl border border-black/20 dark:border-white/20">
+				<p className="font-header text-black dark:text-white mb-8 text-center text-lg">The Eyeglass Loop</p>
 
-			<div className="my-10 p-6 bg-black/5 dark:bg-white/5 rounded-xl border border-black/10 dark:border-white/10">
-				<p className="font-header text-black dark:text-white mb-6 text-center">The Eyeglass Loop</p>
+				{/* Step indicators */}
+				<div className="flex justify-center gap-2 mb-6">
+					{LOOP_STEPS.map((_, idx) => (
+						<div
+							key={idx}
+							className={`w-2 h-2 rounded-full transition-all duration-300 ${
+								idx === currentStep
+									? 'bg-black dark:bg-white scale-125'
+									: 'bg-black/20 dark:bg-white/20'
+							}`}
+						/>
+					))}
+				</div>
 
-				<div className="flex flex-col items-center gap-4">
-					{/* Step 1 */}
-					<div className="step-1 flex items-center gap-4 w-full max-w-md rounded-lg transition-all">
-						<div className="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center text-sm font-bold shrink-0">1</div>
-						<div className="flex-1 p-3 bg-blue-500/10 border border-blue-500/30 rounded-lg">
-							<span className="text-sm text-black dark:text-white"><strong>Agent</strong> enters long-polling state, waiting for requests</span>
+				{/* Single card that cycles */}
+				<div className="relative h-32 flex items-center justify-center">
+					<div
+						key={currentStep}
+						className="absolute inset-0 flex items-center justify-center animate-fade-in"
+					>
+						<div className="text-center max-w-sm">
+							<div className="w-12 h-12 rounded-full border-2 border-black dark:border-white text-black dark:text-white flex items-center justify-center text-xl font-header mx-auto mb-4">
+								{LOOP_STEPS[currentStep].step}
+							</div>
+							<p className="text-black dark:text-white">
+								<strong className="font-header">{LOOP_STEPS[currentStep].actor}</strong>{' '}
+								<span className="text-black/70 dark:text-white/70">
+									{LOOP_STEPS[currentStep].action}
+								</span>
+							</p>
 						</div>
 					</div>
+				</div>
 
-					<div className="connector-1 w-0.5 h-4 bg-blue-500/40 dark:bg-blue-400/40 transition-all"></div>
-
-					{/* Step 2 */}
-					<div className="step-2 flex items-center gap-4 w-full max-w-md rounded-lg transition-all">
-						<div className="w-8 h-8 rounded-full bg-purple-500 text-white flex items-center justify-center text-sm font-bold shrink-0">2</div>
-						<div className="flex-1 p-3 bg-purple-500/10 border border-purple-500/30 rounded-lg">
-							<span className="text-sm text-black dark:text-white"><strong>Browser</strong> sends user request via MCP server</span>
-						</div>
-					</div>
-
-					<div className="connector-2 w-0.5 h-4 bg-purple-500/40 dark:bg-purple-400/40 transition-all"></div>
-
-					{/* Step 3 */}
-					<div className="step-3 flex items-center gap-4 w-full max-w-md rounded-lg transition-all">
-						<div className="w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center text-sm font-bold shrink-0">3</div>
-						<div className="flex-1 p-3 bg-orange-500/10 border border-orange-500/30 rounded-lg">
-							<span className="text-sm text-black dark:text-white"><strong>Agent</strong> completes work, communicates progress back</span>
-						</div>
-					</div>
-
-					<div className="connector-3 w-0.5 h-4 bg-orange-500/40 dark:bg-orange-400/40 transition-all"></div>
-
-					{/* Step 4 - Loop back */}
-					<div className="step-4 flex items-center gap-4 w-full max-w-md rounded-lg transition-all">
-						<div className="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center text-sm font-bold shrink-0">4</div>
-						<div className="flex-1 p-3 bg-green-500/10 border border-green-500/30 rounded-lg">
-							<span className="text-sm text-black dark:text-white"><strong>Loop</strong> — Agent returns to step 1</span>
-						</div>
-					</div>
-
-					{/* Loop arrow indicator - animated */}
-					<div className="loop-icon text-3xl text-green-500 mt-2">↺</div>
+				{/* Loop indicator */}
+				<div className="text-center mt-6 text-black/40 dark:text-white/40 text-sm">
+					step {currentStep + 1} of 4
 				</div>
 			</div>
+
+			<style>{`
+				@keyframes fade-in {
+					from { opacity: 0; transform: translateY(8px); }
+					to { opacity: 1; transform: translateY(0); }
+				}
+				.animate-fade-in {
+					animation: fade-in 0.3s ease-out;
+				}
+			`}</style>
 		</>
 	);
 }
