@@ -572,6 +572,109 @@ export default function BuildingEyeglass() {
 				<code className="px-1.5 py-0.5 bg-black/5 dark:bg-white/10 rounded text-sm font-mono">justify-content: space-between</code>{' '}
 				vs a grid with explicit columns. Providing this upfront at a marginal token cost improves performance. 
 			</p>
+
+			{/* Dogfooding Section */}
+			<h2 className="font-header text-xl md:text-2xl lg:text-3xl text-black dark:text-white mt-8 md:mt-12 mb-4 md:mb-6">
+				Dogfooding
+			</h2>
+
+			<p className="text-black dark:text-white/90">
+				With the MVP of Eyeglass built, I used it to build the Eyeglass website itself. This allowed 
+				me to work out bugs as an active user and find the pain points of real-world use. There are 
+				still issues as of writing this—it's not perfect. But when it's flowing, it enables a different 
+				type of frontend development.
+			</p>
+
+			<p className="text-black dark:text-white/90">
+				You can talk in technical terms—flexbox, grid, design tokens. Or get abstract—"make this feel 
+				lighter", "the spacing feels cramped". The agent has enough context to understand both. I built 
+				this entire blog page with Eyeglass.
+			</p>
+
+			<div className="my-6 md:my-8 p-4 md:p-6 border border-black/10 dark:border-white/10 rounded-xl bg-black/[0.02] dark:bg-white/[0.02]">
+				<p className="text-black dark:text-white/90 mb-3">
+					<strong className="font-header">What I learned:</strong>
+				</p>
+				<ul className="space-y-2 text-sm md:text-base text-black/80 dark:text-white/80">
+					<li>→ The long-polling approach works reliably across different agents</li>
+					<li>→ Framework detection (React/Vue/Svelte) makes debugging significantly faster</li>
+					<li>→ DOM neighborhood context is crucial for layout-related requests</li>
+					<li>→ The browser extension needs to be lightweight—vanilla TS was the right choice</li>
+				</ul>
+			</div>
+
+			{/* Getting Started Section */}
+			<h2 className="font-header text-xl md:text-2xl lg:text-3xl text-black dark:text-white mt-8 md:mt-12 mb-4 md:mb-6">
+				Try It Yourself
+			</h2>
+
+			<p className="text-black dark:text-white/90">
+				Eyeglass is open source and available for anyone to use. If you're interested in trying it 
+				out or contributing, here's where to start:
+			</p>
+
+			<div className="my-6 md:my-8 space-y-4">
+				{/* Website Link */}
+				<div className="flex items-start gap-4 p-4 md:p-5 border border-black/10 dark:border-white/10 rounded-xl hover:border-black/20 dark:hover:border-white/20 transition-colors">
+					<div className="flex-shrink-0 w-10 h-10 rounded-lg bg-black/5 dark:bg-white/5 flex items-center justify-center">
+						<span className="text-lg">🌐</span>
+					</div>
+					<div className="flex-1">
+						<p className="font-header text-black dark:text-white mb-1">Official Website</p>
+						<p className="text-sm text-black/60 dark:text-white/60 mb-2">
+							Documentation, setup guides, and examples
+						</p>
+						<a
+							href="https://eyeglass.dev"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="text-sm text-blue-500 hover:underline font-mono"
+						>
+							eyeglass.dev →
+						</a>
+					</div>
+				</div>
+
+				{/* GitHub Link */}
+				<div className="flex items-start gap-4 p-4 md:p-5 border border-black/10 dark:border-white/10 rounded-xl hover:border-black/20 dark:hover:border-white/20 transition-colors">
+					<div className="flex-shrink-0 w-10 h-10 rounded-lg bg-black/5 dark:bg-white/5 flex items-center justify-center">
+						<span className="text-lg">⭐</span>
+					</div>
+					<div className="flex-1">
+						<p className="font-header text-black dark:text-white mb-1">GitHub Repository</p>
+						<p className="text-sm text-black/60 dark:text-white/60 mb-2">
+							Source code, issues, and contributions welcome
+						</p>
+						<a
+							href="https://github.com/donutboyband/eyeglass"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="text-sm text-blue-500 hover:underline font-mono"
+						>
+							github.com/donutboyband/eyeglass →
+						</a>
+					</div>
+				</div>
+			</div>
+
+			<p className="text-black dark:text-white/90">
+				The quickest way to get started is to install the browser extension and the MCP server, 
+				then add Eyeglass to your AI coding agent's configuration. Full setup instructions are 
+				available on the website.
+			</p>
+
+			<p className="text-black/60 dark:text-white/60 text-sm mt-6 md:mt-8 italic">
+				Built by{' '}
+				<a
+					href="https://github.com/donutboyband"
+					target="_blank"
+					rel="noopener noreferrer"
+					className="text-blue-500 hover:underline"
+				>
+					donutboyband
+				</a>
+				. Contributions, feedback, and stars appreciated.
+			</p>
 		</>
 	);
 }
