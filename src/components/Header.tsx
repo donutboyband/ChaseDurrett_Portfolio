@@ -77,14 +77,16 @@ export default function Header() {
 					<div
 						className="menu-bg-part fixed top-0 left-0 w-1/2 h-full bg-black dark:bg-slate-950 z-10"
 						style={{
-							animation: 'slideDownInLeft 300ms cubic-bezier(0.65, 0, 0.35, 1) forwards'
+							animation: 'slideDownInLeft 300ms cubic-bezier(0.65, 0, 0.35, 1) forwards',
+							transform: 'translateY(-100%)'
 						}}
 					></div>
 
 					<div
 						className="menu-bg-part fixed top-0 right-0 w-1/2 h-full bg-black dark:bg-slate-950 z-10"
 						style={{
-							animation: 'slideDownInRight 300ms cubic-bezier(0.65, 0, 0.35, 1) 100ms forwards'
+							animation: 'slideDownInRight 300ms cubic-bezier(0.65, 0, 0.35, 1) 100ms forwards',
+							transform: 'translateY(-100%)'
 						}}
 					></div>
 				</>
