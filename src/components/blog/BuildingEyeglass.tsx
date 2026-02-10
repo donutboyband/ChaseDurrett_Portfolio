@@ -293,21 +293,88 @@ export default function BuildingEyeglass() {
 				}
 			`}</style>
 
-			<p>
+			<p className="text-black dark:text-white/90">
 				To my surprise, long-polling was very effective as a strategy in accomplishing the full
 				loop. Claude Code picked it up best, followed by Codex, then Copilot.
 			</p>
 
-			<p>Now to the actual building part. I setup Eyeglass into four packages--
+			{/* The Architecture Section */}
+			<h2 className="font-header text-2xl md:text-3xl text-black dark:text-white mt-12 mb-6">
+				The Architecture
+			</h2>
 
-				1. @eyelass/bridge - the MCP bridge that connects the client and the agent. This contains all the tooling for the agent to call during eyeglass operations. I (with Claude) built this in Node, and it supports Stdio MCP and HTTP for Agents like Codex.
-
-				2. @eyeglass/inpsector - the main attraction. This is where I focused most of my efforts. Because it's a dev tool, this was made in vanilla JS (TS) and CSS, as I wanted the bundle size to be as small as possible. User preference are managed via local storage to persist user settings. 
-
-				3. @eyeglass/cli - This was created to make the setup for eyeglass into existing project simple. It works okay. I'm still working out the bugs in the setup with different frameworks. 
-
-				4. @eyeglass/types - shared type interfaces. 
+			<p className="text-black dark:text-white/90">
+				Now to the actual building part. I structured Eyeglass into four packages:
 			</p>
+
+			<div className="my-8 font-mono text-sm">
+				{/* Package Tree */}
+				<div className="border border-black/10 dark:border-white/10 rounded-lg overflow-hidden">
+					{/* Header */}
+					<div className="px-4 py-3 bg-black/[0.02] dark:bg-white/[0.02] border-b border-black/10 dark:border-white/10">
+						<span className="text-black/40 dark:text-white/40">eyeglass/</span>
+						<span className="text-black/60 dark:text-white/60">packages</span>
+					</div>
+
+					{/* Bridge */}
+					<div className="group">
+						<div className="px-4 py-4 border-b border-black/5 dark:border-white/5 hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors">
+							<div className="flex items-baseline gap-3">
+								<span className="text-black/30 dark:text-white/30">├──</span>
+								<span className="text-black dark:text-white font-medium">@eyeglass/bridge</span>
+								<span className="text-black/40 dark:text-white/40 text-xs">Node.js</span>
+							</div>
+							<p className="mt-2 ml-8 font-sans text-black/70 dark:text-white/70 text-sm leading-relaxed">
+								The MCP bridge that connects the client and the agent. Contains all the tooling for the agent to call during eyeglass operations. Built in Node, it supports both Stdio MCP and HTTP for agents like Codex.
+							</p>
+						</div>
+					</div>
+
+					{/* Inspector */}
+					<div className="group relative">
+						<div className="absolute left-0 top-0 bottom-0 w-1 bg-black dark:bg-white" />
+						<div className="px-4 py-4 border-b border-black/5 dark:border-white/5 bg-black/[0.02] dark:bg-white/[0.03]">
+							<div className="flex items-baseline gap-3">
+								<span className="text-black/30 dark:text-white/30">├──</span>
+								<span className="text-black dark:text-white font-medium">@eyeglass/inspector</span>
+								<span className="text-black/40 dark:text-white/40 text-xs">Vanilla TS</span>
+								<span className="text-xs px-2 py-0.5 bg-black dark:bg-white text-white dark:text-black rounded">main focus</span>
+							</div>
+							<p className="mt-2 ml-8 font-sans text-black/70 dark:text-white/70 text-sm leading-relaxed">
+								The main attraction—where I focused most of my efforts. Because it's a dev tool, I built it in vanilla JS/TS and CSS for the smallest possible bundle size. User preferences persist via localStorage.
+							</p>
+						</div>
+					</div>
+
+					{/* CLI */}
+					<div className="group">
+						<div className="px-4 py-4 border-b border-black/5 dark:border-white/5 hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors">
+							<div className="flex items-baseline gap-3">
+								<span className="text-black/30 dark:text-white/30">├──</span>
+								<span className="text-black dark:text-white font-medium">@eyeglass/cli</span>
+								<span className="text-black/40 dark:text-white/40 text-xs">CLI</span>
+							</div>
+							<p className="mt-2 ml-8 font-sans text-black/70 dark:text-white/70 text-sm leading-relaxed">
+								Created to make setup into existing projects simple. It works okay—still ironing out bugs with different frameworks.
+							</p>
+						</div>
+					</div>
+
+					{/* Types */}
+					<div className="group">
+						<div className="px-4 py-4 hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors">
+							<div className="flex items-baseline gap-3">
+								<span className="text-black/30 dark:text-white/30">└──</span>
+								<span className="text-black dark:text-white font-medium">@eyeglass/types</span>
+								<span className="text-black/40 dark:text-white/40 text-xs">TypeScript</span>
+							</div>
+							<p className="mt-2 ml-8 font-sans text-black/70 dark:text-white/70 text-sm leading-relaxed">
+								Shared type interfaces.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
 		</>
 	);
 }
