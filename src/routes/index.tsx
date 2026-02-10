@@ -33,7 +33,6 @@ const experiences = [
 function IndexPage() {
 	const journeyRef = useRef<HTMLElement>(null);
 	const heroTitleRef = useRef<HTMLHeadingElement>(null);
-	const periodRef = useRef<HTMLSpanElement>(null);
 
 	useEffect(() => {
 		if (typeof window === 'undefined') return;
@@ -86,15 +85,6 @@ function IndexPage() {
 			);
 		}
 
-		// Period spin animation
-		if (periodRef.current) {
-			gsap.fromTo(
-				periodRef.current,
-				{ rotation: 0 },
-				{ rotation: 360, duration: 0.6, delay: 0.4, ease: 'power2.inOut' }
-			);
-		}
-
 		return () => {
 			ctx.revert();
 			ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
@@ -109,7 +99,7 @@ function IndexPage() {
 				aria-label="Intro"
 			>
 				<h1 className="font-header text-6xl sm:text-8xl md:text-9xl" ref={heroTitleRef}>
-					hi<span className="inline-block overflow-visible" style={{ width: '0.35em' }}><span className="text-blue-500 transition-opacity duration-150 inline-block" ref={periodRef}>.</span></span>
+					hi<span className="text-blue-500 transition-opacity duration-150">.</span>
 				</h1>
 
 				<svg
