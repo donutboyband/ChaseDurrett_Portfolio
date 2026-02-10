@@ -237,9 +237,9 @@ export default function Header() {
 					}
 				}
 
-				svg:hover,
-				svg:active,
-				svg:focus {
+				.menu svg:hover,
+				.menu svg:active,
+				.menu svg:focus {
 					stroke: #baff29;
 				}
 			`}</style>
