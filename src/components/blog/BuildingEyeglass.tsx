@@ -465,21 +465,19 @@ export default function BuildingEyeglass() {
 				And create the following interface for the semantic snapshot that the agent receives:
 			</p>
 
-			<Highlight theme={themes.github} code={SEMANTIC_SNAPSHOT_CODE} language="typescript">
+			<Highlight theme={themes.oneDark} code={SEMANTIC_SNAPSHOT_CODE} language="typescript">
 				{({ style, tokens, getLineProps, getTokenProps }) => (
 					<pre
-						className="my-6 p-4 border border-black/10 dark:border-white/10 rounded-lg overflow-x-auto text-sm"
-						style={{ ...style, background: 'transparent' }}
+						className="my-6 p-4 rounded-lg overflow-x-auto text-sm"
+						style={style}
 					>
-						<code className="dark:invert dark:hue-rotate-180">
-							{tokens.map((line, i) => (
-								<div key={i} {...getLineProps({ line })}>
-									{line.map((token, key) => (
-										<span key={key} {...getTokenProps({ token })} />
-									))}
-								</div>
-							))}
-						</code>
+						{tokens.map((line, i) => (
+							<div key={i} {...getLineProps({ line })}>
+								{line.map((token, key) => (
+									<span key={key} {...getTokenProps({ token })} />
+								))}
+							</div>
+						))}
 					</pre>
 				)}
 			</Highlight>
