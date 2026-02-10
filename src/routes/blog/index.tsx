@@ -2,113 +2,28 @@ import { createFileRoute } from '@tanstack/react-router';
 import { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import About from '../../components/blog/About';
+import BuildingWithReact from '../../components/blog/BuildingWithReact';
+import DataScienceJourney from '../../components/blog/DataScienceJourney';
 
 const blogPosts = [
 	{
 		id: 'about',
 		title: 'About',
 		date: 'Feb 10, 2026',
-		content: (
-			<>
-				<p className="text-black dark:text-white/90">
-					I'm a full-stack developer based in Oklahoma City with a passion for building clean, maintainable applications.
-				</p>
-
-				<p className="text-black dark:text-white/90">
-					Currently, I work at{' '}
-					<a href="https://www.baltlifeins.com/" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
-						Baltimore Life Insurance
-					</a>{' '}
-					where I build enterprise-grade applications using React, .NET, and SQL. Before that, I worked at{' '}
-					<a href="https://soupagency.com/" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
-						Soup Agency
-					</a>
-					, crafting marketing websites for various clients.
-				</p>
-
-				<p className="text-black dark:text-white/90">
-					I enjoy exploring new technologies and applying them to solve real-world problems. Lately, I've been diving into data science and machine learning, learning how to apply these tools to challenges I've encountered in my work.
-				</p>
-
-				<p className="text-black dark:text-white/90">
-					I consider myself a builder at heart and enjoy creating highly polished, user-focused products.
-				</p>
-
-				<p className="text-black dark:text-white/90">
-					You can reach me at{' '}
-					<a href="https://www.linkedin.com/in/chasedurrett/" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
-						LinkedIn
-					</a>
-					, check out my code on{' '}
-					<a href="https://github.com/donutboyband" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
-						GitHub
-					</a>
-					, or email me at{' '}
-					<a href="mailto:chase@cdinfosec.com" className="text-blue-500 hover:underline">
-						chase@cdinfosec.com
-					</a>
-					.
-				</p>
-			</>
-		)
+		content: <About />
 	},
 	{
 		id: 'building-with-react',
 		title: 'Building with React',
 		date: 'Feb 5, 2026',
-		content: (
-			<>
-				<p className="text-black dark:text-white/90">
-					React continues to be my framework of choice for building modern web applications. The component-based architecture makes it easy to create reusable, maintainable code.
-				</p>
-
-				<p className="text-black dark:text-white/90">
-					Recently, I've been exploring the new React Server Components and how they can improve performance for content-heavy applications. The ability to render components on the server and stream them to the client is a game-changer.
-				</p>
-
-				<p className="text-black dark:text-white/90">
-					Some key takeaways from my experience:
-				</p>
-
-				<ul className="list-disc list-inside space-y-2 text-black dark:text-white/90">
-					<li>Keep components small and focused</li>
-					<li>Use TypeScript for better type safety</li>
-					<li>Leverage hooks for cleaner state management</li>
-					<li>Test components in isolation</li>
-				</ul>
-			</>
-		)
+		content: <BuildingWithReact />
 	},
 	{
 		id: 'data-science-journey',
 		title: 'My Data Science Journey',
 		date: 'Jan 28, 2026',
-		content: (
-			<>
-				<p className="text-black dark:text-white/90">
-					Over the past year, I've been diving deeper into data science and machine learning. What started as curiosity has turned into a genuine passion for applying these tools to real-world problems.
-				</p>
-
-				<p className="text-black dark:text-white/90">
-					I've been working through various courses and tutorials, building projects that combine my web development background with data analysis. The intersection of these fields is fascinating.
-				</p>
-
-				<p className="text-black dark:text-white/90">
-					Some areas I'm exploring:
-				</p>
-
-				<ul className="list-disc list-inside space-y-2 text-black dark:text-white/90">
-					<li>Natural language processing for business applications</li>
-					<li>Predictive modeling for risk assessment</li>
-					<li>Data visualization with D3.js and Python</li>
-					<li>Building ML pipelines with modern tools</li>
-				</ul>
-
-				<p className="text-black dark:text-white/90">
-					The journey is just beginning, and I'm excited to see where it leads.
-				</p>
-			</>
-		)
+		content: <DataScienceJourney />
 	}
 ];
 
