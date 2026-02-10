@@ -150,8 +150,8 @@ export default function BuildingEyeglass() {
 
 					{/* Circular visualization */}
 					<div className="relative w-72 h-72 mx-auto">
-						{/* Orbit ring */}
-						<div className="absolute inset-0 rounded-full border-2 border-dashed border-black/10 dark:border-white/10 orbit-spin" />
+						{/* Orbit ring - aligned with center of blobs */}
+						<div className="absolute inset-6 rounded-full border-2 border-dashed border-black/10 dark:border-white/10 orbit-spin" />
 
 						{/* The 4 nodes arranged in a circle */}
 						{LOOP_STEPS.map((step, idx) => {
