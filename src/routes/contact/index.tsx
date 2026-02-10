@@ -11,6 +11,7 @@ type ArcPath = {
 
 function ContactPage() {
 	const globeRef = useRef<HTMLDivElement>(null);
+	const isInitialized = useRef(false);
 	const [form, setForm] = useState({
 		name: '',
 		email: '',
@@ -34,9 +35,9 @@ function ContactPage() {
 		let cleanupGlobe: (() => void) | null = null;
 
 		const createGlobe = async () => {
-			if (!globeRef.current) return;
+			if (!globeRef.current || isInitialized.current) return;
 			
-			// Clear any existing globes first
+			isInitialized.current = true;
 			globeRef.current.innerHTML = '';
 
 			const [
