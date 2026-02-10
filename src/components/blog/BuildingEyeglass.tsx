@@ -127,7 +127,7 @@ export default function BuildingEyeglass() {
 			</p>
 
 			<p className="text-black dark:text-white/90">
-				Over one week I fervently recreated Agentation in my own way with <em>one goal</em>: two-way
+				Over one week I feverishly recreated Agentation in my own way with <em>one goal</em>: two-way
 				communication from the browser.
 			</p>
 
@@ -481,43 +481,6 @@ export default function BuildingEyeglass() {
 					</pre>
 				)}
 			</Highlight>
-
-			{/* Deep Dive Section */}
-			<h2 className="font-header text-2xl md:text-3xl text-black dark:text-white mt-12 mb-6">
-				Under the Hood: The Fiber Walker
-			</h2>
-
-			<p className="text-black dark:text-white/90">
-				The most interesting part of the inspector is how it finds which component owns a DOM element.
-				React leaves a hidden breadcrumb on every element it creates, which points back to the
-				component that made it.
-			</p>
-
-			<div className="my-8 p-6 border border-black/10 dark:border-white/10 rounded-xl bg-black/[0.02] dark:bg-white/[0.02]">
-				<p className="font-mono text-sm text-black/80 dark:text-white/80 mb-4">
-					<span className="text-black/40 dark:text-white/40">// React leaves a hidden trail on every DOM element:</span>
-				</p>
-				<p className="font-mono text-sm text-black dark:text-white">
-					element[<span className="text-green-600 dark:text-green-400">"__reactFiber$..."</span>] → Component Info
-				</p>
-			</div>
-
-			<p className="text-black dark:text-white/90">
-				Following this breadcrumb trail leads to the component name, props, parent components, and—most
-				importantly—<strong className="font-header">the file path and line number</strong> where the component lives
-				in your codebase.
-			</p>
-
-			<p className="text-black dark:text-white/90">
-				The tricky part? React adds its own wrapper components around yours—things like Context providers
-				and error boundaries. The inspector filters these out to find <em>your</em> actual components.
-			</p>
-
-			<p className="text-black dark:text-white/90">
-				Once it finds the right component, it walks up the tree collecting the <strong className="font-header">ancestry chain</strong>—the
-				full path of parent components. This gives the agent context like "this button is inside a Card
-				which is inside a Modal which is inside the App."
-			</p>
 
 			{/* Snapshot Capture Section */}
 			<h2 className="font-header text-2xl md:text-3xl text-black dark:text-white mt-12 mb-6">

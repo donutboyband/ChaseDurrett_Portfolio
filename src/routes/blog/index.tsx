@@ -16,14 +16,8 @@ const blogPosts = [
 	{
 		id: 'building-eyeglass',
 		title: 'Building Eyeglass',
-		date: 'Feb 5, 2026',
+		date: 'Feb 10, 2026',
 		content: <BuildingEyeglass />
-	},
-	{
-		id: 'data-science-journey',
-		title: 'My Data Science Journey',
-		date: 'Jan 28, 2026',
-		content: <DataScienceJourney />
 	}
 ];
 
