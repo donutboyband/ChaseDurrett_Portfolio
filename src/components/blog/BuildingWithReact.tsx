@@ -2,7 +2,7 @@ export default function BuildingWithReact() {
 return (
 <>
 <h1 className="font-header text-4xl md:text-5xl text-black dark:text-white mb-4">
-Visual Bridge for AI Agents in 4 Days
+Eyeglass in one week
 </h1>
 
 <h2 className="font-header text-3xl md:text-4xl text-black dark:text-white mt-12 mb-4">
@@ -10,12 +10,40 @@ The Spark
 </h2>
 
 <p className="text-black dark:text-white/90">
-I was reading{' '}
-<a href="https://agentation.dev" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
+I was exploring the incredible tool—and rapidly evolving Agentic semantic understanding standard—{' '}
+<a href="https://agentation.dev" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline font-header">
 Agentation
 </a>{' '}
-recently, and a comment by Geoffrey Huntley stuck with me: "The moat is gone." He was talking about how agentic AI tools are leveling the playing field. It inspired me, but it also highlighted a massive gap in my own workflow.
+recently. It's a simple idea, but the execution is incredible and once I started using it I started dreading chatting to an agent about frontend changes <em>NOT</em> using Agentation.
 </p>
+
+<div className="my-8 p-6 bg-gradient-to-r from-blue-500/10 to-transparent dark:from-blue-500/20 dark:to-transparent border-l-4 border-blue-500 rounded-r-xl">
+<p className="text-black dark:text-white/90">
+<strong className="font-header text-lg">The friction point:</strong> I didn't want to switch to my terminal for every change.
+</p>
+</div>
+
+<p className="text-black dark:text-white/90">
+It sounds spoiled, but I imagined there were real benefits from not leaving the browser. Or so I told myself. Thus the idea for <strong className="font-header">Eyeglass</strong> was born.
+</p>
+
+<p className="text-black dark:text-white/90">
+Over one week I fervently recreated Agentation in my own way with <em>one goal</em>: two-way communication from the browser.
+</p>
+
+<div className="my-8 p-6 border border-black/10 dark:border-white/10 rounded-xl bg-black/5 dark:bg-white/5">
+<p className="text-black dark:text-white/90 mb-3">
+<strong className="font-header">Why recreate Agentation?</strong>
+</p>
+<ul className="space-y-2 text-black/80 dark:text-white/80">
+<li>→ Prove to myself I could make a "magic" tool</li>
+<li>→ Prove Geoffrey Huntley's point: with Agentic AI, there are no software moats</li>
+<li>→ The only limit in development is now imagination</li>
+</ul>
+<p className="text-sm text-black/60 dark:text-white/60 mt-4 italic">
+Though, you get better (and safer) results if you know what you're doing technically.
+</p>
+</div>
 
 <p className="text-black dark:text-white/90">
 AI coding agents are incredible, but there is a fundamental disconnect. When I'm staring at a button in my browser thinking "this padding is wrong," I can't just tell the AI *that*. I have to context-switch to my terminal, mentally translate the visual element into a file path or component name, and hope the AI understands which "Submit" button I'm talking about.
