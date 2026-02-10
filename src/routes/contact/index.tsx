@@ -36,8 +36,8 @@ function ContactPage() {
 		const createGlobe = async () => {
 			if (!globeRef.current) return;
 			
-			// Prevent duplicate globes (React StrictMode double mount)
-			if (globeRef.current.querySelector('svg')) return;
+			// Clear any existing globes first
+			globeRef.current.innerHTML = '';
 
 			const [
 				{ select, geoOrthographic, geoPath, geoGraticule10, timer, easeCubicOut },
