@@ -62,10 +62,10 @@ export default function Header() {
 							onClick={() => setIsOpen(!isOpen)}
 							aria-label="Open menu"
 						>
-							<div className="absolute h-0 w-full bg-black dark:bg-white inset-0 group-hover:h-full z-0 transition-all ease-in-out duration-200"></div>
-							<span className="w-3/4 h-[2px] bg-black dark:bg-white mx-2 group-hover:bg-white dark:group-hover:bg-black z-10"></span>
-							<span className="w-4/6 h-[2px] bg-black dark:bg-white mx-2 group-hover:bg-white dark:group-hover:bg-black z-10"></span>
-							<span className="w-3/6 h-[2px] bg-black dark:bg-white mx-2 group-hover:bg-white dark:group-hover:bg-black z-10"></span>
+							<div className="absolute h-0 w-full bg-black dark:bg-white inset-0 md:group-hover:h-full z-0 transition-all ease-in-out duration-200"></div>
+							<span className="w-3/4 h-[2px] bg-black dark:bg-white mx-2 md:group-hover:bg-white md:dark:group-hover:bg-black z-10"></span>
+							<span className="w-4/6 h-[2px] bg-black dark:bg-white mx-2 md:group-hover:bg-white md:dark:group-hover:bg-black z-10"></span>
+							<span className="w-3/6 h-[2px] bg-black dark:bg-white mx-2 md:group-hover:bg-white md:dark:group-hover:bg-black z-10"></span>
 						</button>
 					)}
 				</div>

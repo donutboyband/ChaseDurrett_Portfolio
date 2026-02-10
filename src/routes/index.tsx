@@ -140,9 +140,6 @@ function IndexPage() {
 						<p className="font-cabinet text-xl text-black dark:text-white/80 leading-relaxed">
 							I&apos;m a lifelong learner who loves turning ideas into reality. As a full-stack developer, I
 							build clean, scalable applications that prioritize user experience and maintainability.
-							Lately, I&apos;ve ventured into data science and machine learning in my spare time, learning and
-							applying those skills by solving challenges I&apos;ve come across in the industries I&apos;ve worked
-							in.
 						</p>
 					</div>
 
