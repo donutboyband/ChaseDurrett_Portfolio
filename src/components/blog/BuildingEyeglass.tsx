@@ -488,62 +488,34 @@ export default function BuildingEyeglass() {
 			</h2>
 
 			<p className="text-black dark:text-white/90">
-				The most interesting part of the inspector is how it extracts React component information.
-				React doesn't expose its internals publicly, but there's a secret: every DOM element rendered
-				by React has a hidden property that links back to its <em>Fiber node</em>.
+				The most interesting part of the inspector is how it finds which component owns a DOM element.
+				React leaves a hidden breadcrumb on every element it creates, which points back to the
+				component that made it.
 			</p>
 
 			<div className="my-8 p-6 border border-black/10 dark:border-white/10 rounded-xl bg-black/[0.02] dark:bg-white/[0.02]">
 				<p className="font-mono text-sm text-black/80 dark:text-white/80 mb-4">
-					<span className="text-black/40 dark:text-white/40">// Every React element has this hidden key:</span>
+					<span className="text-black/40 dark:text-white/40">// React leaves a hidden trail on every DOM element:</span>
 				</p>
 				<p className="font-mono text-sm text-black dark:text-white">
-					element[<span className="text-green-600 dark:text-green-400">"__reactFiber$..."</span>] → Fiber Node
+					element[<span className="text-green-600 dark:text-green-400">"__reactFiber$..."</span>] → Component Info
 				</p>
 			</div>
 
 			<p className="text-black dark:text-white/90">
-				The Fiber is React's internal representation of a component instance. It contains everything:
-				the component name, props, parent chain, and crucially—<strong className="font-header">debug source info</strong>{' '}
-				that includes the file path and line number where the component was defined.
+				Following this breadcrumb trail leads to the component name, props, parent components, and—most
+				importantly—<strong className="font-header">the file path and line number</strong> where the component lives
+				in your codebase.
 			</p>
 
 			<p className="text-black dark:text-white/90">
-				But here's the catch: not every Fiber corresponds to a component <em>you</em> wrote.
-				React wraps your components in internal structures like Context.Provider, StrictMode, and
-				Suspense boundaries. The fiber-walker has to skip these and find the nearest{' '}
-				<em>user-defined</em> component:
+				The tricky part? React adds its own wrapper components around yours—things like Context providers
+				and error boundaries. The inspector filters these out to find <em>your</em> actual components.
 			</p>
 
-			<Highlight theme={themes.oneDark} code={`function isUserComponent(fiber: ReactFiber): boolean {
-  // Only function/class components (tags 0, 1, 11, 14, 15)
-  if (!COMPONENT_TAGS.has(fiber.tag)) return false;
-
-  const name = fiber.type.displayName || fiber.type.name;
-
-  // Skip React internals
-  if (name?.startsWith('Context') || name?.endsWith('Provider')) {
-    return false;
-  }
-
-  return true;
-}`} language="typescript">
-				{({ style, tokens, getLineProps, getTokenProps }) => (
-					<pre className="my-6 p-4 rounded-lg overflow-x-auto text-sm" style={style}>
-						{tokens.map((line, i) => (
-							<div key={i} {...getLineProps({ line })}>
-								{line.map((token, key) => (
-									<span key={key} {...getTokenProps({ token })} />
-								))}
-							</div>
-						))}
-					</pre>
-				)}
-			</Highlight>
-
 			<p className="text-black dark:text-white/90">
-				Once we find the right Fiber, we walk up the tree collecting the <strong className="font-header">ancestry chain</strong>—the
-				list of parent components. This gives the agent context like "this button is inside a Card
+				Once it finds the right component, it walks up the tree collecting the <strong className="font-header">ancestry chain</strong>—the
+				full path of parent components. This gives the agent context like "this button is inside a Card
 				which is inside a Modal which is inside the App."
 			</p>
 
