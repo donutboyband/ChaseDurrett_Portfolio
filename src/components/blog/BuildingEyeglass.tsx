@@ -211,14 +211,6 @@ export default function BuildingEyeglass() {
 								</p>
 							</div>
 						</div>
-
-						{/* Traveling dot */}
-						<div
-							className="traveling-dot"
-							style={{
-								'--angle': `${currentStep * 90 - 90}deg`
-							} as React.CSSProperties}
-						/>
 					</div>
 
 					{/* Whimsical arrow */}
