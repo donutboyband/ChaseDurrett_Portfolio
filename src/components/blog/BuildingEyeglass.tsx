@@ -4,7 +4,7 @@ const LOOP_STEPS = [
 	{ step: 1, actor: 'Agent', action: 'enters long-polling state, waiting for requests' },
 	{ step: 2, actor: 'Browser', action: 'sends user request via MCP server' },
 	{ step: 3, actor: 'Agent', action: 'completes work, communicates progress back' },
-	{ step: 4, actor: 'Loop', action: 'returns to step 1' },
+	{ step: 4, actor: 'Loop', action: 'returns to step 1' }
 ];
 
 export default function BuildingEyeglass() {
@@ -37,10 +37,13 @@ export default function BuildingEyeglass() {
 			</p>
 
 			<p className="text-black dark:text-white/90">
-				As I used it, I wanted more and more to not leave the browser for the requests. It sounds
-				spoiled, but I imagined there were real benefits from not leaving the browser. Some being
-				less context-switching and a constraint that forces the tool's UI to be <em>really</em>{' '}
-				comprehensive. Thus the idea for <strong className="font-header">Eyeglass</strong> was born.
+				As I used it, I wanted more and more to not leave the browser for the requests. Agentation
+				uses copy/paste as the main vehicle for getting the context to the agent. There's also an
+				MCP integration, but to my knowledge I wasn't able to find a way to sync that back to the
+				browser. It sounds spoiled, but I imagined there were real benefits from not leaving the
+				browser. Some being less context-switching and a constraint that forces the tool's UI to be{' '}
+				<em>really</em> comprehensive. Thus the idea for{' '}
+				<strong className="font-header">Eyeglass</strong> was born.
 			</p>
 
 			<p className="text-black dark:text-white/90">
@@ -159,16 +162,17 @@ export default function BuildingEyeglass() {
 									className="absolute transition-all duration-500"
 									style={{
 										left: `calc(50% + ${x}px - 24px)`,
-										top: `calc(50% + ${y}px - 24px)`,
+										top: `calc(50% + ${y}px - 24px)`
 									}}
 								>
 									<div
 										className={`
 											w-12 h-12 rounded-full flex items-center justify-center
 											font-header text-lg transition-all duration-300
-											${isActive
-												? 'bg-black dark:bg-white text-white dark:text-black scale-125 shadow-lg'
-												: 'bg-white dark:bg-black border-2 border-black/30 dark:border-white/30 text-black/50 dark:text-white/50'
+											${
+												isActive
+													? 'bg-black dark:bg-white text-white dark:text-black scale-125 shadow-lg'
+													: 'bg-white dark:bg-black border-2 border-black/30 dark:border-white/30 text-black/50 dark:text-white/50'
 											}
 										`}
 									>
@@ -194,10 +198,7 @@ export default function BuildingEyeglass() {
 
 						{/* Center content */}
 						<div className="absolute inset-0 flex items-center justify-center">
-							<div
-								key={currentStep}
-								className="text-center max-w-[140px] animate-fade-in"
-							>
+							<div key={currentStep} className="text-center max-w-[140px] animate-fade-in">
 								<p className="text-sm text-black/70 dark:text-white/70 leading-relaxed">
 									{LOOP_STEPS[currentStep].action}
 								</p>
@@ -291,6 +292,81 @@ export default function BuildingEyeglass() {
 					animation: wiggle 2s ease-in-out infinite;
 				}
 			`}</style>
+
+			<p>
+				To my surprise, long-polling was very effective as a strategy in accomplishing the full
+				loop. Claude Code picked it up best, followed by Codex, then Copilot.
+			</p>
+
+			<h2 className="font-header text-2xl md:text-3xl text-black dark:text-white mt-12 mb-6">
+				The Build
+			</h2>
+
+			<p className="text-black dark:text-white/90 mb-8">
+				With the approach settled, I dove into building. Over 96 hours, Eyeglass evolved into four core packages, each solving a specific piece of the puzzle:
+			</p>
+
+			<div className="space-y-4 my-10">
+				{/* Package 1: Bridge */}
+				<div className="group p-6 border border-black/10 dark:border-white/10 rounded-xl bg-gradient-to-br from-blue-500/5 to-transparent dark:from-blue-400/10 hover:border-black/20 dark:hover:border-white/20 transition-all">
+					<div className="flex items-start gap-4">
+						<div className="text-3xl mt-1">🌉</div>
+						<div className="flex-1">
+							<h3 className="font-header text-lg text-black dark:text-white mb-2">
+								@eyeglass/bridge
+							</h3>
+							<p className="text-sm text-black/70 dark:text-white/70 leading-relaxed">
+								The MCP bridge connecting client and agent. Built in Node with Claude's help, it provides all the tooling agents need during Eyeglass operations. Supports both Stdio MCP and HTTP for agents like Codex.
+							</p>
+						</div>
+					</div>
+				</div>
+
+				{/* Package 2: Inspector */}
+				<div className="group p-6 border border-black/10 dark:border-white/10 rounded-xl bg-gradient-to-br from-purple-500/5 to-transparent dark:from-purple-400/10 hover:border-black/20 dark:hover:border-white/20 transition-all">
+					<div className="flex items-start gap-4">
+						<div className="text-3xl mt-1">👁️</div>
+						<div className="flex-1">
+							<h3 className="font-header text-lg text-black dark:text-white mb-2">
+								@eyeglass/inspector
+							</h3>
+							<p className="text-sm text-black/70 dark:text-white/70 leading-relaxed">
+								<span className="font-header text-black dark:text-white">The main attraction.</span> Where I focused most of my efforts. Built in vanilla TypeScript with minimal CSS to keep the bundle size tiny. User preferences persist via local storage for a seamless dev experience.
+							</p>
+						</div>
+					</div>
+				</div>
+
+				{/* Package 3: CLI */}
+				<div className="group p-6 border border-black/10 dark:border-white/10 rounded-xl bg-gradient-to-br from-green-500/5 to-transparent dark:from-green-400/10 hover:border-black/20 dark:hover:border-white/20 transition-all">
+					<div className="flex items-start gap-4">
+						<div className="text-3xl mt-1">⚡</div>
+						<div className="flex-1">
+							<h3 className="font-header text-lg text-black dark:text-white mb-2">
+								@eyeglass/cli
+							</h3>
+							<p className="text-sm text-black/70 dark:text-white/70 leading-relaxed">
+								Makes adding Eyeglass to existing projects simple. Works well, though I'm still ironing out edge cases with different frameworks.
+							</p>
+						</div>
+					</div>
+				</div>
+
+				{/* Package 4: Types */}
+				<div className="group p-6 border border-black/10 dark:border-white/10 rounded-xl bg-gradient-to-br from-orange-500/5 to-transparent dark:from-orange-400/10 hover:border-black/20 dark:hover:border-white/20 transition-all">
+					<div className="flex items-start gap-4">
+						<div className="text-3xl mt-1">📦</div>
+						<div className="flex-1">
+							<h3 className="font-header text-lg text-black dark:text-white mb-2">
+								@eyeglass/types
+							</h3>
+							<p className="text-sm text-black/70 dark:text-white/70 leading-relaxed">
+								Shared type interfaces keeping everything type-safe across the ecosystem.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
 		</>
 	);
 }
