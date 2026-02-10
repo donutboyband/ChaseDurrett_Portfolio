@@ -3,8 +3,8 @@ import { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import About from '../../components/blog/About';
-import BuildingWithReact from '../../components/blog/BuildingWithReact';
 import DataScienceJourney from '../../components/blog/DataScienceJourney';
+import BuildingEyeglass from '../../components/blog/BuildingEyeglass';
 
 const blogPosts = [
 	{
@@ -14,10 +14,10 @@ const blogPosts = [
 		content: <About />
 	},
 	{
-		id: 'building-with-react',
-		title: 'Building with React',
+		id: 'building-eyeglass',
+		title: 'Building Eyeglass',
 		date: 'Feb 5, 2026',
-		content: <BuildingWithReact />
+		content: <BuildingEyeglass />
 	},
 	{
 		id: 'data-science-journey',
@@ -84,9 +84,7 @@ function BlogPage() {
 				{/* Main Content */}
 				<div className="flex-1 max-w-2xl" ref={contentRef}>
 					<div className="space-y-8 font-cabinet text-lg leading-relaxed">
-						<p className="text-black/50 dark:text-white/50 text-sm">
-							Updated {selectedPost.date}
-						</p>
+						<p className="text-black/50 dark:text-white/50 text-sm">Updated {selectedPost.date}</p>
 
 						{selectedPost.content}
 					</div>
