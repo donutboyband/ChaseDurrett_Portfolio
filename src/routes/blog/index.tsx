@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -28,8 +28,23 @@ const blogPosts = [
 ];
 
 function BlogPage() {
+	const navigate = useNavigate();
 	const [selectedPost, setSelectedPost] = useState(blogPosts[0]);
 	const contentRef = useRef<HTMLDivElement>(null);
+
+	// Initialize from URL hash on mount
+	useEffect(() => {
+		const hash = window.location.hash.slice(1);
+		if (hash) {
+			const post = blogPosts.find((p) => p.id === hash);
+			if (post) setSelectedPost(post);
+		}
+	}, []);
+
+	const handlePostSelect = (post: typeof blogPosts[0]) => {
+		setSelectedPost(post);
+		navigate({ to: '/blog', hash: post.id });
+	};
 
 	useEffect(() => {
 		if (typeof window === 'undefined') return;
@@ -68,13 +83,20 @@ function BlogPage() {
 						{blogPosts.map((post) => (
 							<button
 								key={post.id}
-								onClick={() => setSelectedPost(post)}
-								className={`block w-full text-left font-cabinet text-sm transition-colors py-1 ${
+								onClick={() => handlePostSelect(post)}
+								className={`flex items-center gap-2 w-full text-left font-cabinet text-sm transition-colors py-1 ${
 									selectedPost.id === post.id
 										? 'text-black dark:text-white'
 										: 'text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white'
 								}`}
 							>
+								<span
+									className={`w-1.5 h-1.5 rounded-full transition-opacity ${
+										selectedPost.id === post.id
+											? 'bg-black dark:bg-white opacity-100'
+											: 'opacity-0'
+									}`}
+								/>
 								{post.title}
 							</button>
 						))}
