@@ -5,6 +5,7 @@ import ChipButton from './ChipButton';
 import { useTheme } from '../contexts/ThemeContext';
 
 const workArr = ['FRONTEND', 'BACKEND', 'FULLSTACK', 'FRONTEND', 'BACKEND', 'FULLSTACK'];
+const blogArr = ['INSIGHTS', 'TUTORIALS', 'THOUGHTS', 'INSIGHTS', 'TUTORIALS', 'THOUGHTS'];
 const contactArr = ['IDEAS', 'GOALS', 'DREAMS', 'IDEAS', 'GOALS', 'DREAMS'];
 
 export default function Header() {
@@ -173,6 +174,14 @@ export default function Header() {
 								itemsArr={workArr}
 								link="WORK"
 								href="/work"
+								borders={true}
+								onClose={() => setIsOpen(false)}
+								onNavigate={handleNavigate}
+							/>
+							<MenuItem
+								itemsArr={blogArr}
+								link="BLOG"
+								href="/blog"
 								borders={true}
 								onClose={() => setIsOpen(false)}
 								onNavigate={handleNavigate}
