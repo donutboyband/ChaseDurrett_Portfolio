@@ -99,7 +99,7 @@ export default function BuildingEyeglass() {
 
 	return (
 		<>
-			<h1 className="font-header text-4xl md:text-5xl text-black dark:text-white mb-4">
+			<h1 className="font-header text-3xl md:text-4xl lg:text-5xl text-black dark:text-white mb-4">
 				Building Eyeglass
 			</h1>
 			<p className="text-black dark:text-white/90">
@@ -131,16 +131,16 @@ export default function BuildingEyeglass() {
 				communication from the browser.
 			</p>
 
-			<div className="my-8 p-6 border border-black/10 dark:border-white/10 rounded-xl bg-black/5 dark:bg-white/5">
+			<div className="my-6 md:my-8 p-4 md:p-6 border border-black/10 dark:border-white/10 rounded-xl bg-black/5 dark:bg-white/5">
 				<p className="text-black dark:text-white/90 mb-3">
 					<strong className="font-header">Why?</strong>
 				</p>
-				<ul className="space-y-2 text-black/80 dark:text-white/80">
+				<ul className="space-y-2 text-sm md:text-base text-black/80 dark:text-white/80">
 					<li>→ Prove to myself I could make a "magic" tool (it's kind of magic)</li>
 					<li>→ Prove Geoffrey Huntley's point: with Agentic AI, there are no software moats</li>
 					<li>→ The only limit in development is now imagination</li>
 				</ul>
-				<p className="text-sm text-black/60 dark:text-white/60 mt-4 italic">
+				<p className="text-xs md:text-sm text-black/60 dark:text-white/60 mt-4 italic">
 					Though, you get better (and{' '}
 					<a
 						className="text-blue-500"
@@ -159,8 +159,8 @@ export default function BuildingEyeglass() {
 				out:
 			</p>
 
-			<div className="my-10 p-6 border-l-4 border-blue-500 bg-blue-500/5 dark:bg-blue-500/10 rounded-r-lg">
-				<p className="text-black/70 dark:text-white/90 text-sm font-header">
+			<div className="my-6 md:my-10 p-4 md:p-6 border-l-4 border-blue-500 bg-blue-500/5 dark:bg-blue-500/10 rounded-r-lg">
+				<p className="text-black/70 dark:text-white/90 text-xs md:text-sm font-header leading-relaxed">
 					"When you describe a problem in words, precision gets lost. "The button hover feels
 					sluggish": which part? The delay before it starts? The duration? The easing? "The sidebar
 					looks off": which element? What's off about it? I know exactly what I mean when I see it,
@@ -180,7 +180,7 @@ export default function BuildingEyeglass() {
 			</p>
 
 			{/* The Challenge Section */}
-			<h2 className="font-header text-2xl md:text-3xl text-black dark:text-white mt-12 mb-6">
+			<h2 className="font-header text-xl md:text-2xl lg:text-3xl text-black dark:text-white mt-8 md:mt-12 mb-4 md:mb-6">
 				The Challenge
 			</h2>
 
@@ -189,26 +189,26 @@ export default function BuildingEyeglass() {
 			</p>
 
 			{/* Two Approaches */}
-			<div className="grid md:grid-cols-2 gap-4 my-8">
+			<div className="grid md:grid-cols-2 gap-3 md:gap-4 my-6 md:my-8">
 				{/* First Approach - Failed */}
-				<div className="p-5 border border-red-500/30 dark:border-red-400/30 rounded-xl bg-white dark:bg-black">
+				<div className="p-4 md:p-5 border border-red-500/30 dark:border-red-400/30 rounded-xl bg-white dark:bg-black">
 					<div className="flex items-center gap-2 mb-3">
-						<span className="text-black/40 dark:text-white/40 text-xl">✕</span>
-						<span className="font-header text-black dark:text-white">Approach 1: MCP Sampling</span>
+						<span className="text-black/40 dark:text-white/40 text-lg md:text-xl">✕</span>
+						<span className="font-header text-sm md:text-base text-black dark:text-white">Approach 1: MCP Sampling</span>
 					</div>
-					<p className="text-sm text-black/60 dark:text-white/60">
+					<p className="text-xs md:text-sm text-black/60 dark:text-white/60">
 						The MCP protocol has nascent support for <em>sampling</em>, which allows an MCP server
 						to prompt an agent directly. However, even Claude Code doesn't support this yet.
 					</p>
 				</div>
 
 				{/* Second Approach - Success */}
-				<div className="p-5 border-2 border-green-500/30 dark:border-green-400/30 rounded-xl bg-white dark:bg-black">
+				<div className="p-4 md:p-5 border-2 border-green-500/30 dark:border-green-400/30 rounded-xl bg-white dark:bg-black">
 					<div className="flex items-center gap-2 mb-3">
-						<span className="text-black dark:text-white text-xl">✓</span>
-						<span className="font-header text-black dark:text-white">Approach 2: Long-Polling</span>
+						<span className="text-black dark:text-white text-lg md:text-xl">✓</span>
+						<span className="font-header text-sm md:text-base text-black dark:text-white">Approach 2: Long-Polling</span>
 					</div>
-					<p className="text-sm text-black/70 dark:text-white/70">
+					<p className="text-xs md:text-sm text-black/70 dark:text-white/70">
 						Put the agent in a waiting state that <em>doesn't consume tokens</em>. When the browser
 						sends a request, the agent wakes up and processes it.
 					</p>
@@ -216,15 +216,15 @@ export default function BuildingEyeglass() {
 			</div>
 
 			{/* The Loop Diagram - Creative Circular */}
-			<div className="my-12 relative">
-				<div className="p-8 relative overflow-hidden">
+			<div className="my-8 md:my-12 relative">
+				<div className="p-4 md:p-8 relative overflow-hidden">
 					{/* Hand-drawn style title */}
-					<p className="font-header text-black dark:text-white mb-8 text-center text-xl">
+					<p className="font-header text-black dark:text-white mb-6 md:mb-8 text-center text-lg md:text-xl">
 						The Loop
 					</p>
 
 					{/* Circular visualization */}
-					<div className="relative w-72 h-72 mx-auto">
+					<div className="relative w-64 h-64 md:w-72 md:h-72 mx-auto">
 						{/* Orbit ring - aligned with center of blobs */}
 						<div className="absolute inset-6 rounded-full border-2 border-dashed border-black/10 dark:border-white/10 orbit-spin" />
 
@@ -567,10 +567,10 @@ export default function BuildingEyeglass() {
 			</div>
 
 			<p className="text-black dark:text-white/90">
-				The neighborhood context was a late addition but turned out to be crucial. An agent trying to
+				The neighborhood context was a late addition but has proven useful. An agent trying to
 				center a button needs to know if its parent is a flex container with{' '}
 				<code className="px-1.5 py-0.5 bg-black/5 dark:bg-white/10 rounded text-sm font-mono">justify-content: space-between</code>{' '}
-				vs a grid with explicit columns. Without this context, the agent is just guessing.
+				vs a grid with explicit columns. Providing this upfront at a marginal token cost improves performance. 
 			</p>
 		</>
 	);
