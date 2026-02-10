@@ -126,8 +126,8 @@ function BlogPage() {
 				gsap.from(elements, {
 					opacity: 0,
 					y: 20,
-					duration: 0.6,
-					stagger: 0.1,
+					duration: 0.4,
+					stagger: 0.05,
 					ease: 'power2.out',
 					scrollTrigger: {
 						trigger: contentRef.current,
