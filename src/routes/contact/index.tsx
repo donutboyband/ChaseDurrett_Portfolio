@@ -326,6 +326,17 @@ function ContactPage() {
 					height: auto;
 					filter: drop-shadow(0 12px 30px rgba(0, 0, 0, 0.1));
 				}
+				
+				:global(.globe-svg *) {
+					outline: none !important;
+					border: none !important;
+				}
+				
+				:global(.globe-svg *:hover),
+				:global(.globe-svg *:focus) {
+					outline: none !important;
+					border: none !important;
+				}
 
 				@media (max-width: 640px) {
 					:global(.globe-svg) {
