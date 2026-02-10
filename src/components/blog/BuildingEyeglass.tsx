@@ -179,10 +179,10 @@ export default function BuildingEyeglass() {
 										className={`
 											absolute whitespace-nowrap text-xs font-header
 											transition-all duration-300
-											${idx === 0 ? 'top-full mt-2 left-1/2 -translate-x-1/2' : ''}
-											${idx === 1 ? 'left-full ml-2 top-1/2 -translate-y-1/2' : ''}
-											${idx === 2 ? 'bottom-full mb-2 left-1/2 -translate-x-1/2' : ''}
-											${idx === 3 ? 'right-full mr-2 top-1/2 -translate-y-1/2' : ''}
+											${idx === 0 ? 'top-full mt-4 left-1/2 -translate-x-1/2' : ''}
+											${idx === 1 ? 'left-full ml-4 top-1/2 -translate-y-1/2' : ''}
+											${idx === 2 ? 'bottom-full mb-4 left-1/2 -translate-x-1/2' : ''}
+											${idx === 3 ? 'right-full mr-4 top-1/2 -translate-y-1/2' : ''}
 											${isActive ? 'opacity-100' : 'opacity-0'}
 										`}
 									>
