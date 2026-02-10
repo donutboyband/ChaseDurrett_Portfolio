@@ -1,4 +1,84 @@
 import { useState, useEffect } from 'react';
+import { Highlight, themes } from 'prism-react-renderer';
+
+const SEMANTIC_SNAPSHOT_CODE = `interface SemanticSnapshot {
+  // Element identification
+  role: string;           // ARIA role (button, link, textbox, etc.)
+  name: string;           // Accessible name
+  tagName: string;        // HTML tag
+  id?: string;            // Element ID
+  className?: string;     // CSS classes
+  dataAttributes?: Record<string, string>;
+
+  // Framework context
+  framework: {
+    name: 'react' | 'vue' | 'svelte' | 'vanilla';
+    componentName?: string;   // e.g., "SubmitButton"
+    filePath?: string;        // e.g., "src/components/SubmitButton.tsx"
+    lineNumber?: number;
+    props?: Record<string, unknown>;
+    ancestry?: string[];      // Parent component chain
+  };
+
+  // Accessibility
+  a11y: {
+    label: string | null;
+    description: string | null;
+    disabled: boolean;
+    expanded?: boolean;
+    checked?: boolean | 'mixed';
+    hidden: boolean;
+  };
+
+  // Layout
+  geometry: {
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+    visible: boolean;
+  };
+
+  // Styles
+  styles: {
+    display: string;
+    position: string;
+    flexDirection?: string;
+    gridTemplate?: string;
+    padding: string;
+    margin: string;
+    color: string;
+    backgroundColor: string;
+    fontFamily: string;
+    zIndex: string;
+  };
+
+  // DOM neighborhood for layout context
+  neighborhood?: {
+    parents: Array<{
+      tagName: string;
+      className?: string;
+      styles: {
+        display: string;
+        position: string;
+        flexDirection?: string;
+        alignItems?: string;
+        justifyContent?: string;
+        gap?: string;
+        gridTemplate?: string;
+      };
+    }>;
+    children: Array<{
+      tagName: string;
+      className?: string;
+      count?: number;  // If multiple similar children, group them
+    }>;
+  };
+
+  // Metadata
+  timestamp: number;
+  url: string;
+}`;
 
 const LOOP_STEPS = [
 	{ step: 1, actor: 'Agent', action: 'enters long-polling state, waiting for requests' },
@@ -303,9 +383,7 @@ export default function BuildingEyeglass() {
 				The Architecture
 			</h2>
 
-			<p className="text-black dark:text-white/90">
-				Now to the actual building part. I structured Eyeglass into four packages:
-			</p>
+			<p className="text-black dark:text-white/90">I structured Eyeglass into four packages:</p>
 
 			<div className="my-8 font-mono text-sm">
 				{/* Package Tree */}
@@ -325,7 +403,9 @@ export default function BuildingEyeglass() {
 								<span className="text-black/40 dark:text-white/40 text-xs">Node.js</span>
 							</div>
 							<p className="mt-2 ml-8 font-sans text-black/70 dark:text-white/70 text-sm leading-relaxed">
-								The MCP bridge that connects the client and the agent. Contains all the tooling for the agent to call during eyeglass operations. Built in Node, it supports both Stdio MCP and HTTP for agents like Codex.
+								The MCP bridge that connects the client and the agent. Contains all the tooling for
+								the agent to call during eyeglass operations. Built in Node, it supports both Stdio
+								MCP and HTTP for agents like Codex.
 							</p>
 						</div>
 					</div>
@@ -338,10 +418,14 @@ export default function BuildingEyeglass() {
 								<span className="text-black/30 dark:text-white/30">├──</span>
 								<span className="text-black dark:text-white font-medium">@eyeglass/inspector</span>
 								<span className="text-black/40 dark:text-white/40 text-xs">Vanilla TS</span>
-								<span className="text-xs px-2 py-0.5 bg-black dark:bg-white text-white dark:text-black rounded">main focus</span>
+								<span className="text-xs px-2 py-0.5 bg-black dark:bg-white text-white dark:text-black rounded">
+									main focus
+								</span>
 							</div>
 							<p className="mt-2 ml-8 font-sans text-black/70 dark:text-white/70 text-sm leading-relaxed">
-								The main attraction—where I focused most of my efforts. Because it's a dev tool, I built it in vanilla JS/TS and CSS for the smallest possible bundle size. User preferences persist via localStorage.
+								The main attraction—where I focused most of my efforts. Because it's a dev tool, I
+								built it in vanilla JS/TS and CSS for the smallest possible bundle size. User
+								preferences persist via localStorage.
 							</p>
 						</div>
 					</div>
@@ -355,7 +439,8 @@ export default function BuildingEyeglass() {
 								<span className="text-black/40 dark:text-white/40 text-xs">CLI</span>
 							</div>
 							<p className="mt-2 ml-8 font-sans text-black/70 dark:text-white/70 text-sm leading-relaxed">
-								Created to make setup into existing projects simple. It works okay—still ironing out bugs with different frameworks.
+								Created to make setup into existing projects simple. It works okay—still ironing out
+								bugs with different frameworks.
 							</p>
 						</div>
 					</div>
@@ -375,6 +460,29 @@ export default function BuildingEyeglass() {
 					</div>
 				</div>
 			</div>
+
+			<p className="text-black dark:text-white/90">
+				And create the following interface for the semantic snapshot that the agent receives:
+			</p>
+
+			<Highlight theme={themes.github} code={SEMANTIC_SNAPSHOT_CODE} language="typescript">
+				{({ style, tokens, getLineProps, getTokenProps }) => (
+					<pre
+						className="my-6 p-4 border border-black/10 dark:border-white/10 rounded-lg overflow-x-auto text-sm"
+						style={{ ...style, background: 'transparent' }}
+					>
+						<code className="dark:invert dark:hue-rotate-180">
+							{tokens.map((line, i) => (
+								<div key={i} {...getLineProps({ line })}>
+									{line.map((token, key) => (
+										<span key={key} {...getTokenProps({ token })} />
+									))}
+								</div>
+							))}
+						</code>
+					</pre>
+				)}
+			</Highlight>
 		</>
 	);
 }
