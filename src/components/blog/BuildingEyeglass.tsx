@@ -114,51 +114,90 @@ export default function BuildingEyeglass() {
 				</div>
 			</div>
 
-			{/* The Loop Diagram */}
+			{/* The Loop Diagram - Animated */}
+			<style>{`
+				@keyframes pulse-step {
+					0%, 100% { opacity: 0.5; transform: scale(1); }
+					50% { opacity: 1; transform: scale(1.02); }
+				}
+				@keyframes flow-down {
+					0%, 100% { opacity: 0.2; height: 16px; }
+					50% { opacity: 0.8; height: 20px; }
+				}
+				@keyframes spin-slow {
+					from { transform: rotate(0deg); }
+					to { transform: rotate(-360deg); }
+				}
+				@keyframes glow-blue {
+					0%, 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+					50% { box-shadow: 0 0 20px 4px rgba(59, 130, 246, 0.4); }
+				}
+				@keyframes glow-purple {
+					0%, 100% { box-shadow: 0 0 0 0 rgba(168, 85, 247, 0); }
+					50% { box-shadow: 0 0 20px 4px rgba(168, 85, 247, 0.4); }
+				}
+				@keyframes glow-orange {
+					0%, 100% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0); }
+					50% { box-shadow: 0 0 20px 4px rgba(249, 115, 22, 0.4); }
+				}
+				@keyframes glow-green {
+					0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+					50% { box-shadow: 0 0 20px 4px rgba(34, 197, 94, 0.4); }
+				}
+				.step-1 { animation: pulse-step 4s ease-in-out infinite, glow-blue 4s ease-in-out infinite; animation-delay: 0s; }
+				.step-2 { animation: pulse-step 4s ease-in-out infinite, glow-purple 4s ease-in-out infinite; animation-delay: 1s; }
+				.step-3 { animation: pulse-step 4s ease-in-out infinite, glow-orange 4s ease-in-out infinite; animation-delay: 2s; }
+				.step-4 { animation: pulse-step 4s ease-in-out infinite, glow-green 4s ease-in-out infinite; animation-delay: 3s; }
+				.connector-1 { animation: flow-down 4s ease-in-out infinite; animation-delay: 0.5s; }
+				.connector-2 { animation: flow-down 4s ease-in-out infinite; animation-delay: 1.5s; }
+				.connector-3 { animation: flow-down 4s ease-in-out infinite; animation-delay: 2.5s; }
+				.loop-icon { animation: spin-slow 8s linear infinite; }
+			`}</style>
+
 			<div className="my-10 p-6 bg-black/5 dark:bg-white/5 rounded-xl border border-black/10 dark:border-white/10">
 				<p className="font-header text-black dark:text-white mb-6 text-center">The Eyeglass Loop</p>
 
 				<div className="flex flex-col items-center gap-4">
 					{/* Step 1 */}
-					<div className="flex items-center gap-4 w-full max-w-md">
+					<div className="step-1 flex items-center gap-4 w-full max-w-md rounded-lg transition-all">
 						<div className="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center text-sm font-bold shrink-0">1</div>
 						<div className="flex-1 p-3 bg-blue-500/10 border border-blue-500/30 rounded-lg">
 							<span className="text-sm text-black dark:text-white"><strong>Agent</strong> enters long-polling state, waiting for requests</span>
 						</div>
 					</div>
 
-					<div className="w-0.5 h-4 bg-black/20 dark:bg-white/20"></div>
+					<div className="connector-1 w-0.5 h-4 bg-blue-500/40 dark:bg-blue-400/40 transition-all"></div>
 
 					{/* Step 2 */}
-					<div className="flex items-center gap-4 w-full max-w-md">
+					<div className="step-2 flex items-center gap-4 w-full max-w-md rounded-lg transition-all">
 						<div className="w-8 h-8 rounded-full bg-purple-500 text-white flex items-center justify-center text-sm font-bold shrink-0">2</div>
 						<div className="flex-1 p-3 bg-purple-500/10 border border-purple-500/30 rounded-lg">
 							<span className="text-sm text-black dark:text-white"><strong>Browser</strong> sends user request via MCP server</span>
 						</div>
 					</div>
 
-					<div className="w-0.5 h-4 bg-black/20 dark:bg-white/20"></div>
+					<div className="connector-2 w-0.5 h-4 bg-purple-500/40 dark:bg-purple-400/40 transition-all"></div>
 
 					{/* Step 3 */}
-					<div className="flex items-center gap-4 w-full max-w-md">
+					<div className="step-3 flex items-center gap-4 w-full max-w-md rounded-lg transition-all">
 						<div className="w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center text-sm font-bold shrink-0">3</div>
 						<div className="flex-1 p-3 bg-orange-500/10 border border-orange-500/30 rounded-lg">
 							<span className="text-sm text-black dark:text-white"><strong>Agent</strong> completes work, communicates progress back</span>
 						</div>
 					</div>
 
-					<div className="w-0.5 h-4 bg-black/20 dark:bg-white/20"></div>
+					<div className="connector-3 w-0.5 h-4 bg-orange-500/40 dark:bg-orange-400/40 transition-all"></div>
 
 					{/* Step 4 - Loop back */}
-					<div className="flex items-center gap-4 w-full max-w-md">
+					<div className="step-4 flex items-center gap-4 w-full max-w-md rounded-lg transition-all">
 						<div className="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center text-sm font-bold shrink-0">4</div>
 						<div className="flex-1 p-3 bg-green-500/10 border border-green-500/30 rounded-lg">
 							<span className="text-sm text-black dark:text-white"><strong>Loop</strong> — Agent returns to step 1</span>
 						</div>
 					</div>
 
-					{/* Loop arrow indicator */}
-					<div className="text-2xl text-black/40 dark:text-white/40 mt-2">↺</div>
+					{/* Loop arrow indicator - animated */}
+					<div className="loop-icon text-3xl text-green-500 mt-2">↺</div>
 				</div>
 			</div>
 		</>
