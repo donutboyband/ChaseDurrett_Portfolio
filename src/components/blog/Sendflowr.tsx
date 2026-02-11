@@ -36,8 +36,8 @@ export default function Sendflowr() {
 
 	useEffect(() => {
 		const interval = setInterval(() => {
-			setAnimatedIndex((prev) => (prev + 1) % TIMING_COMPARISON.length);
-		}, 1000);
+			setAnimatedIndex((prev) => (prev + 1) % 60);
+		}, 100);
 		return () => clearInterval(interval);
 	}, []);
 
@@ -59,46 +59,60 @@ export default function Sendflowr() {
 				(opens, clicks, site visits), and updates predictions in real time as new data streams in.
 			</p>
 
-			{/* Animated Timing Comparison */}
+			{/* Animated Timing Comparison - Minute vs Hour Resolution */}
 			<div className="my-8 p-6 border border-black/10 dark:border-white/10 rounded-xl bg-white/50 dark:bg-black/50">
-				<p className="font-header text-black dark:text-white mb-4 text-center">
-					Traditional vs. Personalized Timing
+				<p className="font-header text-black dark:text-white mb-2 text-center">
+					Hour-Level Buckets vs. Minute-Level Precision
 				</p>
-				<div className="space-y-3">
-					{TIMING_COMPARISON.map((data, idx) => {
-						const isActive = idx === animatedIndex;
-						return (
-							<div key={data.hour} className="space-y-1">
-								<div className="flex items-center justify-between text-xs text-black/60 dark:text-white/60">
-									<span className={`font-cabinet ${isActive ? 'font-bold text-black dark:text-white' : ''}`}>
-										{data.hour}
-									</span>
-								</div>
-								<div className="flex gap-2">
-									<div className="flex-1">
-										<div className="h-6 bg-black/10 dark:bg-white/10 rounded overflow-hidden">
-											<div
-												className={`h-full bg-black/30 dark:bg-white/30 transition-all duration-500 ${isActive ? 'bg-black/50 dark:bg-white/50' : ''}`}
-												style={{ width: `${data.traditional}%` }}
-											/>
-										</div>
-									</div>
-									<div className="flex-1">
-										<div className="h-6 bg-black/10 dark:bg-white/10 rounded overflow-hidden">
-											<div
-												className={`h-full bg-blue-500 transition-all duration-500 ${isActive ? 'bg-blue-600 scale-y-110' : ''}`}
-												style={{ width: `${data.personalized}%` }}
-											/>
-										</div>
-									</div>
-								</div>
-							</div>
-						);
-					})}
+				<p className="text-xs text-black/60 dark:text-white/60 text-center mb-6">
+					Traditional tools group all activity from 2:00-3:00 PM together
+				</p>
+				
+				{/* Hour-level (Traditional) */}
+				<div className="mb-6">
+					<p className="text-sm font-medium text-black dark:text-white mb-2">Traditional (Hour-Level)</p>
+					<div className="flex gap-1">
+						<div className="flex-1 h-16 bg-black/20 dark:bg-white/20 rounded flex items-center justify-center">
+							<span className="text-xs text-black/50 dark:text-white/50">2-3 PM</span>
+						</div>
+					</div>
+					<p className="text-xs text-black/60 dark:text-white/60 mt-2">
+						Everyone in the "2-3 PM" bucket gets the same send time (e.g., 2:00 PM)
+					</p>
 				</div>
-				<div className="flex justify-between mt-4 text-xs text-black/60 dark:text-white/60">
-					<span>← Traditional (aggregate)</span>
-					<span>Personalized (per-user) →</span>
+
+				{/* Minute-level (SendFlowr) */}
+				<div>
+					<p className="text-sm font-medium text-black dark:text-white mb-2">SendFlowr (Minute-Level)</p>
+					<div className="flex gap-px">
+						{Array.from({ length: 60 }).map((_, i) => {
+							const isActive = i === animatedIndex;
+							const isPeak = i === 37; // 2:37 PM
+							return (
+								<div
+									key={i}
+									className={`flex-1 h-16 rounded-sm transition-all duration-300 ${
+										isPeak && isActive
+											? 'bg-blue-500 scale-y-125'
+											: isPeak
+											? 'bg-blue-400'
+											: 'bg-black/10 dark:bg-white/10'
+									}`}
+									title={`2:${String(i).padStart(2, '0')} PM`}
+								/>
+							);
+						})}
+					</div>
+					<p className="text-xs text-black/60 dark:text-white/60 mt-2">
+						Each minute is tracked individually. This user consistently engages at 2:37 PM, not 2:00 PM.
+					</p>
+				</div>
+
+				<div className="mt-6 p-3 bg-blue-500/10 rounded-lg border border-blue-500/20">
+					<p className="text-xs text-black dark:text-white/90">
+						<strong>The difference:</strong> 10,080 minute slots per week vs. 168 hour buckets. 
+						That's 60x more precision in understanding when someone actually engages.
+					</p>
 				</div>
 			</div>
 
