@@ -100,7 +100,7 @@ function WorkPage() {
 					</div>
 				) : (
 					<div className="grid grid-cols-1 gap-6 md:gap-8 py-4">
-						{repos.map((repo) => (
+						{repos.map((repo: Repo) => (
 							<a
 								key={repo.name}
 								className="group"
