@@ -1,0 +1,254 @@
+import { useState, useRef, useEffect } from 'react';
+import intents from '../data/intents.json';
+
+interface Message {
+  text: string;
+  isBot: boolean;
+  timestamp: Date;
+}
+
+interface Intent {
+  keywords: string[];
+  answer: string;
+}
+
+type IntentsData = Record<string, Intent>;
+
+const FALLBACK_MESSAGE = "I didn't quite catch that. Would you like to hear about my **skills**, **projects**, **experience**, or **how to contact me**?";
+
+const quickActions = [
+  { label: 'Skills', query: 'What are your skills?' },
+  { label: 'Experience', query: 'Tell me about your experience' },
+  { label: 'Projects', query: 'What projects have you built?' },
+  { label: 'Contact', query: 'How can I contact you?' }
+];
+
+export default function PortfolioBot() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      text: "👋 Hi! I'm here to answer questions about my skills, experience, and projects. How can I help you?",
+      isBot: true,
+      timestamp: new Date()
+    }
+  ]);
+  const [inputValue, setInputValue] = useState('');
+  const [isTyping, setIsTyping] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+  useEffect(() => {
+    if (isOpen && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isOpen]);
+
+  const sanitizeInput = (input: string): string => {
+    return input.toLowerCase().replace(/[^\w\s]/g, '');
+  };
+
+  const findBestMatch = (input: string): string => {
+    const sanitized = sanitizeInput(input);
+    const words = sanitized.split(/\s+/);
+    
+    const scores: Record<string, number> = {};
+    const intentsTyped = intents as IntentsData;
+
+    Object.keys(intentsTyped).forEach((intentKey) => {
+      const intent = intentsTyped[intentKey];
+      let score = 0;
+      
+      intent.keywords.forEach((keyword) => {
+        if (words.includes(keyword)) {
+          score += 2;
+        } else if (sanitized.includes(keyword)) {
+          score += 1;
+        }
+      });
+      
+      scores[intentKey] = score;
+    });
+
+    const bestMatch = Object.keys(scores).reduce((a, b) => 
+      scores[a] > scores[b] ? a : b
+    );
+
+    return scores[bestMatch] > 0 ? intentsTyped[bestMatch].answer : FALLBACK_MESSAGE;
+  };
+
+  const handleSendMessage = (text: string) => {
+    if (!text.trim()) return;
+
+    const userMessage: Message = {
+      text,
+      isBot: false,
+      timestamp: new Date()
+    };
+
+    setMessages((prev) => [...prev, userMessage]);
+    setInputValue('');
+    setIsTyping(true);
+
+    setTimeout(() => {
+      const response = findBestMatch(text);
+      const botMessage: Message = {
+        text: response,
+        isBot: true,
+        timestamp: new Date()
+      };
+      
+      setMessages((prev) => [...prev, botMessage]);
+      setIsTyping(false);
+    }, 800);
+  };
+
+  const handleQuickAction = (query: string) => {
+    handleSendMessage(query);
+  };
+
+  const renderMarkdown = (text: string) => {
+    return text
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-blue-500 underline">$1</a>');
+  };
+
+  return (
+    <>
+      {/* Floating Action Button */}
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className={`fixed bottom-8 right-8 w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center z-50 ${
+          isOpen ? 'scale-0' : 'scale-100'
+        }`}
+        aria-label="Open chat"
+      >
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+        </svg>
+        <span className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white animate-pulse" />
+      </button>
+
+      {/* Chat Window */}
+      <div
+        className={`fixed bottom-8 right-8 w-[350px] h-[500px] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden transition-all duration-300 z-50 ${
+          isOpen ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
+        }`}
+      >
+        {/* Header */}
+        <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-4 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+              <span className="text-lg">👨‍💻</span>
+            </div>
+            <div>
+              <h3 className="font-semibold">Portfolio Assistant</h3>
+              <div className="flex items-center gap-1 text-xs">
+                <span className="w-2 h-2 bg-green-400 rounded-full" />
+                <span>Live</span>
+              </div>
+            </div>
+          </div>
+          <button
+            onClick={() => setIsOpen(false)}
+            className="text-white/80 hover:text-white transition-colors"
+            aria-label="Close chat"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        {/* Messages */}
+        <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
+          {messages.map((message, index) => (
+            <div
+              key={index}
+              className={`flex ${message.isBot ? 'justify-start' : 'justify-end'}`}
+            >
+              <div
+                className={`max-w-[80%] px-4 py-2 rounded-2xl ${
+                  message.isBot
+                    ? 'bg-white text-gray-800 rounded-tl-none shadow-sm'
+                    : 'bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-tr-none'
+                }`}
+              >
+                <div
+                  className="text-sm"
+                  dangerouslySetInnerHTML={{ __html: renderMarkdown(message.text) }}
+                />
+              </div>
+            </div>
+          ))}
+          
+          {isTyping && (
+            <div className="flex justify-start">
+              <div className="bg-white px-4 py-2 rounded-2xl rounded-tl-none shadow-sm">
+                <div className="flex gap-1">
+                  <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                  <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                  <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                </div>
+              </div>
+            </div>
+          )}
+          
+          <div ref={messagesEndRef} />
+        </div>
+
+        {/* Quick Actions */}
+        <div className="px-4 py-2 bg-white border-t border-gray-200">
+          <div className="flex gap-2 flex-wrap">
+            {quickActions.map((action) => (
+              <button
+                key={action.label}
+                onClick={() => handleQuickAction(action.query)}
+                className="px-3 py-1 text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-full transition-colors"
+              >
+                {action.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Input */}
+        <div className="p-4 bg-white border-t border-gray-200">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSendMessage(inputValue);
+            }}
+            className="flex gap-2"
+          >
+            <input
+              ref={inputRef}
+              type="text"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              placeholder="Ask me anything..."
+              className="flex-1 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+            />
+            <button
+              type="submit"
+              disabled={!inputValue.trim()}
+              className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg transition-shadow"
+              aria-label="Send message"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+              </svg>
+            </button>
+          </form>
+        </div>
+      </div>
+    </>
+  );
+}

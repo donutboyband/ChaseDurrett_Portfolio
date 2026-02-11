@@ -1,0 +1,22 @@
+{
+  "skills": {
+    "keywords": ["tech", "stack", "languages", "code", "tools", "frameworks", "skills", "technology", "programming"],
+    "answer": "I'm proficient in **TypeScript, React, and Node.js**. Lately, I've been diving deep into WebGPU and performance optimization."
+  },
+  "experience": {
+    "keywords": ["work", "job", "history", "career", "company", "resume", "experience", "employment", "background"],
+    "answer": "I have 4+ years of experience, most recently at **TechCorp** where I led the frontend migration to Next.js."
+  },
+  "projects": {
+    "keywords": ["projects", "portfolio", "built", "created", "made", "developed", "showcase"],
+    "answer": "I've built several notable projects including a real-time collaboration tool, a data visualization dashboard, and this portfolio site!"
+  },
+  "contact": {
+    "keywords": ["contact", "email", "reach", "hire", "connect", "message", "talk", "call"],
+    "answer": "You can reach me at **hello@example.com** or connect with me on [LinkedIn](https://linkedin.com). I'm always open to interesting opportunities!"
+  },
+  "about": {
+    "keywords": ["about", "who", "yourself", "bio", "introduction", "tell"],
+    "answer": "I'm a passionate full-stack developer who loves building user-centric applications. When I'm not coding, you'll find me exploring new tech or contributing to open source."
+  }
+}

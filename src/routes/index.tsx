@@ -2,6 +2,7 @@ import { createFileRoute } from '@tanstack/react-router';
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import PortfolioBot from '../components/PortfolioBot';
 
 const experiences = [
 	{
@@ -94,6 +95,7 @@ function IndexPage() {
 
 	return (
 		<>
+			<PortfolioBot />
 			<div
 				className="w-full h-screen-100 flex flex-col justify-center items-center space-y-6 text-black dark:text-white transition-colors"
 				role="region"
