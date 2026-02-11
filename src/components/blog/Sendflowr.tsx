@@ -20,16 +20,17 @@ const API_RESPONSE_JSON = `{
   }
 }`;
 
-const TIMING_COMPARISON = [
-	{ hour: '8 AM', traditional: 5, personalized: 2 },
-	{ hour: '10 AM', traditional: 8, personalized: 15 },
-	{ hour: '12 PM', traditional: 15, personalized: 8 },
-	{ hour: '2 PM', traditional: 20, personalized: 45 },
-	{ hour: '4 PM', traditional: 15, personalized: 10 },
-	{ hour: '6 PM', traditional: 12, personalized: 5 },
-	{ hour: '8 PM', traditional: 18, personalized: 10 },
-	{ hour: '10 PM', traditional: 7, personalized: 5 }
-];
+// Generate minute-level engagement probabilities (simulating real user pattern)
+const generateMinuteData = () => {
+	return Array.from({ length: 60 }).map((_, i) => {
+		// Peak at minute 37 (2:37 PM)
+		const distance = Math.abs(i - 37);
+		const probability = Math.max(0, 1 - distance / 20) * 0.8;
+		return Math.random() * 0.2 + probability; // Add some noise
+	});
+};
+
+const MINUTE_PROBABILITIES = generateMinuteData();
 
 export default function Sendflowr() {
 	const [animatedIndex, setAnimatedIndex] = useState(0);
@@ -77,41 +78,67 @@ export default function Sendflowr() {
 						</div>
 					</div>
 					<p className="text-xs text-black/60 dark:text-white/60 mt-2">
-						Everyone in the "2-3 PM" bucket gets the same send time (e.g., 2:00 PM)
+						Everyone in the &quot;2-3 PM&quot; bucket gets the same send time (e.g., 2:00 PM)
 					</p>
 				</div>
 
 				{/* Minute-level (SendFlowr) */}
 				<div>
-					<p className="text-sm font-medium text-black dark:text-white mb-2">SendFlowr (Minute-Level)</p>
-					<div className="flex gap-px">
-						{Array.from({ length: 60 }).map((_, i) => {
-							const isActive = i === animatedIndex;
-							const isPeak = i === 37; // 2:37 PM
-							return (
-								<div
-									key={i}
-									className={`flex-1 h-16 rounded-sm transition-all duration-300 ${
-										isPeak && isActive
-											? 'bg-blue-500 scale-y-125'
-											: isPeak
-											? 'bg-blue-400'
-											: 'bg-black/10 dark:bg-white/10'
-									}`}
-									title={`2:${String(i).padStart(2, '0')} PM`}
-								/>
-							);
-						})}
+					<p className="text-sm font-medium text-black dark:text-white mb-2">
+						SendFlowr (Minute-Level)
+						{animatedIndex === 37 && (
+							<span className="ml-2 text-xs text-blue-500 animate-pulse">
+								✓ Peak found: 2:37 PM
+							</span>
+						)}
+					</p>
+					<div className="relative">
+						<div className="flex gap-px">
+							{MINUTE_PROBABILITIES.map((prob, i) => {
+								const isScanning = i === animatedIndex;
+								const isScanned = i < animatedIndex;
+								const isPeak = i === 37;
+								const height = prob * 100;
+								
+								return (
+									<div
+										key={i}
+										className="flex-1 relative"
+										title={`2:${String(i).padStart(2, '0')} PM - ${(prob * 100).toFixed(1)}% probability`}
+									>
+										<div className="h-16 flex items-end">
+											<div
+												className={`w-full rounded-t-sm transition-all duration-300 ${
+													isScanning
+														? 'bg-yellow-400 animate-pulse'
+														: isScanned
+														? isPeak
+															? 'bg-blue-500'
+															: 'bg-blue-400/60'
+														: 'bg-black/10 dark:bg-white/10'
+												}`}
+												style={{ height: `${height}%` }}
+											/>
+										</div>
+									</div>
+								);
+							})}
+						</div>
+						{/* Scanning line */}
+						<div
+							className="absolute top-0 w-0.5 h-16 bg-yellow-400 transition-all duration-100"
+							style={{ left: `${(animatedIndex / 60) * 100}%` }}
+						/>
 					</div>
 					<p className="text-xs text-black/60 dark:text-white/60 mt-2">
-						Each minute is tracked individually. This user consistently engages at 2:37 PM, not 2:00 PM.
+						Scanning through the hour... SendFlowr finds the exact minute with highest engagement probability.
 					</p>
 				</div>
 
 				<div className="mt-6 p-3 bg-blue-500/10 rounded-lg border border-blue-500/20">
 					<p className="text-xs text-black dark:text-white/90">
 						<strong>The difference:</strong> 10,080 minute slots per week vs. 168 hour buckets. 
-						That's 60x more precision in understanding when someone actually engages.
+						That&apos;s 60x more precision in understanding when someone actually engages.
 					</p>
 				</div>
 			</div>
@@ -215,22 +242,21 @@ export default function Sendflowr() {
 
 			<p className="text-black dark:text-white/90 font-medium mt-6">What I Learned</p>
 			<p className="text-black dark:text-white/90">
-				This project taught me that precision in timing systems requires thinking beyond simple statistics. It&apos;s about:
+				This project taught me about:
 			</p>
 			<ul className="list-disc list-inside space-y-2 text-black dark:text-white/80">
 				<li>Treating identity as a graph problem, not a lookup table</li>
 				<li>Building continuous probability models instead of discrete buckets</li>
-				<li>Accounting for platform-specific latency as a first-class concern</li>
-				<li>Designing systems that degrade gracefully (minute → hour fallback)</li>
+				<li>Accounting for platform-specific latency, and latency as a problem in general</li>
 				<li>Making architectural decisions auditable and explainable</li>
 			</ul>
 
 			<p className="text-black dark:text-white/90">
-				It&apos;s not production-ready (or even mostly development-ready), but it&apos;s been a good playground for exploring concepts that I&apos;m trying to get better at, of which I certainly have not mastered.
+				It&apos;s not production-ready (or even mostly development-ready), but it&apos;s been a good playground for exploring concepts that I&apos;m trying to get better at, all of which I certainly have not mastered.
 			</p>
 
 			<p className="text-black dark:text-white/90">
-				Check out the code on{' '}
+				Check it out on{' '}
 				<a
 					href="https://github.com/donutboyband/SendFlowr"
 					target="_blank"
