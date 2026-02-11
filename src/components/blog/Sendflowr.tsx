@@ -206,7 +206,7 @@ export default function Sendflowr() {
 			</div>
 
 			<p className="text-black dark:text-white/90 font-medium">Project Structure</p>
-			<p className="text-black dark:text-white/80">
+			<p className="text-black dark:text-white/70 text-sm">
 				<code>src/SendFlowr.Inference/</code> – Python FastAPI service<br />
 				<code>src/SendFlowr.Connectors/</code> – C# webhook connectors<br />
 				<code>src/SendFlowr.Consumer/</code> – Kafka consumer<br />
