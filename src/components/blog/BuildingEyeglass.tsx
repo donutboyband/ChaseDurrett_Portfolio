@@ -116,6 +116,23 @@ export default function BuildingEyeglass() {
 				>
 					Eyeglass
 				</a>
+				{' '}
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" className="inline-block w-8 h-8 ml-2">
+					<defs>
+						<linearGradient id="lensGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+							<stop offset="0%" style={{ stopColor: '#60a5fa', stopOpacity: 0.3 }} />
+							<stop offset="100%" style={{ stopColor: '#3b82f6', stopOpacity: 0.1 }} />
+						</linearGradient>
+					</defs>
+					<circle cx="30" cy="50" r="20" fill="url(#lensGrad)" stroke="#3b82f6" strokeWidth="3" />
+					<circle cx="70" cy="50" r="20" fill="url(#lensGrad)" stroke="#3b82f6" strokeWidth="3" />
+					<path d="M 50 50 Q 50 42 50 50" stroke="#3b82f6" strokeWidth="3" fill="none" />
+					<line x1="50" y1="47" x2="50" y2="53" stroke="#3b82f6" strokeWidth="3" strokeLinecap="round" />
+					<line x1="10" y1="50" x2="10" y2="50" stroke="#3b82f6" strokeWidth="3" />
+					<path d="M 10 50 L 5 45" stroke="#3b82f6" strokeWidth="3" strokeLinecap="round" />
+					<path d="M 90 50 L 95 45" stroke="#3b82f6" strokeWidth="3" strokeLinecap="round" />
+					<path d="M 65 45 L 65 60 L 69 56 L 74 63 L 76 61 L 71 54 L 76 54 Z" fill="#3b82f6" />
+				</svg>
 			</h1>
 			<p className="text-black dark:text-white/90">
 				I was exploring the tool—and rapidly evolving Agentic semantic understanding standard—{' '}
