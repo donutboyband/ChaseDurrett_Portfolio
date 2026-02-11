@@ -1,6 +1,13 @@
-import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import { TanStackRouterVite } from '@tanstack/router-vite-plugin';
 
 export default defineConfig({
-	plugins: [sveltekit()]
+	plugins: [
+		react(),
+		TanStackRouterVite({
+			routeFileIgnorePattern: '\\+.*\\.(ts|svelte)$'
+		})
+	],
+	publicDir: 'static'
 });

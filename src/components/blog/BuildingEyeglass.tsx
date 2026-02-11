@@ -1,0 +1,677 @@
+import { useState, useEffect } from 'react';
+import { Highlight, themes } from 'prism-react-renderer';
+
+const SEMANTIC_SNAPSHOT_CODE = `interface SemanticSnapshot {
+  // Element identification
+  role: string;           // ARIA role (button, link, textbox, etc.)
+  name: string;           // Accessible name
+  tagName: string;        // HTML tag
+  id?: string;            // Element ID
+  className?: string;     // CSS classes
+  dataAttributes?: Record<string, string>;
+
+  // Framework context
+  framework: {
+    name: 'react' | 'vue' | 'svelte' | 'vanilla';
+    componentName?: string;   // e.g., "SubmitButton"
+    filePath?: string;        // e.g., "src/components/SubmitButton.tsx"
+    lineNumber?: number;
+    props?: Record<string, unknown>;
+    ancestry?: string[];      // Parent component chain
+  };
+
+  // Accessibility
+  a11y: {
+    label: string | null;
+    description: string | null;
+    disabled: boolean;
+    expanded?: boolean;
+    checked?: boolean | 'mixed';
+    hidden: boolean;
+  };
+
+  // Layout
+  geometry: {
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+    visible: boolean;
+  };
+
+  // Styles
+  styles: {
+    display: string;
+    position: string;
+    flexDirection?: string;
+    gridTemplate?: string;
+    padding: string;
+    margin: string;
+    color: string;
+    backgroundColor: string;
+    fontFamily: string;
+    zIndex: string;
+  };
+
+  // DOM neighborhood for layout context
+  neighborhood?: {
+    parents: Array<{
+      tagName: string;
+      className?: string;
+      styles: {
+        display: string;
+        position: string;
+        flexDirection?: string;
+        alignItems?: string;
+        justifyContent?: string;
+        gap?: string;
+        gridTemplate?: string;
+      };
+    }>;
+    children: Array<{
+      tagName: string;
+      className?: string;
+      count?: number;  // If multiple similar children, group them
+    }>;
+  };
+
+  // Metadata
+  timestamp: number;
+  url: string;
+}`;
+
+const LOOP_STEPS = [
+	{ step: 1, actor: 'Agent', action: 'enters long-polling state, waiting for requests' },
+	{ step: 2, actor: 'Browser', action: 'sends user request via MCP server' },
+	{ step: 3, actor: 'Agent', action: 'completes work, communicates progress back' },
+	{ step: 4, actor: 'Loop', action: 'returns to step 1' }
+];
+
+export default function BuildingEyeglass() {
+	const [currentStep, setCurrentStep] = useState(0);
+	const [copied, setCopied] = useState(false);
+
+	const copyToClipboard = () => {
+		navigator.clipboard.writeText('npx @eyeglass/cli init');
+		setCopied(true);
+		setTimeout(() => setCopied(false), 2000);
+	};
+
+	useEffect(() => {
+		const interval = setInterval(() => {
+			setCurrentStep((prev) => (prev + 1) % LOOP_STEPS.length);
+		}, 2000);
+		return () => clearInterval(interval);
+	}, []);
+
+	return (
+		<>
+			<h1 className="font-header text-3xl md:text-4xl lg:text-5xl text-black dark:text-white mb-4">
+				Building{' '}
+				<a
+					className="text-blue-500 underline"
+					href="https://www.eyeglass.dev"
+					target="_blank"
+					rel="noreferrer"
+				>
+					Eyeglass
+				</a>
+			</h1>
+			<p className="text-black dark:text-white/90">
+				I was exploring the tool—and rapidly evolving Agentic semantic understanding standard—{' '}
+				<a
+					href="https://agentation.dev"
+					target="_blank"
+					rel="noopener noreferrer"
+					className="text-blue-500 hover:underline font-header"
+				>
+					Agentation
+				</a>{' '}
+				recently. It&apos;s a simple idea, but the execution is incredible and once I started using
+				it I started dreading chatting to an agent about frontend changes <em>NOT</em> using
+				Agentation.
+			</p>
+
+			<p className="text-black dark:text-white/90">
+				As I used it, I wanted more and more to not leave the browser for the requests. Agentation
+				uses copy/paste as the main vehicle for getting the context to the agent. There&apos;s also
+				an MCP integration, but to my knowledge I wasn&apos;t able to find a way to sync that back
+				to the browser. It sounds spoiled, but I imagined there were real benefits from not leaving
+				the browser. Some being less context-switching and a constraint that forces the tool&apos;s
+				UI to be <em>really</em> comprehensive. Thus the idea for{' '}
+				<strong className="font-header">Eyeglass</strong> was born.
+			</p>
+
+			<p className="text-black dark:text-white/90">
+				Over one week I feverishly recreated Agentation in my own way with <em>one goal</em>:
+				two-way communication from the browser.
+			</p>
+
+			<div className="my-6 md:my-8 p-4 md:p-6 border border-black/10 dark:border-white/10 rounded-xl bg-black/5 dark:bg-white/5">
+				<p className="text-black dark:text-white/90 mb-3">
+					<strong className="font-header">Why?</strong>
+				</p>
+				<ul className="space-y-2 text-sm md:text-base text-black/80 dark:text-white/80">
+					<li>→ Prove to myself I could make a &quot;magic&quot; tool (it&apos;s kind of magic)</li>
+					<li>
+						→ Prove Geoffrey Huntley&apos;s point: with Agentic AI, there are no software moats
+					</li>
+					<li>→ The only limit in development is now imagination</li>
+				</ul>
+				<p className="text-xs md:text-sm text-black/60 dark:text-white/60 mt-4 italic">
+					Though, you get better (and{' '}
+					<a
+						className="text-blue-500"
+						href="https://acuvity.ai/the-clawdbot-dumpster-fire-72-hours-that-exposed-everything-wrong-with-ai-security/"
+						target="_blank"
+						rel="noreferrer"
+					>
+						safer
+					</a>
+					) results if you know what you&apos;re doing technically.
+				</p>
+			</div>
+
+			<p className="text-black dark:text-white/90">
+				AI coding agents are incredible, but as Benji Taylor, the creator of Agentation, pointed
+				out:
+			</p>
+
+			<div className="my-6 md:my-10 p-4 md:p-6 border-l-4 border-blue-500 bg-blue-500/5 dark:bg-blue-500/10 rounded-r-lg">
+				<p className="text-black/70 dark:text-white/90 text-xs md:text-sm font-header leading-relaxed">
+					&quot;When you describe a problem in words, precision gets lost. &quot;The button hover
+					feels sluggish&quot;: which part? The delay before it starts? The duration? The easing?
+					&quot;The sidebar looks off&quot;: which element? What&apos;s off about it? I know exactly
+					what I mean when I see it, but translating that into text loses information... The agent
+					has to guess which element you mean, search for it in the codebase, and hope it found the
+					right one. The more specific your feedback, the less guesswork for the agent, but
+					specificity is tedious to type out. Screenshots are only somewhat better because the agent
+					still has to infer which part you&apos;re referring to.&quot;
+				</p>
+			</div>
+
+			<p className="text-black dark:text-white/90">
+				So, I gave myself a challenge: build a dev tool like Agentation that communicates a semantic
+				snapshot to an agent via an MCP server, and create the UI so that the dev/user never has to
+				leave the browser. 96 hours later, <strong className="font-header">Eyeglass</strong> was
+				born.
+			</p>
+
+			{/* The Challenge Section */}
+			<h2 className="font-header text-xl md:text-2xl lg:text-3xl text-black dark:text-white mt-8 md:mt-12 mb-4 md:mb-6">
+				The Challenge
+			</h2>
+
+			<p className="text-black dark:text-white/90 mb-6">
+				How do you make an agent respond to browser events without the user leaving the page?
+			</p>
+
+			{/* Two Approaches */}
+			<div className="grid md:grid-cols-2 gap-3 md:gap-4 my-6 md:my-8">
+				{/* First Approach - Failed */}
+				<div className="p-4 md:p-5 border border-red-500/30 dark:border-red-400/30 rounded-xl bg-white dark:bg-black">
+					<div className="flex items-center gap-2 mb-3">
+						<span className="text-black/40 dark:text-white/40 text-lg md:text-xl">✕</span>
+						<span className="font-header text-sm md:text-base text-black dark:text-white">
+							Approach 1: MCP Sampling
+						</span>
+					</div>
+					<p className="text-xs md:text-sm text-black/60 dark:text-white/60">
+						The MCP protocol has nascent support for <em>sampling</em>, which allows an MCP server
+						to prompt an agent directly. However, even Claude Code doesn&apos;t support this yet.
+					</p>
+				</div>
+
+				{/* Second Approach - Success */}
+				<div className="p-4 md:p-5 border-2 border-green-500/30 dark:border-green-400/30 rounded-xl bg-white dark:bg-black">
+					<div className="flex items-center gap-2 mb-3">
+						<span className="text-black dark:text-white text-lg md:text-xl">✓</span>
+						<span className="font-header text-sm md:text-base text-black dark:text-white">
+							Approach 2: Long-Polling
+						</span>
+					</div>
+					<p className="text-xs md:text-sm text-black/70 dark:text-white/70">
+						Put the agent in a waiting state that <em>doesn&apos;t consume tokens</em>. When the
+						browser sends a request, the agent wakes up and processes it.
+					</p>
+				</div>
+			</div>
+
+			{/* The Loop Diagram - Creative Circular */}
+			<div className="my-8 md:my-12 relative">
+				<div className="p-4 md:p-8 relative overflow-hidden">
+					{/* Hand-drawn style title */}
+					<p className="font-header text-black dark:text-white mb-6 md:mb-8 text-center text-lg md:text-xl">
+						The Loop
+					</p>
+
+					{/* Circular visualization */}
+					<div className="relative w-64 h-64 md:w-72 md:h-72 mx-auto">
+						{/* Orbit ring - aligned with center of blobs */}
+						<div className="absolute inset-6 rounded-full border-2 border-dashed border-black/10 dark:border-white/10 orbit-spin" />
+
+						{/* The 4 nodes arranged in a circle */}
+						{LOOP_STEPS.map((step, idx) => {
+							const angle = (idx * 90 - 90) * (Math.PI / 180);
+							const radius = 120;
+							const x = Math.cos(angle) * radius;
+							const y = Math.sin(angle) * radius;
+							const isActive = idx === currentStep;
+
+							return (
+								<div
+									key={idx}
+									className="absolute transition-all duration-500"
+									style={{
+										left: `calc(50% + ${x}px - 24px)`,
+										top: `calc(50% + ${y}px - 24px)`
+									}}
+								>
+									<div
+										className={`
+											w-12 h-12 rounded-full flex items-center justify-center
+											font-header text-lg transition-all duration-300
+											${
+												isActive
+													? 'bg-black dark:bg-white text-white dark:text-black scale-125 shadow-lg'
+													: 'bg-white dark:bg-black border-2 border-black/30 dark:border-white/30 text-black/50 dark:text-white/50'
+											}
+										`}
+									>
+										{step.step}
+									</div>
+									{/* Label that appears on active */}
+									<div
+										className={`
+											absolute whitespace-nowrap text-xs font-header
+											transition-all duration-300
+											${idx === 0 ? 'top-full mt-4 left-1/2 -translate-x-1/2' : ''}
+											${idx === 1 ? 'left-full ml-4 top-1/2 -translate-y-1/2' : ''}
+											${idx === 2 ? 'bottom-full mb-4 left-1/2 -translate-x-1/2' : ''}
+											${idx === 3 ? 'right-full mr-4 top-1/2 -translate-y-1/2' : ''}
+											${isActive ? 'opacity-100' : 'opacity-0'}
+										`}
+									>
+										<span className="highlight-text">{step.actor}</span>
+									</div>
+								</div>
+							);
+						})}
+
+						{/* Center content */}
+						<div className="absolute inset-0 flex items-center justify-center">
+							<div key={currentStep} className="text-center max-w-[140px] animate-fade-in">
+								<p className="text-sm text-black/70 dark:text-white/70 leading-relaxed">
+									{LOOP_STEPS[currentStep].action}
+								</p>
+							</div>
+						</div>
+					</div>
+
+					{/* Whimsical arrow */}
+					<div className="text-center mt-8 text-black/30 dark:text-white/30">
+						<span className="text-2xl wiggle">↻</span>
+					</div>
+				</div>
+			</div>
+
+			<style>{`
+				@keyframes fade-in {
+					from { opacity: 0; transform: scale(0.95); }
+					to { opacity: 1; transform: scale(1); }
+				}
+				.animate-fade-in {
+					animation: fade-in 0.4s ease-out;
+				}
+
+				@keyframes float {
+					0%, 100% { transform: translateY(0) translateX(0); opacity: 0.3; }
+					50% { transform: translateY(-20px) translateX(10px); opacity: 0.6; }
+				}
+				.particle {
+					position: absolute;
+					width: 6px;
+					height: 6px;
+					border-radius: 50%;
+					background: currentColor;
+					opacity: 0.3;
+				}
+				.particle-1 {
+					top: 20%;
+					left: 10%;
+					animation: float 4s ease-in-out infinite;
+				}
+				.particle-2 {
+					top: 60%;
+					right: 15%;
+					animation: float 5s ease-in-out infinite 1s;
+				}
+				.particle-3 {
+					bottom: 20%;
+					left: 20%;
+					animation: float 6s ease-in-out infinite 2s;
+				}
+
+				@keyframes orbit {
+					from { transform: rotate(0deg); }
+					to { transform: rotate(360deg); }
+				}
+				.orbit-spin {
+					animation: orbit 20s linear infinite;
+				}
+
+				.highlight-text {
+					background: linear-gradient(120deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.05) 100%);
+					padding: 2px 8px;
+					border-radius: 4px;
+				}
+				:is(.dark) .highlight-text {
+					background: linear-gradient(120deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%);
+				}
+
+				.traveling-dot {
+					position: absolute;
+					width: 8px;
+					height: 8px;
+					background: black;
+					border-radius: 50%;
+					left: 50%;
+					top: 50%;
+					transform: rotate(var(--angle)) translateX(120px) translateY(-50%);
+					transition: transform 0.5s ease-in-out;
+				}
+				:is(.dark) .traveling-dot {
+					background: white;
+				}
+
+				@keyframes wiggle {
+					0%, 100% { transform: rotate(0deg); }
+					25% { transform: rotate(-10deg); }
+					75% { transform: rotate(10deg); }
+				}
+				.wiggle {
+					display: inline-block;
+					animation: wiggle 2s ease-in-out infinite;
+				}
+			`}</style>
+
+			<p className="text-black dark:text-white/90">
+				To my surprise, long-polling was very effective as a strategy in accomplishing the full
+				loop. Claude Code picked it up best, followed by Codex, then Copilot.
+			</p>
+
+			{/* The Architecture Section */}
+			<h2 className="font-header text-2xl md:text-3xl text-black dark:text-white mt-12 mb-6">
+				The Architecture
+			</h2>
+
+			<p className="text-black dark:text-white/90">I structured Eyeglass into four packages:</p>
+
+			<div className="my-8 font-mono text-sm">
+				{/* Package Tree */}
+				<div className="border border-black/10 dark:border-white/10 rounded-lg overflow-hidden">
+					{/* Header */}
+					<div className="px-4 py-3 bg-black/[0.02] dark:bg-white/[0.02] border-b border-black/10 dark:border-white/10">
+						<span className="text-black/40 dark:text-white/40">eyeglass/</span>
+						<span className="text-black/60 dark:text-white/60">packages</span>
+					</div>
+
+					{/* Bridge */}
+					<div className="group">
+						<div className="px-4 py-4 border-b border-black/5 dark:border-white/5 hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors">
+							<div className="flex items-baseline gap-3">
+								<span className="text-black/30 dark:text-white/30">├──</span>
+								<span className="text-black dark:text-white font-medium">@eyeglass/bridge</span>
+								<span className="text-black/40 dark:text-white/40 text-xs">Node.js</span>
+							</div>
+							<p className="mt-2 ml-8 font-sans text-black/70 dark:text-white/70 text-sm leading-relaxed">
+								The MCP bridge that connects the client and the agent. Contains all the tooling for
+								the agent to call during eyeglass operations. Built in Node, it supports both Stdio
+								MCP and HTTP for agents like Codex.
+							</p>
+						</div>
+					</div>
+
+					{/* Inspector */}
+					<div className="group relative">
+						<div className="absolute left-0 top-0 bottom-0 w-1 bg-black dark:bg-white" />
+						<div className="px-4 py-4 border-b border-black/5 dark:border-white/5 bg-black/[0.02] dark:bg-white/[0.03]">
+							<div className="flex items-baseline gap-3">
+								<span className="text-black/30 dark:text-white/30">├──</span>
+								<span className="text-black dark:text-white font-medium">@eyeglass/inspector</span>
+								<span className="text-black/40 dark:text-white/40 text-xs">Vanilla TS</span>
+								<span className="text-xs px-2 py-0.5 bg-black dark:bg-white text-white dark:text-black rounded">
+									main focus
+								</span>
+							</div>
+							<p className="mt-2 ml-8 font-sans text-black/70 dark:text-white/70 text-sm leading-relaxed">
+								The main attraction—where I focused most of my efforts. Because it&apos;s a dev
+								tool, I built it in vanilla JS/TS and CSS for the smallest possible bundle size.
+								User preferences persist via localStorage.
+							</p>
+						</div>
+					</div>
+
+					{/* CLI */}
+					<div className="group">
+						<div className="px-4 py-4 border-b border-black/5 dark:border-white/5 hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors">
+							<div className="flex items-baseline gap-3">
+								<span className="text-black/30 dark:text-white/30">├──</span>
+								<span className="text-black dark:text-white font-medium">@eyeglass/cli</span>
+								<span className="text-black/40 dark:text-white/40 text-xs">CLI</span>
+							</div>
+							<p className="mt-2 ml-8 font-sans text-black/70 dark:text-white/70 text-sm leading-relaxed">
+								Created to make setup into existing projects simple. It works okay—still ironing out
+								bugs with different frameworks.
+							</p>
+						</div>
+					</div>
+
+					{/* Types */}
+					<div className="group">
+						<div className="px-4 py-4 hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors">
+							<div className="flex items-baseline gap-3">
+								<span className="text-black/30 dark:text-white/30">└──</span>
+								<span className="text-black dark:text-white font-medium">@eyeglass/types</span>
+								<span className="text-black/40 dark:text-white/40 text-xs">TypeScript</span>
+							</div>
+							<p className="mt-2 ml-8 font-sans text-black/70 dark:text-white/70 text-sm leading-relaxed">
+								Shared type interfaces.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<p className="text-black dark:text-white/90">
+				And create the following interface for the semantic snapshot that the agent receives:
+			</p>
+
+			<Highlight theme={themes.oneDark} code={SEMANTIC_SNAPSHOT_CODE} language="typescript">
+				{({ style, tokens, getLineProps, getTokenProps }) => (
+					<pre className="my-6 p-4 rounded-lg overflow-x-auto text-sm" style={style}>
+						{tokens.map((line, i) => (
+							<div key={i} {...getLineProps({ line })}>
+								{line.map((token, key) => (
+									<span key={key} {...getTokenProps({ token })} />
+								))}
+							</div>
+						))}
+					</pre>
+				)}
+			</Highlight>
+
+			{/* Snapshot Capture Section */}
+			<h2 className="font-header text-2xl md:text-3xl text-black dark:text-white mt-12 mb-6">
+				Capturing the Snapshot
+			</h2>
+
+			<p className="text-black dark:text-white/90">
+				The semantic snapshot combines multiple sources of truth about an element:
+			</p>
+
+			<div className="my-8 grid gap-4">
+				{[
+					{
+						title: 'ARIA & Accessibility',
+						desc: 'Role, accessible name, labels, disabled/hidden state. We follow the same algorithm screen readers use.'
+					},
+					{
+						title: 'Framework Context',
+						desc: 'Component name, file path, line number, props. Works for React, Vue, and Svelte.'
+					},
+					{
+						title: 'Geometry',
+						desc: 'Bounding box coordinates. Tells the agent where the element is on screen.'
+					},
+					{
+						title: 'Computed Styles',
+						desc: 'Display, position, flex/grid properties, colors, fonts. The actual rendered values.'
+					},
+					{
+						title: 'DOM Neighborhood',
+						desc: 'Parent containers and their layout properties, children grouped by type. Layout context matters.'
+					}
+				].map((item, i) => (
+					<div
+						key={i}
+						className="flex gap-4 p-4 border border-black/5 dark:border-white/5 rounded-lg hover:border-black/10 dark:hover:border-white/10 transition-colors"
+					>
+						<div className="flex-shrink-0 w-8 h-8 rounded bg-black/5 dark:bg-white/5 flex items-center justify-center font-mono text-sm text-black/40 dark:text-white/40">
+							{i + 1}
+						</div>
+						<div>
+							<p className="font-header text-black dark:text-white text-sm">{item.title}</p>
+							<p className="text-black/60 dark:text-white/60 text-sm mt-1">{item.desc}</p>
+						</div>
+					</div>
+				))}
+			</div>
+
+			<p className="text-black dark:text-white/90">
+				The neighborhood context was a late addition but has proven useful. An agent trying to
+				center a button needs to know if its parent is a flex container with{' '}
+				<code className="px-1.5 py-0.5 bg-black/5 dark:bg-white/10 rounded text-sm font-mono">
+					justify-content: space-between
+				</code>{' '}
+				vs a grid with explicit columns. Providing this upfront at a marginal token cost improves
+				performance.
+			</p>
+
+			{/* Dogfooding Section */}
+			<h2 className="font-header text-xl md:text-2xl lg:text-3xl text-black dark:text-white mt-8 md:mt-12 mb-4 md:mb-6">
+				Using it
+			</h2>
+
+			<p className="text-black dark:text-white/90">
+				With the MVP of Eyeglass built, I used it to build the{' '}
+				<a
+					className="text-blue-500 hover:underline"
+					href="https://www.eyeglass.dev"
+					target="_blank"
+					rel="noreferrer"
+				>
+					Eyeglass website
+				</a>{' '}
+				itself. This allowed me to work out bugs as an active user and find the pain points of
+				real-world use. There are still issues as of writing this—it&apos;s not perfect. But when
+				it&apos;s flowing, it enables a different type of frontend development.
+			</p>
+
+			<p className="text-black dark:text-white/90">
+				You can talk in technical terms—flexbox, grid, design tokens. Or get abstract—&quot;make
+				this feel lighter&quot;, &quot;the spacing feels cramped&quot;. The agent has enough context
+				to understand both. I built this entire blog page with Eyeglass.
+			</p>
+
+			<div className="my-6 md:my-8 p-4 md:p-6 border border-black/10 dark:border-white/10 rounded-xl bg-black/[0.02] dark:bg-white/[0.02]">
+				<p className="text-black dark:text-white/90 mb-3">
+					<strong className="font-header">What I learned:</strong>
+				</p>
+				<ul className="space-y-2 text-sm md:text-base text-black/80 dark:text-white/80">
+					<li>→ The long-polling approach works reliably across different agents</li>
+					<li>→ Framework detection (React/Vue/Svelte) makes debugging significantly faster</li>
+					<li>→ DOM neighborhood context is crucial for layout-related requests</li>
+					<li>→ The browser extension needs to be lightweight—vanilla TS was the right choice</li>
+				</ul>
+			</div>
+
+			{/* Getting Started Section */}
+			<h2 className="font-header text-xl md:text-2xl lg:text-3xl text-black dark:text-white mt-8 md:mt-12 mb-4 md:mb-6">
+				Try It Yourself
+			</h2>
+
+			<p className="text-black dark:text-white/90">
+				Eyeglass is open source and available for anyone to use. If you&apos;re interested in trying
+				it out or contributing, here&apos;s where to start:
+			</p>
+
+			<div className="my-6 md:my-8 grid gap-4">
+				{[
+					{
+						title: 'Official Website',
+						desc: 'Documentation, setup guides, and examples',
+						link: 'https://eyeglass.dev',
+						linkText: 'eyeglass.dev'
+					},
+					{
+						title: 'GitHub Repository',
+						desc: 'Source code, issues, and contributions welcome',
+						link: 'https://github.com/donutboyband/eyeglass',
+						linkText: 'github.com/donutboyband/eyeglass'
+					}
+				].map((item, i) => (
+					<div
+						key={i}
+						className="flex gap-4 p-4 border border-black/5 dark:border-white/5 rounded-lg hover:border-black/10 dark:hover:border-white/10 transition-colors"
+					>
+						<div className="flex-shrink-0 w-8 h-8 rounded bg-black/5 dark:bg-white/5 flex items-center justify-center font-mono text-sm text-black/40 dark:text-white/40">
+							{i + 1}
+						</div>
+						<div>
+							<p className="font-header text-black dark:text-white text-sm">{item.title}</p>
+							<p className="text-black/60 dark:text-white/60 text-sm mt-1">{item.desc}</p>
+							<a
+								href={item.link}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="text-sm text-blue-500 hover:underline font-mono mt-2 inline-block"
+							>
+								{item.linkText} →
+							</a>
+						</div>
+					</div>
+				))}
+			</div>
+
+			<p className="text-black dark:text-white/90">
+				The quickest way to get started is to use the CLI tool to install it:
+			</p>
+
+			<div className="my-4 relative group">
+				<pre className="p-4 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-lg font-mono text-sm text-black dark:text-white overflow-x-auto">
+					<code>npx @eyeglass/cli init</code>
+				</pre>
+				<button
+					onClick={copyToClipboard}
+					className="absolute top-2 right-2 px-2 py-1 text-xs font-mono bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 border border-black/10 dark:border-white/10 rounded transition-colors text-black/60 dark:text-white/60"
+				>
+					{copied ? 'Copied!' : 'Copy'}
+				</button>
+			</div>
+
+			<p className="text-black/60 dark:text-white/60 text-sm mt-6 md:mt-8 italic">
+				Built by{' '}
+				<a
+					href="https://github.com/donutboyband"
+					target="_blank"
+					rel="noopener noreferrer"
+					className="text-blue-500 hover:underline"
+				>
+					donutboyband
+				</a>
+				. Contributions, feedback, and stars appreciated.
+			</p>
+		</>
+	);
+}
