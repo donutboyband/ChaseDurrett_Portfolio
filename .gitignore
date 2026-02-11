@@ -25,6 +25,7 @@ src/routeTree.gen.ts
 
 .gogo
 .claude
+.copilot/
 repomix-output.xml
 
 .tanstack/temp
