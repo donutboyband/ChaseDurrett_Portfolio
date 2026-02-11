@@ -123,9 +123,22 @@ export default function Sendflowr() {
 			<p className="text-black dark:text-white/90 font-medium">Example API Response</p>
 			<div className="my-4 p-4 bg-black/5 dark:bg-white/5 rounded-lg border border-black/10 dark:border-white/10 font-mono text-sm overflow-x-auto">
 				<pre className="text-black dark:text-white/90">{`{
+  "decision_id": "01JGXYZ789ABCDEF",
   "universal_id": "sf_b8783dbfc0024695",
+  "target_minute_utc": 7195,
   "trigger_timestamp_utc": "2026-01-16T23:55:00Z",
-  "confidence_score": 0.72
+  "latency_estimate_seconds": 300,
+  "confidence_score": 0.72,
+  "model_version": "baseline_v1",
+  "explanation_ref": "exp_abc123",
+  "created_at_utc": "2026-01-10T12:00:00Z",
+  "debug": {
+    "base_curve_peak_minute": 7200,
+    "applied_weights": [
+      {"signal": "shopify_browse", "weight": 0.3}
+    ],
+    "suppressed": false
+  }
 }`}</pre>
 			</div>
 
