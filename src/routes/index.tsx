@@ -30,6 +30,7 @@ const experiences = [
 	}
 ];
 
+// eslint-disable-next-line react-refresh/only-export-components
 function IndexPage() {
 	const journeyRef = useRef<HTMLElement>(null);
 	const heroTitleRef = useRef<HTMLHeadingElement>(null);

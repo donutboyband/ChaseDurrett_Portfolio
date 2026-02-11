@@ -3,14 +3,13 @@ import { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import About from '../../components/blog/About';
-import DataScienceJourney from '../../components/blog/DataScienceJourney';
 import BuildingEyeglass from '../../components/blog/BuildingEyeglass';
 
 const blogPosts = [
 	{
 		id: 'about',
-		title: 'About',
-		date: 'Feb 10, 2026',
+		title: 'Hello',
+		date: 'Feb 09, 2026',
 		content: <About />
 	},
 	{
@@ -21,6 +20,7 @@ const blogPosts = [
 	}
 ];
 
+// eslint-disable-next-line react-refresh/only-export-components
 function BlogPage() {
 	const navigate = useNavigate();
 	const [selectedPost, setSelectedPost] = useState(blogPosts[0]);
@@ -31,6 +31,7 @@ function BlogPage() {
 		const hash = window.location.hash.slice(1);
 		if (hash) {
 			const post = blogPosts.find((p) => p.id === hash);
+			// eslint-disable-next-line react-hooks/set-state-in-effect
 			if (post) setSelectedPost(post);
 		}
 	}, []);

@@ -50,6 +50,7 @@ async function fetchRepos(): Promise<Repo[]> {
 		}));
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 function WorkPage() {
 	const { repos } = Route.useLoaderData();
 

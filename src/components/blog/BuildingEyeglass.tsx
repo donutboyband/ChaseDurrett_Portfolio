@@ -108,9 +108,12 @@ export default function BuildingEyeglass() {
 		<>
 			<h1 className="font-header text-3xl md:text-4xl lg:text-5xl text-black dark:text-white mb-4">
 				Building{' '}
-				<a 
-				className='text-blue-500 underline'
-				href="https://www.eyeglass.dev" target="_blank" rel="noreferrer">
+				<a
+					className="text-blue-500 underline"
+					href="https://www.eyeglass.dev"
+					target="_blank"
+					rel="noreferrer"
+				>
 					Eyeglass
 				</a>
 			</h1>
@@ -176,14 +179,14 @@ export default function BuildingEyeglass() {
 
 			<div className="my-6 md:my-10 p-4 md:p-6 border-l-4 border-blue-500 bg-blue-500/5 dark:bg-blue-500/10 rounded-r-lg">
 				<p className="text-black/70 dark:text-white/90 text-xs md:text-sm font-header leading-relaxed">
-					"When you describe a problem in words, precision gets lost. &quot;The button hover feels
-					sluggish&quot;: which part? The delay before it starts? The duration? The easing?
+					&quot;When you describe a problem in words, precision gets lost. &quot;The button hover
+					feels sluggish&quot;: which part? The delay before it starts? The duration? The easing?
 					&quot;The sidebar looks off&quot;: which element? What&apos;s off about it? I know exactly
 					what I mean when I see it, but translating that into text loses information... The agent
 					has to guess which element you mean, search for it in the codebase, and hope it found the
 					right one. The more specific your feedback, the less guesswork for the agent, but
 					specificity is tedious to type out. Screenshots are only somewhat better because the agent
-					still has to infer which part you're referring to."
+					still has to infer which part you&apos;re referring to.&quot;
 				</p>
 			</div>
 
@@ -215,7 +218,7 @@ export default function BuildingEyeglass() {
 					</div>
 					<p className="text-xs md:text-sm text-black/60 dark:text-white/60">
 						The MCP protocol has nascent support for <em>sampling</em>, which allows an MCP server
-						to prompt an agent directly. However, even Claude Code doesn't support this yet.
+						to prompt an agent directly. However, even Claude Code doesn&apos;t support this yet.
 					</p>
 				</div>
 
@@ -228,8 +231,8 @@ export default function BuildingEyeglass() {
 						</span>
 					</div>
 					<p className="text-xs md:text-sm text-black/70 dark:text-white/70">
-						Put the agent in a waiting state that <em>doesn't consume tokens</em>. When the browser
-						sends a request, the agent wakes up and processes it.
+						Put the agent in a waiting state that <em>doesn&apos;t consume tokens</em>. When the
+						browser sends a request, the agent wakes up and processes it.
 					</p>
 				</div>
 			</div>
@@ -442,9 +445,9 @@ export default function BuildingEyeglass() {
 								</span>
 							</div>
 							<p className="mt-2 ml-8 font-sans text-black/70 dark:text-white/70 text-sm leading-relaxed">
-								The main attraction—where I focused most of my efforts. Because it's a dev tool, I
-								built it in vanilla JS/TS and CSS for the smallest possible bundle size. User
-								preferences persist via localStorage.
+								The main attraction—where I focused most of my efforts. Because it&apos;s a dev
+								tool, I built it in vanilla JS/TS and CSS for the smallest possible bundle size.
+								User preferences persist via localStorage.
 							</p>
 						</div>
 					</div>
@@ -561,16 +564,24 @@ export default function BuildingEyeglass() {
 			</h2>
 
 			<p className="text-black dark:text-white/90">
-				With the MVP of Eyeglass built, I used it to build the Eyeglass website itself. This allowed
-				me to work out bugs as an active user and find the pain points of real-world use. There are
-				still issues as of writing this—it's not perfect. But when it's flowing, it enables a
-				different type of frontend development.
+				With the MVP of Eyeglass built, I used it to build the{' '}
+				<a
+					className="text-blue-500 hover:underline"
+					href="https://www.eyeglass.dev"
+					target="_blank"
+					rel="noreferrer"
+				>
+					Eyeglass website
+				</a>{' '}
+				itself. This allowed me to work out bugs as an active user and find the pain points of
+				real-world use. There are still issues as of writing this—it&apos;s not perfect. But when
+				it&apos;s flowing, it enables a different type of frontend development.
 			</p>
 
 			<p className="text-black dark:text-white/90">
-				You can talk in technical terms—flexbox, grid, design tokens. Or get abstract—"make this
-				feel lighter", "the spacing feels cramped". The agent has enough context to understand both.
-				I built this entire blog page with Eyeglass.
+				You can talk in technical terms—flexbox, grid, design tokens. Or get abstract—&quot;make
+				this feel lighter&quot;, &quot;the spacing feels cramped&quot;. The agent has enough context
+				to understand both. I built this entire blog page with Eyeglass.
 			</p>
 
 			<div className="my-6 md:my-8 p-4 md:p-6 border border-black/10 dark:border-white/10 rounded-xl bg-black/[0.02] dark:bg-white/[0.02]">
@@ -591,8 +602,8 @@ export default function BuildingEyeglass() {
 			</h2>
 
 			<p className="text-black dark:text-white/90">
-				Eyeglass is open source and available for anyone to use. If you're interested in trying it
-				out or contributing, here's where to start:
+				Eyeglass is open source and available for anyone to use. If you&apos;re interested in trying
+				it out or contributing, here&apos;s where to start:
 			</p>
 
 			<div className="my-6 md:my-8 grid gap-4">
