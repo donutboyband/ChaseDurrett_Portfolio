@@ -44,7 +44,7 @@ const featuredProjects: FeaturedProject[] = [
 		name: 'Creative Director Portfolio',
 		description: 'Portfolio site of a creative dirctor',
 		githubUrl: 'https://github.com/donutboyband/emilee-portfolio',
-		liveUrl: 'https://eccreative.com'
+		liveUrl: 'https://eccreativ.com'
 	}
 ];
 
