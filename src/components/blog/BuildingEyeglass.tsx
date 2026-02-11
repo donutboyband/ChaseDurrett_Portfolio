@@ -89,6 +89,13 @@ const LOOP_STEPS = [
 
 export default function BuildingEyeglass() {
 	const [currentStep, setCurrentStep] = useState(0);
+	const [copied, setCopied] = useState(false);
+
+	const copyToClipboard = () => {
+		navigator.clipboard.writeText('npx @eyeglass/cli init');
+		setCopied(true);
+		setTimeout(() => setCopied(false), 2000);
+	};
 
 	useEffect(() => {
 		const interval = setInterval(() => {
@@ -615,10 +622,20 @@ export default function BuildingEyeglass() {
 			</div>
 
 			<p className="text-black dark:text-white/90">
-				The quickest way to get started is to install the browser extension and the MCP server, 
-				then add Eyeglass to your AI coding agent's configuration. Full setup instructions are 
-				available on the website.
+				The quickest way to get started is to use the CLI tool to install it: 
 			</p>
+
+			<div className="my-4 relative group">
+				<pre className="p-4 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-lg font-mono text-sm text-black dark:text-white overflow-x-auto">
+					<code>npx @eyeglass/cli init</code>
+				</pre>
+				<button
+					onClick={copyToClipboard}
+					className="absolute top-2 right-2 px-2 py-1 text-xs font-mono bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 border border-black/10 dark:border-white/10 rounded transition-colors text-black/60 dark:text-white/60"
+				>
+					{copied ? 'Copied!' : 'Copy'}
+				</button>
+			</div>
 
 			<p className="text-black/60 dark:text-white/60 text-sm mt-6 md:mt-8 italic">
 				Built by{' '}
