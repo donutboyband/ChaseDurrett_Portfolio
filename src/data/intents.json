@@ -1,22 +1,66 @@
 {
   "skills": {
-    "keywords": ["tech", "stack", "languages", "code", "tools", "frameworks", "skills", "technology", "programming"],
-    "answer": "I'm proficient in **TypeScript, React, and Node.js**. Lately, I've been diving deep into WebGPU and performance optimization."
+    "keywords": ["tech", "stack", "languages", "code", "tools", "frameworks", "skills", "technology", "programming", "know", "proficient", "good"],
+    "answer": "I'm proficient in **TypeScript, React, and Node.js**. Lately, I've been diving deep into WebGPU and performance optimization. 🚀"
   },
   "experience": {
-    "keywords": ["work", "job", "history", "career", "company", "resume", "experience", "employment", "background"],
-    "answer": "I have 4+ years of experience, most recently at **TechCorp** where I led the frontend migration to Next.js."
+    "keywords": ["work", "job", "history", "career", "company", "resume", "experience", "employment", "background", "worked"],
+    "answer": "I have 4+ years of experience, most recently at **Baltimore Life Insurance** where I build enterprise-grade applications. Before that, I was at **Soup Agency** crafting marketing websites, and **Audigent** wearing all the IT hats. 💼"
   },
   "projects": {
-    "keywords": ["projects", "portfolio", "built", "created", "made", "developed", "showcase"],
-    "answer": "I've built several notable projects including a real-time collaboration tool, a data visualization dashboard, and this portfolio site!"
+    "keywords": ["projects", "portfolio", "built", "created", "made", "developed", "showcase", "github", "repo"],
+    "answer": "I've built several notable projects including a real-time collaboration tool, a data visualization dashboard, and this portfolio site you're on right now! Check out my [GitHub](https://github.com) for more. 🎨"
   },
   "contact": {
-    "keywords": ["contact", "email", "reach", "hire", "connect", "message", "talk", "call"],
-    "answer": "You can reach me at **hello@example.com** or connect with me on [LinkedIn](https://linkedin.com). I'm always open to interesting opportunities!"
+    "keywords": ["contact", "email", "reach", "hire", "connect", "message", "talk", "call", "linkedin", "dm"],
+    "answer": "You can reach me at **hello@example.com** or connect with me on [LinkedIn](https://linkedin.com). I'm always open to interesting opportunities! ✉️"
   },
   "about": {
-    "keywords": ["about", "who", "yourself", "bio", "introduction", "tell"],
-    "answer": "I'm a passionate full-stack developer who loves building user-centric applications. When I'm not coding, you'll find me exploring new tech or contributing to open source."
+    "keywords": ["about", "who", "yourself", "bio", "introduction", "tell", "describe"],
+    "answer": "I'm a passionate full-stack developer who loves building user-centric applications. When I'm not coding, you'll find me exploring new tech or contributing to open source. 👨‍💻"
+  },
+  "education": {
+    "keywords": ["education", "school", "university", "degree", "college", "studied", "learning", "learn"],
+    "answer": "I'm a lifelong learner who believes the best education comes from building real things and solving real problems. I've learned more from shipping code than any classroom! 📚"
+  },
+  "location": {
+    "keywords": ["where", "location", "live", "based", "from", "city", "country"],
+    "answer": "I'm currently based in the **United States**, but I'm comfortable working remotely with teams across time zones. 🌍"
+  },
+  "hobbies": {
+    "keywords": ["hobbies", "interests", "fun", "free", "time", "enjoy", "like", "love", "passion"],
+    "answer": "Outside of coding, I love tinkering with new tech, experimenting with design, and occasionally diving into game development. I'm a big believer in creative side projects! 🎮"
+  },
+  "availability": {
+    "keywords": ["available", "hire", "hiring", "open", "looking", "freelance", "opportunity", "opportunities"],
+    "answer": "I'm always interested in hearing about exciting opportunities! Feel free to reach out at **hello@example.com** and let's chat. 💬"
+  },
+  "greeting_hi": {
+    "keywords": ["hi", "hello", "hey", "sup", "yo", "howdy", "greetings"],
+    "answer": "Hey there! 👋 What would you like to know about me?"
+  },
+  "greeting_how": {
+    "keywords": ["how", "you", "doing", "going", "up"],
+    "answer": "I'm doing great, thanks for asking! Just here ready to answer your questions. 😊"
+  },
+  "thanks": {
+    "keywords": ["thanks", "thank", "appreciate", "awesome", "cool", "great"],
+    "answer": "You're welcome! Happy to help. 😄"
+  },
+  "joke": {
+    "keywords": ["joke", "funny", "laugh", "humor"],
+    "answer": "Why do programmers prefer dark mode? Because light attracts bugs! 🐛😂"
+  },
+  "favorite": {
+    "keywords": ["favorite", "favourite", "best", "prefer"],
+    "answer": "Tough question! I'd say my favorite tech right now is **TypeScript**—it makes JavaScript feel like a real language. But ask me tomorrow and I might say something else! 💙"
+  },
+  "personality": {
+    "keywords": ["personality", "person", "like", "type"],
+    "answer": "I'm the type of person who reads documentation for fun and gets genuinely excited about clean code. Some call it nerdy, I call it passion! 🤓"
+  },
+  "help": {
+    "keywords": ["help", "assist", "support", "do", "can"],
+    "answer": "I'm here to answer questions about my **skills**, **experience**, **projects**, or how to **contact me**. What would you like to know?"
   }
 }

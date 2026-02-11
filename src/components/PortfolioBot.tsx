@@ -14,12 +14,13 @@ interface Intent {
 
 type IntentsData = Record<string, Intent>;
 
-const FALLBACK_MESSAGE = "I didn't quite catch that. Would you like to hear about my **skills**, **projects**, **experience**, or **how to contact me**?";
+const FALLBACK_MESSAGE = "Hmm, I didn't quite catch that. 🤔 Try asking about my **skills**, **projects**, **experience**, **hobbies**, or how to **contact me**!";
 
 const quickActions = [
   { label: 'Skills', query: 'What are your skills?' },
   { label: 'Experience', query: 'Tell me about your experience' },
   { label: 'Projects', query: 'What projects have you built?' },
+  { label: 'Hobbies', query: 'What are your hobbies?' },
   { label: 'Contact', query: 'How can I contact you?' }
 ];
 
@@ -27,7 +28,7 @@ export default function PortfolioBot() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
-      text: "👋 Hi! I'm here to answer questions about my skills, experience, and projects. How can I help you?",
+      text: "👋 Hey! I'm Chase's AI assistant (well, not really AI—just clever keyword matching 😉). Ask me anything about skills, experience, projects, or just say hi!",
       isBot: true,
       timestamp: new Date()
     }
