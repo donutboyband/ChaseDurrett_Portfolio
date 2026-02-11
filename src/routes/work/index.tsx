@@ -10,6 +10,13 @@ interface Repo {
 	language: string | null;
 }
 
+interface FeaturedProject {
+	name: string;
+	description: string;
+	githubUrl: string;
+	liveUrl: string;
+}
+
 interface GitHubRepoResponse {
 	name: string;
 	description: string | null;
@@ -25,6 +32,15 @@ interface GitHubRepoResponse {
 
 const username = 'donutboyband';
 const apiUrl = `https://api.github.com/users/${username}/repos?sort=updated&direction=desc&per_page=24`;
+
+const featuredProjects: FeaturedProject[] = [
+	{
+		name: 'Sample Project',
+		description: 'A featured project example',
+		githubUrl: 'https://github.com/donutboyband/sample',
+		liveUrl: 'https://sample.com'
+	}
+];
 
 async function fetchRepos(): Promise<Repo[]> {
 	const res = await fetch(apiUrl, {
@@ -92,6 +108,44 @@ function WorkPage() {
 					<p className="font-cabinet text-lg md:text-xl text-black/80 dark:text-white/60 max-w-3xl">
 						RSS feed of my personal projects on GitHub.
 					</p>
+				</div>
+
+				{/* Featured Section */}
+				<div className="space-y-4">
+					<h2 className="font-link text-sm uppercase tracking-[0.16em] text-black/60 dark:text-white/60">
+						Featured
+					</h2>
+					<div className="grid grid-cols-1 gap-4">
+						{featuredProjects.map((project) => (
+							<div
+								key={project.name}
+								className="p-6 border border-black/10 dark:border-white/10 rounded-2xl bg-white/80 dark:bg-slate-900/60 backdrop-blur"
+							>
+								<h3 className="font-header text-xl md:text-2xl mb-2">{project.name}</h3>
+								<p className="font-cabinet text-base text-black/80 dark:text-white/70 mb-4">
+									{project.description}
+								</p>
+								<div className="flex gap-3">
+									<a
+										href={project.githubUrl}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="px-4 py-2 text-xs font-link uppercase tracking-[0.12em] bg-black text-white dark:bg-white dark:text-black rounded-full hover:opacity-80 transition-opacity"
+									>
+										GitHub
+									</a>
+									<a
+										href={project.liveUrl}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="px-4 py-2 text-xs font-link uppercase tracking-[0.12em] bg-primary text-white rounded-full hover:bg-black dark:hover:bg-white dark:hover:text-black transition-colors"
+									>
+										Live Site
+									</a>
+								</div>
+							</div>
+						))}
+					</div>
 				</div>
 
 				{repos.length === 0 ? (
