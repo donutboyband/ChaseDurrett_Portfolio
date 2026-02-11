@@ -21,7 +21,7 @@ const blogPosts = [
 	},
 	{
 		id: 'sendflowr',
-		title: 'Sendflowr',
+		title: 'The Sendflowr idea',
 		date: 'Feb 11, 2026',
 		content: <Sendflowr />
 	}
