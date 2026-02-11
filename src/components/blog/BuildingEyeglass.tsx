@@ -659,7 +659,7 @@ export default function BuildingEyeglass() {
 				</button>
 			</div>
 
-			<p className="text-black/60 dark:text-white/60 text-sm mt-6 md:mt-8 italic">
+			<p className="text-black/60 dark:text-white/60 text-sm mt-6 md:mt-8">
 				Built by{' '}
 				<a
 					href="https://github.com/donutboyband"
@@ -669,7 +669,6 @@ export default function BuildingEyeglass() {
 				>
 					donutboyband
 				</a>
-				. Contributions, feedback, and stars appreciated.
 			</p>
 		</>
 	);
