@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createFileRoute } from '@tanstack/react-router';
 import { useEffect, useRef, useState } from 'react';
 
@@ -9,6 +10,7 @@ type ArcPath = {
 	pathEl: d3.Selection<SVGPathElement, unknown, HTMLElement, unknown>;
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 function ContactPage() {
 	const globeRef = useRef<HTMLDivElement>(null);
 	const isInitialized = useRef(false);

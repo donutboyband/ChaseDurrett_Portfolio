@@ -65,6 +65,7 @@ function WorkPage() {
 
 	const timeAgo = (dateStr: string) => {
 		const date = new Date(dateStr);
+		// eslint-disable-next-line react-hooks/purity
 		const diffMs = Date.now() - date.getTime();
 		const minutes = Math.floor(diffMs / 60000);
 		const hours = Math.floor(minutes / 60);

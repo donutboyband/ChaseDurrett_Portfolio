@@ -107,7 +107,12 @@ export default function BuildingEyeglass() {
 	return (
 		<>
 			<h1 className="font-header text-3xl md:text-4xl lg:text-5xl text-black dark:text-white mb-4">
-				Building Eyeglass
+				Building{' '}
+				<a 
+				className='text-blue-500 underline'
+				href="https://www.eyeglass.dev" target="_blank" rel="noreferrer">
+					Eyeglass
+				</a>
 			</h1>
 			<p className="text-black dark:text-white/90">
 				I was exploring the tool—and rapidly evolving Agentic semantic understanding standard—{' '}
@@ -119,23 +124,24 @@ export default function BuildingEyeglass() {
 				>
 					Agentation
 				</a>{' '}
-				recently. It's a simple idea, but the execution is incredible and once I started using it I
-				started dreading chatting to an agent about frontend changes <em>NOT</em> using Agentation.
+				recently. It&apos;s a simple idea, but the execution is incredible and once I started using
+				it I started dreading chatting to an agent about frontend changes <em>NOT</em> using
+				Agentation.
 			</p>
 
 			<p className="text-black dark:text-white/90">
 				As I used it, I wanted more and more to not leave the browser for the requests. Agentation
-				uses copy/paste as the main vehicle for getting the context to the agent. There's also an
-				MCP integration, but to my knowledge I wasn't able to find a way to sync that back to the
-				browser. It sounds spoiled, but I imagined there were real benefits from not leaving the
-				browser. Some being less context-switching and a constraint that forces the tool's UI to be{' '}
-				<em>really</em> comprehensive. Thus the idea for{' '}
+				uses copy/paste as the main vehicle for getting the context to the agent. There&apos;s also
+				an MCP integration, but to my knowledge I wasn&apos;t able to find a way to sync that back
+				to the browser. It sounds spoiled, but I imagined there were real benefits from not leaving
+				the browser. Some being less context-switching and a constraint that forces the tool&apos;s
+				UI to be <em>really</em> comprehensive. Thus the idea for{' '}
 				<strong className="font-header">Eyeglass</strong> was born.
 			</p>
 
 			<p className="text-black dark:text-white/90">
-				Over one week I feverishly recreated Agentation in my own way with <em>one goal</em>: two-way
-				communication from the browser.
+				Over one week I feverishly recreated Agentation in my own way with <em>one goal</em>:
+				two-way communication from the browser.
 			</p>
 
 			<div className="my-6 md:my-8 p-4 md:p-6 border border-black/10 dark:border-white/10 rounded-xl bg-black/5 dark:bg-white/5">
@@ -143,8 +149,10 @@ export default function BuildingEyeglass() {
 					<strong className="font-header">Why?</strong>
 				</p>
 				<ul className="space-y-2 text-sm md:text-base text-black/80 dark:text-white/80">
-					<li>→ Prove to myself I could make a "magic" tool (it's kind of magic)</li>
-					<li>→ Prove Geoffrey Huntley's point: with Agentic AI, there are no software moats</li>
+					<li>→ Prove to myself I could make a &quot;magic&quot; tool (it&apos;s kind of magic)</li>
+					<li>
+						→ Prove Geoffrey Huntley&apos;s point: with Agentic AI, there are no software moats
+					</li>
 					<li>→ The only limit in development is now imagination</li>
 				</ul>
 				<p className="text-xs md:text-sm text-black/60 dark:text-white/60 mt-4 italic">
@@ -157,7 +165,7 @@ export default function BuildingEyeglass() {
 					>
 						safer
 					</a>
-					) results if you know what you're doing technically.
+					) results if you know what you&apos;re doing technically.
 				</p>
 			</div>
 
@@ -168,19 +176,19 @@ export default function BuildingEyeglass() {
 
 			<div className="my-6 md:my-10 p-4 md:p-6 border-l-4 border-blue-500 bg-blue-500/5 dark:bg-blue-500/10 rounded-r-lg">
 				<p className="text-black/70 dark:text-white/90 text-xs md:text-sm font-header leading-relaxed">
-					"When you describe a problem in words, precision gets lost. "The button hover feels
-					sluggish": which part? The delay before it starts? The duration? The easing? "The sidebar
-					looks off": which element? What's off about it? I know exactly what I mean when I see it,
-					but translating that into text loses information... The agent has to guess which element
-					you mean, search for it in the codebase, and hope it found the right one. The more
-					specific your feedback, the less guesswork for the agent, but specificity is tedious to
-					type out. Screenshots are only somewhat better because the agent still has to infer which
-					part you're referring to."
+					"When you describe a problem in words, precision gets lost. &quot;The button hover feels
+					sluggish&quot;: which part? The delay before it starts? The duration? The easing?
+					&quot;The sidebar looks off&quot;: which element? What&apos;s off about it? I know exactly
+					what I mean when I see it, but translating that into text loses information... The agent
+					has to guess which element you mean, search for it in the codebase, and hope it found the
+					right one. The more specific your feedback, the less guesswork for the agent, but
+					specificity is tedious to type out. Screenshots are only somewhat better because the agent
+					still has to infer which part you're referring to."
 				</p>
 			</div>
 
 			<p className="text-black dark:text-white/90">
-				So, I gave myself a challenge: build a dev tool like Agentation that communicates a sematic
+				So, I gave myself a challenge: build a dev tool like Agentation that communicates a semantic
 				snapshot to an agent via an MCP server, and create the UI so that the dev/user never has to
 				leave the browser. 96 hours later, <strong className="font-header">Eyeglass</strong> was
 				born.
@@ -201,7 +209,9 @@ export default function BuildingEyeglass() {
 				<div className="p-4 md:p-5 border border-red-500/30 dark:border-red-400/30 rounded-xl bg-white dark:bg-black">
 					<div className="flex items-center gap-2 mb-3">
 						<span className="text-black/40 dark:text-white/40 text-lg md:text-xl">✕</span>
-						<span className="font-header text-sm md:text-base text-black dark:text-white">Approach 1: MCP Sampling</span>
+						<span className="font-header text-sm md:text-base text-black dark:text-white">
+							Approach 1: MCP Sampling
+						</span>
 					</div>
 					<p className="text-xs md:text-sm text-black/60 dark:text-white/60">
 						The MCP protocol has nascent support for <em>sampling</em>, which allows an MCP server
@@ -213,7 +223,9 @@ export default function BuildingEyeglass() {
 				<div className="p-4 md:p-5 border-2 border-green-500/30 dark:border-green-400/30 rounded-xl bg-white dark:bg-black">
 					<div className="flex items-center gap-2 mb-3">
 						<span className="text-black dark:text-white text-lg md:text-xl">✓</span>
-						<span className="font-header text-sm md:text-base text-black dark:text-white">Approach 2: Long-Polling</span>
+						<span className="font-header text-sm md:text-base text-black dark:text-white">
+							Approach 2: Long-Polling
+						</span>
 					</div>
 					<p className="text-xs md:text-sm text-black/70 dark:text-white/70">
 						Put the agent in a waiting state that <em>doesn't consume tokens</em>. When the browser
@@ -474,10 +486,7 @@ export default function BuildingEyeglass() {
 
 			<Highlight theme={themes.oneDark} code={SEMANTIC_SNAPSHOT_CODE} language="typescript">
 				{({ style, tokens, getLineProps, getTokenProps }) => (
-					<pre
-						className="my-6 p-4 rounded-lg overflow-x-auto text-sm"
-						style={style}
-					>
+					<pre className="my-6 p-4 rounded-lg overflow-x-auto text-sm" style={style}>
 						{tokens.map((line, i) => (
 							<div key={i} {...getLineProps({ line })}>
 								{line.map((token, key) => (
@@ -502,24 +511,24 @@ export default function BuildingEyeglass() {
 				{[
 					{
 						title: 'ARIA & Accessibility',
-						desc: 'Role, accessible name, labels, disabled/hidden state. We follow the same algorithm screen readers use.',
+						desc: 'Role, accessible name, labels, disabled/hidden state. We follow the same algorithm screen readers use.'
 					},
 					{
 						title: 'Framework Context',
-						desc: 'Component name, file path, line number, props. Works for React, Vue, and Svelte.',
+						desc: 'Component name, file path, line number, props. Works for React, Vue, and Svelte.'
 					},
 					{
 						title: 'Geometry',
-						desc: 'Bounding box coordinates. Tells the agent where the element is on screen.',
+						desc: 'Bounding box coordinates. Tells the agent where the element is on screen.'
 					},
 					{
 						title: 'Computed Styles',
-						desc: 'Display, position, flex/grid properties, colors, fonts. The actual rendered values.',
+						desc: 'Display, position, flex/grid properties, colors, fonts. The actual rendered values.'
 					},
 					{
 						title: 'DOM Neighborhood',
-						desc: 'Parent containers and their layout properties, children grouped by type. Layout context matters.',
-					},
+						desc: 'Parent containers and their layout properties, children grouped by type. Layout context matters.'
+					}
 				].map((item, i) => (
 					<div
 						key={i}
@@ -539,8 +548,11 @@ export default function BuildingEyeglass() {
 			<p className="text-black dark:text-white/90">
 				The neighborhood context was a late addition but has proven useful. An agent trying to
 				center a button needs to know if its parent is a flex container with{' '}
-				<code className="px-1.5 py-0.5 bg-black/5 dark:bg-white/10 rounded text-sm font-mono">justify-content: space-between</code>{' '}
-				vs a grid with explicit columns. Providing this upfront at a marginal token cost improves performance. 
+				<code className="px-1.5 py-0.5 bg-black/5 dark:bg-white/10 rounded text-sm font-mono">
+					justify-content: space-between
+				</code>{' '}
+				vs a grid with explicit columns. Providing this upfront at a marginal token cost improves
+				performance.
 			</p>
 
 			{/* Dogfooding Section */}
@@ -549,16 +561,16 @@ export default function BuildingEyeglass() {
 			</h2>
 
 			<p className="text-black dark:text-white/90">
-				With the MVP of Eyeglass built, I used it to build the Eyeglass website itself. This allowed 
-				me to work out bugs as an active user and find the pain points of real-world use. There are 
-				still issues as of writing this—it's not perfect. But when it's flowing, it enables a different 
-				type of frontend development.
+				With the MVP of Eyeglass built, I used it to build the Eyeglass website itself. This allowed
+				me to work out bugs as an active user and find the pain points of real-world use. There are
+				still issues as of writing this—it's not perfect. But when it's flowing, it enables a
+				different type of frontend development.
 			</p>
 
 			<p className="text-black dark:text-white/90">
-				You can talk in technical terms—flexbox, grid, design tokens. Or get abstract—"make this feel 
-				lighter", "the spacing feels cramped". The agent has enough context to understand both. I built 
-				this entire blog page with Eyeglass.
+				You can talk in technical terms—flexbox, grid, design tokens. Or get abstract—"make this
+				feel lighter", "the spacing feels cramped". The agent has enough context to understand both.
+				I built this entire blog page with Eyeglass.
 			</p>
 
 			<div className="my-6 md:my-8 p-4 md:p-6 border border-black/10 dark:border-white/10 rounded-xl bg-black/[0.02] dark:bg-white/[0.02]">
@@ -579,7 +591,7 @@ export default function BuildingEyeglass() {
 			</h2>
 
 			<p className="text-black dark:text-white/90">
-				Eyeglass is open source and available for anyone to use. If you're interested in trying it 
+				Eyeglass is open source and available for anyone to use. If you're interested in trying it
 				out or contributing, here's where to start:
 			</p>
 
@@ -589,14 +601,14 @@ export default function BuildingEyeglass() {
 						title: 'Official Website',
 						desc: 'Documentation, setup guides, and examples',
 						link: 'https://eyeglass.dev',
-						linkText: 'eyeglass.dev',
+						linkText: 'eyeglass.dev'
 					},
 					{
 						title: 'GitHub Repository',
 						desc: 'Source code, issues, and contributions welcome',
 						link: 'https://github.com/donutboyband/eyeglass',
-						linkText: 'github.com/donutboyband/eyeglass',
-					},
+						linkText: 'github.com/donutboyband/eyeglass'
+					}
 				].map((item, i) => (
 					<div
 						key={i}
@@ -622,7 +634,7 @@ export default function BuildingEyeglass() {
 			</div>
 
 			<p className="text-black dark:text-white/90">
-				The quickest way to get started is to use the CLI tool to install it: 
+				The quickest way to get started is to use the CLI tool to install it:
 			</p>
 
 			<div className="my-4 relative group">
