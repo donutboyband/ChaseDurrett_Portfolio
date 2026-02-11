@@ -34,13 +34,28 @@ const MINUTE_PROBABILITIES = generateMinuteData();
 
 export default function Sendflowr() {
 	const [animatedIndex, setAnimatedIndex] = useState(0);
+	const [isPaused, setIsPaused] = useState(false);
 
 	useEffect(() => {
 		const interval = setInterval(() => {
-			setAnimatedIndex((prev) => (prev + 1) % 60);
+			setAnimatedIndex((prev) => {
+				// When we reach minute 37 (peak), pause
+				if (prev === 37) {
+					setIsPaused(true);
+					setTimeout(() => {
+						setIsPaused(false);
+						setAnimatedIndex(0); // Restart
+					}, 2000); // Pause for 2 seconds
+					return prev;
+				}
+				// Don't increment if paused
+				if (isPaused) return prev;
+				// Continue to 60, then reset
+				return prev >= 59 ? 0 : prev + 1;
+			});
 		}, 100);
 		return () => clearInterval(interval);
-	}, []);
+	}, [isPaused]);
 
 	return (
 		<>
