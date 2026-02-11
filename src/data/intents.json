@@ -1,39 +1,51 @@
 {
   "skills": {
     "keywords": ["tech", "stack", "languages", "code", "tools", "frameworks", "skills", "technology", "programming", "know", "proficient", "good"],
-    "answer": "I'm proficient in **TypeScript, React, and Node.js**. Lately, I've been diving deep into WebGPU and performance optimization. 🚀"
+    "answer": "Day to day I build with **React + TypeScript** on the front end and **.NET 8/ASP.NET** for APIs. Data lives in **PostgreSQL, SQL Server, or MongoDB**. I ship through **Azure DevOps CI/CD**, containerize with **Docker**, and lean on **TailwindCSS/MUI** for UI work. Comfortable jumping between frontend polish and backend architecture."
   },
   "experience": {
     "keywords": ["work", "job", "history", "career", "company", "resume", "experience", "employment", "background", "worked"],
-    "answer": "I have 4+ years of experience, most recently at **Baltimore Life Insurance** where I build enterprise-grade applications. Before that, I was at **Soup Agency** crafting marketing websites, and **Audigent** wearing all the IT hats. 💼"
+    "answer": "**Baltimore Life Insurance (Oct 2024–Present):** lead modernization of internal apps, build secure document workflows, and mentor on .NET/React best practices. **Soup Agency (2023–2024):** shipped high-converting marketing sites in React/Svelte, owned performance budgets, and integrated Shopify/WordPress stacks. **Audigent (2021–2023):** hybrid IT/dev role—built internal JS tools, managed DNS, and partnered with DevOps on multi-cloud infra."
   },
   "projects": {
     "keywords": ["projects", "portfolio", "built", "created", "made", "developed", "showcase", "github", "repo"],
-    "answer": "I've built several notable projects including a real-time collaboration tool, a data visualization dashboard, and this portfolio site you're on right now! Check out my [GitHub](https://github.com) for more. 🎨"
+    "answer": "Highlights: rebuilt a legacy PII document system into **.NET + React** with role-based access and signed URLs; designed a secure file delivery service that cut manual handling to zero; built an internal data transfer tool that moves batches between **AWS + MongoDB** with audit logs; and crafted this portfolio experience. More context at [chasedurrett.dev](https://www.chasedurrett.dev)."
   },
   "contact": {
-    "keywords": ["contact", "email", "reach", "hire", "connect", "message", "talk", "call", "linkedin", "dm"],
-    "answer": "You can reach me at **hello@example.com** or connect with me on [LinkedIn](https://linkedin.com). I'm always open to interesting opportunities! ✉️"
+    "keywords": ["contact", "email", "reach", "hire", "connect", "message", "talk", "call", "linkedin", "dm", "phone"],
+    "answer": "Email **chase@cdinfosec.com** or call/text **(817) 880-3274**. Portfolio: [chasedurrett.dev](https://www.chasedurrett.dev). Happy to talk about roles, projects, or collaborations."
   },
   "about": {
     "keywords": ["about", "who", "yourself", "bio", "introduction", "tell", "describe"],
-    "answer": "I'm a passionate full-stack developer who loves building user-centric applications. When I'm not coding, you'll find me exploring new tech or contributing to open source. 👨‍💻"
+    "answer": "I'm Chase Durrett, a full-stack developer who enjoys untangling legacy systems, tightening security, and polishing UI details. I like pairing with design, writing readable code, and leaving teams with clearer docs than they started with."
   },
   "education": {
     "keywords": ["education", "school", "university", "degree", "college", "studied", "learning", "learn"],
-    "answer": "I'm a lifelong learner who believes the best education comes from building real things and solving real problems. I've learned more from shipping code than any classroom! 📚"
+    "answer": "BFA, **University of Oklahoma** (2018) — Kennedy Center Honoree, National Mark Twain Award. **Web Development** certification at **DevMountain** (2020). Additional training: **Google Cybersecurity** and **ISC2 CC** coursework."
   },
   "location": {
     "keywords": ["where", "location", "live", "based", "from", "city", "country"],
-    "answer": "I'm currently based in the **United States**, but I'm comfortable working remotely with teams across time zones. 🌍"
+    "answer": "Based in the United States and fully set up for remote collaboration across time zones."
   },
   "hobbies": {
     "keywords": ["hobbies", "interests", "fun", "free", "time", "enjoy", "like", "love", "passion"],
-    "answer": "Outside of coding, I love tinkering with new tech, experimenting with design, and occasionally diving into game development. I'm a big believer in creative side projects! 🎮"
+    "answer": "I like tinkering with security labs, exploring new frameworks on small side builds, and keeping notes on what works so I can share with teammates."
   },
   "availability": {
     "keywords": ["available", "hire", "hiring", "open", "looking", "freelance", "opportunity", "opportunities"],
-    "answer": "I'm always interested in hearing about exciting opportunities! Feel free to reach out at **hello@example.com** and let's chat. 💬"
+    "answer": "Open to new roles and freelance work. Reach me at **chase@cdinfosec.com** or **(817) 880-3274** to compare needs and timelines."
+  },
+  "baltimore": {
+    "keywords": ["baltimore", "current", "now", "doing"],
+    "answer": "At **Baltimore Life Insurance** I'm leading a migration to **.NET + React**, building signed-URL document security, and shipping updates that thousands of agents rely on. Focus areas: performance, security, and clearer operational tooling."
+  },
+  "soup": {
+    "keywords": ["soup", "agency", "client", "frontend"],
+    "answer": "At **Soup Agency** I built client sites in **React/Svelte** with **TailwindCSS**, integrated storefronts on **Shopify** and **WordPress**, and focused on page speed and conversion-friendly UX."
+  },
+  "audigent": {
+    "keywords": ["audigent", "analyst", "aws", "cloud"],
+    "answer": "At **Audigent** I built internal JS tools that talked to **AWS + MongoDB**, maintained DNS, and partnered with DevOps on AWS/Azure/GCP deployments. Also shipped small frontend features in Next.js."
   },
   "greeting_hi": {
     "keywords": ["hi", "hello", "hey", "sup", "yo", "howdy", "greetings"],
@@ -53,14 +65,18 @@
   },
   "favorite": {
     "keywords": ["favorite", "favourite", "best", "prefer"],
-    "answer": "Tough question! I'd say my favorite tech right now is **TypeScript**—it makes JavaScript feel like a real language. But ask me tomorrow and I might say something else! 💙"
+    "answer": "Current favorite stack: **TypeScript + React** for UI plus **.NET** for APIs. It gives strong typing end to end without slowing delivery."
   },
   "personality": {
     "keywords": ["personality", "person", "like", "type"],
-    "answer": "I'm the type of person who reads documentation for fun and gets genuinely excited about clean code. Some call it nerdy, I call it passion! 🤓"
+    "answer": "I like turning vague requirements into clear plans, writing code that others can maintain, and closing loops with docs and demos. Security and reliability are the lenses I default to."
+  },
+  "certifications": {
+    "keywords": ["certification", "certified", "training", "credentials"],
+    "answer": "Certifications: **Google Cybersecurity Specialization** and **ISC2 CC** training. Security is a recurring theme in my work."
   },
   "help": {
     "keywords": ["help", "assist", "support", "do", "can"],
-    "answer": "I'm here to answer questions about my **skills**, **experience**, **projects**, or how to **contact me**. What would you like to know?"
+    "answer": "Ask about my **skills**, **experience**, **projects**, or how to **contact me**. If you want something else, try a few keywords and I'll point you to specifics."
   }
 }

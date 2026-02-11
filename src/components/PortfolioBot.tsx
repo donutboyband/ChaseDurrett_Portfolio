@@ -14,7 +14,48 @@ interface Intent {
 
 type IntentsData = Record<string, Intent>;
 
-const FALLBACK_MESSAGE = "Hmm, I didn't quite catch that. 🤔 Try asking about my **skills**, **projects**, **experience**, **hobbies**, or how to **contact me**!";
+const FALLBACK_MESSAGE = "I might have missed that. Ask about my **skills**, **projects**, **experience**, **hobbies**, or how to **contact me** and I'll share specifics.";
+
+const CLARIFYING_QUESTIONS = [
+  "Want career highlights, project details, or contact info?",
+  "Looking for tech stack, recent work, or availability?",
+  "I can share skills, projects, and current role—what should I start with?",
+  "I can summarize experience or dive into a project—pick one and I'll expand."
+];
+
+const STOP_WORDS = new Set([
+  'the', 'and', 'a', 'an', 'of', 'to', 'in', 'on', 'for', 'with', 'about', 'at',
+  'by', 'from', 'up', 'is', 'it', 'as', 'that', 'this', 'these', 'those', 'you',
+  'your', 'my', 'me', 'i', 'we', 'are', 'be', 'can', 'do', 'how', 'what', 'why',
+  'tell', 'say', 'give'
+]);
+
+const toneClosers = [
+  "If you want more detail, tell me what to zoom in on.",
+  "Happy to dig deeper on timelines, impact, or stack details.",
+  "If there's a project you're curious about, name it and I'll share specifics."
+];
+
+const pickDeterministic = <T,>(items: T[], seed: number): T | null => {
+  if (!items.length) return null;
+  return items[seed % items.length];
+};
+
+const hashString = (input: string): number => {
+  let hash = 0;
+  for (let i = 0; i < input.length; i += 1) {
+    hash = (hash << 5) - hash + input.charCodeAt(i);
+    hash |= 0; // force 32-bit
+  }
+  return Math.abs(hash);
+};
+
+const extractFocusWord = (words: string[]): string | null => {
+  const meaningful = words.filter((w) => w && !STOP_WORDS.has(w));
+  if (!meaningful.length) return null;
+  // deterministic pick: longest word, then alphabetical
+  return meaningful.sort((a, b) => (b.length - a.length) || a.localeCompare(b))[0];
+};
 
 const quickActions = [
   { label: 'Skills', query: 'What are your skills?' },
@@ -28,7 +69,7 @@ export default function PortfolioBot() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
-      text: "👋 Hey! I'm Chase's AI assistant (well, not really AI—just clever keyword matching 😉). Ask me anything about skills, experience, projects, or just say hi!",
+      text: "👋 Hey! I'm Chase's portfolio guide. Ask about my work, recent projects, the stack I use day-to-day, or how to reach me—I'll keep it concise and real.",
       isBot: true,
       timestamp: new Date()
     }
@@ -69,21 +110,19 @@ export default function PortfolioBot() {
     };
   }, [isOpen]);
 
-  const sanitizeInput = (input: string): string => {
-    return input.toLowerCase().replace(/[^\w\s]/g, '');
-  };
+  const sanitizeInput = (input: string): string =>
+    input.toLowerCase().replace(/[^\w\s]/g, '');
 
   const findBestMatch = (input: string): string => {
     const sanitized = sanitizeInput(input);
-    const words = sanitized.split(/\s+/);
-    
-    const scores: Record<string, number> = {};
+    const words = sanitized.split(/\s+/).filter(Boolean);
     const intentsTyped = intents as IntentsData;
+    const scoredIntents: { key: string; score: number }[] = [];
 
     Object.keys(intentsTyped).forEach((intentKey) => {
       const intent = intentsTyped[intentKey];
       let score = 0;
-      
+
       intent.keywords.forEach((keyword) => {
         if (words.includes(keyword)) {
           score += 2;
@@ -91,15 +130,31 @@ export default function PortfolioBot() {
           score += 1;
         }
       });
-      
-      scores[intentKey] = score;
+
+      scoredIntents.push({ key: intentKey, score });
     });
 
-    const bestMatch = Object.keys(scores).reduce((a, b) => 
-      scores[a] > scores[b] ? a : b
-    );
+    const ranked = scoredIntents
+      .sort((a, b) => b.score - a.score || a.key.localeCompare(b.key))
+      .filter((item) => item.score > 0);
 
-    return scores[bestMatch] > 0 ? intentsTyped[bestMatch].answer : FALLBACK_MESSAGE;
+    if (!ranked.length || ranked[0].score < 2) {
+      const clarifier =
+        pickDeterministic(CLARIFYING_QUESTIONS, hashString(sanitized)) ||
+        FALLBACK_MESSAGE;
+      return clarifier;
+    }
+
+    const bestKey = ranked[0].key;
+    const focus = extractFocusWord(words);
+    const baseAnswer = intentsTyped[bestKey].answer;
+    const seed = hashString(`${sanitized}-${bestKey}`);
+    const closer = pickDeterministic(toneClosers, seed);
+    const focusLine = focus
+      ? ` If you want specifics on ${focus}, tell me and I'll dig in.`
+      : '';
+
+    return `${baseAnswer}${focusLine}${closer ? ` ${closer}` : ''}`;
   };
 
   const handleSendMessage = (text: string) => {
