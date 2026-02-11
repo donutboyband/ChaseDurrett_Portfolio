@@ -125,64 +125,54 @@ export default function PortfolioBot() {
       {/* Floating Action Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`fixed bottom-8 right-8 w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center z-50 ${
+        className={`fixed bottom-8 right-8 w-12 h-12 bg-black dark:bg-white text-white dark:text-black rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center z-50 ${
           isOpen ? 'scale-0' : 'scale-100'
         }`}
         aria-label="Open chat"
       >
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
         </svg>
-        <span className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white animate-pulse" />
       </button>
 
       {/* Chat Window */}
       <div
-        className={`fixed bottom-8 right-8 w-[350px] h-[500px] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden transition-all duration-300 z-50 ${
+        className={`fixed bottom-8 right-8 w-[350px] h-[500px] bg-white dark:bg-slate-900 border border-black/10 dark:border-white/10 rounded-xl shadow-xl flex flex-col overflow-hidden transition-all duration-300 z-50 ${
           isOpen ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
         }`}
       >
         {/* Header */}
-        <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-4 flex items-center justify-between">
+        <div className="border-b border-black/10 dark:border-white/10 p-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
-              <span className="text-lg">👨‍💻</span>
-            </div>
-            <div>
-              <h3 className="font-semibold">Portfolio Assistant</h3>
-              <div className="flex items-center gap-1 text-xs">
-                <span className="w-2 h-2 bg-green-400 rounded-full" />
-                <span>Live</span>
-              </div>
-            </div>
+            <div className="w-2 h-2 bg-green-500 rounded-full" />
+            <h3 className="text-sm font-medium text-black dark:text-white">Chat</h3>
           </div>
           <button
             onClick={() => setIsOpen(false)}
-            className="text-white/80 hover:text-white transition-colors"
+            className="text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white transition-colors"
             aria-label="Close chat"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
 
         {/* Messages */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
+        <div className="flex-1 overflow-y-auto p-4 space-y-3">
           {messages.map((message, index) => (
             <div
               key={index}
               className={`flex ${message.isBot ? 'justify-start' : 'justify-end'}`}
             >
               <div
-                className={`max-w-[80%] px-4 py-2 rounded-2xl ${
+                className={`max-w-[80%] px-3 py-2 rounded-lg text-sm ${
                   message.isBot
-                    ? 'bg-white text-gray-800 rounded-tl-none shadow-sm'
-                    : 'bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-tr-none'
+                    ? 'bg-black/5 dark:bg-white/5 text-black dark:text-white'
+                    : 'bg-black dark:bg-white text-white dark:text-black'
                 }`}
               >
                 <div
-                  className="text-sm"
                   dangerouslySetInnerHTML={{ __html: renderMarkdown(message.text) }}
                 />
               </div>
@@ -191,11 +181,11 @@ export default function PortfolioBot() {
           
           {isTyping && (
             <div className="flex justify-start">
-              <div className="bg-white px-4 py-2 rounded-2xl rounded-tl-none shadow-sm">
+              <div className="bg-black/5 dark:bg-white/5 px-3 py-2 rounded-lg">
                 <div className="flex gap-1">
-                  <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                  <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                  <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                  <span className="w-1.5 h-1.5 bg-black/40 dark:bg-white/40 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                  <span className="w-1.5 h-1.5 bg-black/40 dark:bg-white/40 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                  <span className="w-1.5 h-1.5 bg-black/40 dark:bg-white/40 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
                 </div>
               </div>
             </div>
@@ -205,13 +195,13 @@ export default function PortfolioBot() {
         </div>
 
         {/* Quick Actions */}
-        <div className="px-4 py-2 bg-white border-t border-gray-200">
-          <div className="flex gap-2 flex-wrap">
+        <div className="px-4 py-2 border-t border-black/10 dark:border-white/10">
+          <div className="flex gap-1.5 flex-wrap">
             {quickActions.map((action) => (
               <button
                 key={action.label}
                 onClick={() => handleQuickAction(action.query)}
-                className="px-3 py-1 text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-full transition-colors"
+                className="px-2.5 py-1 text-xs bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 text-black dark:text-white rounded-md transition-colors"
               >
                 {action.label}
               </button>
@@ -220,7 +210,7 @@ export default function PortfolioBot() {
         </div>
 
         {/* Input */}
-        <div className="p-4 bg-white border-t border-gray-200">
+        <div className="p-3 border-t border-black/10 dark:border-white/10">
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -234,15 +224,15 @@ export default function PortfolioBot() {
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               placeholder="Ask me anything..."
-              className="flex-1 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+              className="flex-1 px-3 py-2 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-lg focus:outline-none focus:border-black dark:focus:border-white text-sm text-black dark:text-white placeholder:text-black/40 dark:placeholder:text-white/40"
             />
             <button
               type="submit"
               disabled={!inputValue.trim()}
-              className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg transition-shadow"
+              className="w-9 h-9 bg-black dark:bg-white text-white dark:text-black rounded-lg flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed hover:opacity-80 transition-opacity"
               aria-label="Send message"
             >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
               </svg>
             </button>
