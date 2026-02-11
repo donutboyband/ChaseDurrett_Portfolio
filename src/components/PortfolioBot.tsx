@@ -37,6 +37,7 @@ export default function PortfolioBot() {
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const chatWindowRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -50,6 +51,22 @@ export default function PortfolioBot() {
     if (isOpen && inputRef.current) {
       inputRef.current.focus();
     }
+  }, [isOpen]);
+
+  useEffect(() => {
+    const handleWheel = (e: WheelEvent) => {
+      if (chatWindowRef.current?.contains(e.target as Node)) {
+        e.stopPropagation();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('wheel', handleWheel, { passive: false });
+    }
+
+    return () => {
+      document.removeEventListener('wheel', handleWheel);
+    };
   }, [isOpen]);
 
   const sanitizeInput = (input: string): string => {
@@ -138,6 +155,7 @@ export default function PortfolioBot() {
 
       {/* Chat Window */}
       <div
+        ref={chatWindowRef}
         className={`fixed bottom-8 right-8 w-[350px] h-[500px] bg-white dark:bg-slate-900 border border-black/10 dark:border-white/10 rounded-xl shadow-xl flex flex-col overflow-hidden transition-all duration-300 z-50 ${
           isOpen ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
         }`}
