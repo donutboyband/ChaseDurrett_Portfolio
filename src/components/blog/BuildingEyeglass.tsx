@@ -538,7 +538,7 @@ export default function BuildingEyeglass() {
 
 			{/* Dogfooding Section */}
 			<h2 className="font-header text-xl md:text-2xl lg:text-3xl text-black dark:text-white mt-8 md:mt-12 mb-4 md:mb-6">
-				Dogfooding
+				Using it
 			</h2>
 
 			<p className="text-black dark:text-white/90">
@@ -576,48 +576,42 @@ export default function BuildingEyeglass() {
 				out or contributing, here's where to start:
 			</p>
 
-			<div className="my-6 md:my-8 space-y-4">
-				{/* Website Link */}
-				<div className="flex items-start gap-4 p-4 md:p-5 border border-black/10 dark:border-white/10 rounded-xl hover:border-black/20 dark:hover:border-white/20 transition-colors">
-					<div className="flex-shrink-0 w-10 h-10 rounded-lg bg-black/5 dark:bg-white/5 flex items-center justify-center">
-						<span className="text-lg">🌐</span>
+			<div className="my-6 md:my-8 grid gap-4">
+				{[
+					{
+						title: 'Official Website',
+						desc: 'Documentation, setup guides, and examples',
+						link: 'https://eyeglass.dev',
+						linkText: 'eyeglass.dev',
+					},
+					{
+						title: 'GitHub Repository',
+						desc: 'Source code, issues, and contributions welcome',
+						link: 'https://github.com/donutboyband/eyeglass',
+						linkText: 'github.com/donutboyband/eyeglass',
+					},
+				].map((item, i) => (
+					<div
+						key={i}
+						className="flex gap-4 p-4 border border-black/5 dark:border-white/5 rounded-lg hover:border-black/10 dark:hover:border-white/10 transition-colors"
+					>
+						<div className="flex-shrink-0 w-8 h-8 rounded bg-black/5 dark:bg-white/5 flex items-center justify-center font-mono text-sm text-black/40 dark:text-white/40">
+							{i + 1}
+						</div>
+						<div>
+							<p className="font-header text-black dark:text-white text-sm">{item.title}</p>
+							<p className="text-black/60 dark:text-white/60 text-sm mt-1">{item.desc}</p>
+							<a
+								href={item.link}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="text-sm text-blue-500 hover:underline font-mono mt-2 inline-block"
+							>
+								{item.linkText} →
+							</a>
+						</div>
 					</div>
-					<div className="flex-1">
-						<p className="font-header text-black dark:text-white mb-1">Official Website</p>
-						<p className="text-sm text-black/60 dark:text-white/60 mb-2">
-							Documentation, setup guides, and examples
-						</p>
-						<a
-							href="https://eyeglass.dev"
-							target="_blank"
-							rel="noopener noreferrer"
-							className="text-sm text-blue-500 hover:underline font-mono"
-						>
-							eyeglass.dev →
-						</a>
-					</div>
-				</div>
-
-				{/* GitHub Link */}
-				<div className="flex items-start gap-4 p-4 md:p-5 border border-black/10 dark:border-white/10 rounded-xl hover:border-black/20 dark:hover:border-white/20 transition-colors">
-					<div className="flex-shrink-0 w-10 h-10 rounded-lg bg-black/5 dark:bg-white/5 flex items-center justify-center">
-						<span className="text-lg">⭐</span>
-					</div>
-					<div className="flex-1">
-						<p className="font-header text-black dark:text-white mb-1">GitHub Repository</p>
-						<p className="text-sm text-black/60 dark:text-white/60 mb-2">
-							Source code, issues, and contributions welcome
-						</p>
-						<a
-							href="https://github.com/donutboyband/eyeglass"
-							target="_blank"
-							rel="noopener noreferrer"
-							className="text-sm text-blue-500 hover:underline font-mono"
-						>
-							github.com/donutboyband/eyeglass →
-						</a>
-					</div>
-				</div>
+				))}
 			</div>
 
 			<p className="text-black dark:text-white/90">
