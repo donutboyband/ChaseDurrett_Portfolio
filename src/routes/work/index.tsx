@@ -115,22 +115,22 @@ function WorkPage() {
 					<h2 className="font-link text-sm uppercase tracking-[0.16em] text-black/60 dark:text-white/60">
 						Featured
 					</h2>
-					<div className="grid grid-cols-1 gap-4">
+					<div className="space-y-2">
 						{featuredProjects.map((project) => (
 							<div
 								key={project.name}
-								className="p-6 border border-black/10 dark:border-white/10 rounded-2xl bg-white/80 dark:bg-slate-900/60 backdrop-blur"
+								className="py-3 border-b border-black/10 dark:border-white/10 last:border-0"
 							>
-								<h3 className="font-header text-xl md:text-2xl mb-2">{project.name}</h3>
-								<p className="font-cabinet text-base text-black/80 dark:text-white/70 mb-4">
+								<h3 className="font-cabinet text-base md:text-lg mb-1">{project.name}</h3>
+								<p className="font-cabinet text-sm text-black/60 dark:text-white/60 mb-2">
 									{project.description}
 								</p>
-								<div className="flex gap-3">
+								<div className="flex gap-4 text-sm">
 									<a
 										href={project.githubUrl}
 										target="_blank"
 										rel="noopener noreferrer"
-										className="px-4 py-2 text-xs font-link uppercase tracking-[0.12em] bg-black text-white dark:bg-white dark:text-black rounded-full hover:opacity-80 transition-opacity"
+										className="text-black/70 dark:text-white/70 hover:text-black dark:hover:text-white transition-colors underline"
 									>
 										GitHub
 									</a>
@@ -138,7 +138,7 @@ function WorkPage() {
 										href={project.liveUrl}
 										target="_blank"
 										rel="noopener noreferrer"
-										className="px-4 py-2 text-xs font-link uppercase tracking-[0.12em] bg-primary text-white rounded-full hover:bg-black dark:hover:bg-white dark:hover:text-black transition-colors"
+										className="text-black/70 dark:text-white/70 hover:text-black dark:hover:text-white transition-colors underline"
 									>
 										Live Site
 									</a>
