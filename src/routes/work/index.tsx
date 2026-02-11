@@ -35,16 +35,16 @@ const apiUrl = `https://api.github.com/users/${username}/repos?sort=updated&dire
 
 const featuredProjects: FeaturedProject[] = [
 	{
-		name: 'Sample Project',
-		description: 'A featured project example',
-		githubUrl: 'https://github.com/donutboyband/sample',
-		liveUrl: 'https://sample.com'
+		name: 'Eyeglass',
+		description: 'A devtool for seamless agentic frontend workflow',
+		githubUrl: 'https://github.com/donutboyband/eyeglass',
+		liveUrl: 'https://eyeglass.dev'
 	},
 	{
-		name: 'Another Featured Project',
-		description: 'Another great project worth highlighting',
-		githubUrl: 'https://github.com/donutboyband/another',
-		liveUrl: 'https://another.com'
+		name: 'Creative Director Portfolio',
+		description: 'Portfolio site of a creative dirctor',
+		githubUrl: 'https://github.com/donutboyband/emilee-portfolio',
+		liveUrl: 'https://eccreative.com'
 	}
 ];
 
@@ -107,13 +107,7 @@ function WorkPage() {
 		<section className="w-full text-black dark:text-white py-16 px-6 md:py-24 md:px-12 lg:px-20 transition-colors">
 			<div className="max-w-6xl mx-auto space-y-10">
 				<div className="space-y-4">
-					<div className="flex items-center gap-3 text-sm font-link uppercase tracking-[0.16em] text-black/60 dark:text-white/60">
-						Github feed · auto-pulled · cached for a while
-					</div>
 					<h1 className="font-header text-3xl sm:text-4xl md:text-5xl leading-tight">Work</h1>
-					<p className="font-cabinet text-lg md:text-xl text-black/80 dark:text-white/60 max-w-3xl">
-						RSS feed of my personal projects on GitHub.
-					</p>
 				</div>
 
 				{/* Featured Section */}
@@ -127,8 +121,8 @@ function WorkPage() {
 								key={project.name}
 								className="py-3 border-b border-black/10 dark:border-white/10 last:border-0"
 							>
-								<h3 className="font-cabinet text-base md:text-lg mb-1">{project.name}</h3>
-								<p className="font-cabinet text-sm text-black/60 dark:text-white/60 mb-2">
+								<h3 className="font-header text-base md:text-lg mb-1">{project.name}</h3>
+								<p className="font-cabinet text-sm text-black/90 dark:text-white/80 mb-2">
 									{project.description}
 								</p>
 								<div className="flex gap-4 text-sm">
@@ -154,12 +148,17 @@ function WorkPage() {
 					</div>
 				</div>
 
+				<div>
+					<div className="flex items-center gap-3 text-sm font-link uppercase tracking-[0.16em] text-black/60 dark:text-white/60">
+						Github RSS feed · auto-pulled · cached for a while
+					</div>
+				</div>
 				{repos.length === 0 ? (
 					<div className="border border-black/10 dark:border-white/10 rounded-2xl p-6 bg-white/70 dark:bg-slate-900/60 backdrop-blur font-cabinet text-black/70 dark:text-white/80">
 						No repositories found right now. Check back soon.
 					</div>
 				) : (
-					<div className="grid grid-cols-1 gap-6 md:gap-8 py-4">
+					<div className="grid grid-cols-1 gap-6 md:gap-8">
 						{repos.map((repo: Repo) => (
 							<a
 								key={repo.name}
