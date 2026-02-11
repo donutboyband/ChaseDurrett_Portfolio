@@ -4,6 +4,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import About from '../../components/blog/About';
 import BuildingEyeglass from '../../components/blog/BuildingEyeglass';
+import Sendflowr from '../../components/blog/Sendflowr';
 
 const blogPosts = [
 	{
@@ -17,6 +18,12 @@ const blogPosts = [
 		title: 'Building Eyeglass',
 		date: 'Feb 10, 2026',
 		content: <BuildingEyeglass />
+	},
+	{
+		id: 'sendflowr',
+		title: 'Sendflowr',
+		date: 'Feb 11, 2026',
+		content: <Sendflowr />
 	}
 ];
 
