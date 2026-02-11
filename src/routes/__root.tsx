@@ -1,4 +1,4 @@
-import { createRootRoute, Outlet } from '@tanstack/react-router';
+import { createRootRoute, Outlet, Link } from '@tanstack/react-router';
 import { ThemeProvider } from '../contexts/ThemeContext';
 import { useEffect, useRef } from 'react';
 import Lenis from 'lenis';
@@ -6,8 +6,30 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import MouseBlob from '../components/MouseBlob';
 
+function NotFoundComponent() {
+	return (
+		<div className="min-h-screen flex items-center justify-center px-6">
+			<div className="text-center space-y-6">
+				<h1 className="font-header text-6xl md:text-8xl text-black dark:text-white">
+					404
+				</h1>
+				<p className="font-cabinet text-xl text-black/70 dark:text-white/70">
+					Page not found
+				</p>
+				<Link
+					to="/"
+					className="inline-block px-6 py-3 bg-black dark:bg-white text-white dark:text-black font-link text-sm uppercase tracking-wider rounded-full hover:opacity-80 transition-opacity"
+				>
+					Go home
+				</Link>
+			</div>
+		</div>
+	);
+}
+
 export const Route = createRootRoute({
-	component: RootComponent
+	component: RootComponent,
+	notFoundComponent: NotFoundComponent
 });
 
 // eslint-disable-next-line react-refresh/only-export-components

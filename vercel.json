@@ -1,5 +1,8 @@
 {
 	"outputDirectory": "dist",
+	"rewrites": [
+		{ "source": "/((?!assets/).*)", "destination": "/index.html" }
+	],
 	"headers": [
 		{
 			"source": "/_app/(.*)",
