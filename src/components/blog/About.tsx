@@ -6,22 +6,8 @@ export default function About() {
 			</p>
 
 			<p className="text-black dark:text-white/90">
-				I am a{' '}
-				<span className="inline-block animate-float font-medium">
-					builder
-				</span>{' '}
-				that loves creating things in whatever medium I can-be it coding or music.
+				I am a builder that loves creating things in whatever medium I can-be it coding or music.
 			</p>
-			
-			<style>{`
-				@keyframes float {
-					0%, 100% { transform: translateY(0px); }
-					50% { transform: translateY(-4px); }
-				}
-				.animate-float {
-					animation: float 3s ease-in-out infinite;
-				}
-			`}</style>
 
 			<p className="text-black dark:text-white/90">
 				You can reach me on{' '}
