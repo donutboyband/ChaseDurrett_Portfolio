@@ -39,6 +39,12 @@ const featuredProjects: FeaturedProject[] = [
 		description: 'A featured project example',
 		githubUrl: 'https://github.com/donutboyband/sample',
 		liveUrl: 'https://sample.com'
+	},
+	{
+		name: 'Another Featured Project',
+		description: 'Another great project worth highlighting',
+		githubUrl: 'https://github.com/donutboyband/another',
+		liveUrl: 'https://another.com'
 	}
 ];
 
