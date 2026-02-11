@@ -135,8 +135,7 @@ export default function BuildingEyeglass() {
 			<p className="text-black dark:text-white/90">
 				As I used it, I wanted more and more to not leave the browser for the requests. Agentation
 				uses copy/paste as the main vehicle for getting the context to the agent. There&apos;s also
-				an MCP integration, but to my knowledge I wasn&apos;t able to find a way to sync that back
-				to the browser. It sounds spoiled, but I imagined there were real benefits from not leaving
+				an MCP integration, but to my knowledge there isn&apos;t a way to sync agent communications back to the browser. It sounds spoiled, but I imagined there were real benefits from not leaving
 				the browser. Some being less context-switching and a constraint that forces the tool&apos;s
 				UI to be <em>really</em> comprehensive. Thus the idea for{' '}
 				<strong className="font-header">Eyeglass</strong> was born.
@@ -154,7 +153,7 @@ export default function BuildingEyeglass() {
 				<ul className="space-y-2 text-sm md:text-base text-black/80 dark:text-white/80">
 					<li>→ Prove to myself I could make a &quot;magic&quot; tool (it&apos;s kind of magic)</li>
 					<li>
-						→ Prove Geoffrey Huntley&apos;s point: with Agentic AI, there are no software moats
+						→ Prove Geoffrey Huntley&apos;s point: with Agentic AI, there are no software moats <span className="text-sm">(which, of course, means that everyone will have their own version of eyeglass or whatever tool they need. Why not just make it yourself if you can?)</span>
 					</li>
 					<li>→ The only limit in development is now imagination</li>
 				</ul>
