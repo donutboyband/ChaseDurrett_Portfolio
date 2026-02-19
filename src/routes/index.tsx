@@ -104,10 +104,11 @@ function IndexPage() {
 				</h1>
 
 				<svg
-					className="w-6 h-6 stroke-black/60 dark:stroke-white/70 group-hover:stroke-black dark:group-hover:stroke-white transition-colors duration-200"
+					className="w-6 h-6 stroke-black/75 dark:stroke-white/80 group-hover:stroke-black dark:group-hover:stroke-white transition-colors duration-200"
 					fill="none"
 					viewBox="0 0 24 24"
 					xmlns="http://www.w3.org/2000/svg"
+					aria-hidden="true"
 				>
 					<path
 						d="M12 5v14m0 0-5-5m5 5 5-5"
@@ -134,11 +135,11 @@ function IndexPage() {
 				<div className="max-w-6xl mx-auto grid md:grid-cols-[1fr,2fr] gap-10 md:gap-16">
 					<div className="space-y-6 md:sticky md:top-24 self-start">
 						<div>
-							<p className="font-link text-xl text-black/60 dark:text-white/60">Chase Durrett</p>
-							<p className="font-link text-md text-black/60 dark:text-white/40">Full Stack Developer</p>
+							<p className="font-link text-xl text-black/75 dark:text-white/80">Chase Durrett</p>
+							<p className="font-link text-md text-black/70 dark:text-white/70">Full Stack Developer</p>
 						</div>
 						<h2 className="font-header text-4xl md:text-6xl leading-tight">Experience</h2>
-						<p className="font-cabinet text-xl text-black dark:text-white/80 leading-relaxed">
+						<p className="font-cabinet text-xl text-black dark:text-white leading-relaxed">
 							I&apos;m a lifelong learner who loves turning ideas into reality. As a full-stack developer, I
 							build clean, scalable applications that prioritize user experience and maintainability.
 						</p>
@@ -147,7 +148,7 @@ function IndexPage() {
 					<div className="relative">
 						<div className="flex flex-col gap-12 md:gap-10">
 							<div className="space-y-4">
-								<p className="font-link text-sm text-black/60 dark:text-white/60">Work experience</p>
+								<p className="font-link text-sm text-black/75 dark:text-white/75">Work experience</p>
 								{experiences.map((exp, index) => (
 									<article
 										key={index}
@@ -159,10 +160,10 @@ function IndexPage() {
 											<span className="px-0 md:px-3 py-1 md:bg-black text-black md:text-white rounded-full md:dark:bg-white dark:text-white/60 md:dark:text-black">
 												{exp.company}
 											</span>
-											<span className="text-black/60 dark:text-white/70">{exp.years}</span>
+											<span className="text-black/75 dark:text-white/75">{exp.years}</span>
 										</div>
 										<h3 className="font-header text-2xl md:text-3xl mt-3 mb-2">{exp.role}</h3>
-										<p className="font-cabinet text-base md:text-xl text-black dark:text-white/80 leading-relaxed">
+										<p className="font-cabinet text-base md:text-xl text-black dark:text-white leading-relaxed">
 											{exp.summary}
 										</p>
 										<div className="flex flex-wrap gap-2 mt-4">

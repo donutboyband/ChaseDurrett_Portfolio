@@ -112,7 +112,7 @@ function WorkPage() {
 
 				{/* Featured Section */}
 				<div className="space-y-4">
-					<h2 className="font-link text-sm uppercase tracking-[0.16em] text-black/60 dark:text-white/60">
+					<h2 className="font-link text-sm uppercase tracking-[0.16em] text-black/75 dark:text-white/75">
 						Featured
 					</h2>
 					<div className="space-y-2">
@@ -122,7 +122,7 @@ function WorkPage() {
 								className="py-3 border-b border-black/10 dark:border-white/10 last:border-0"
 							>
 								<h3 className="font-header text-base md:text-lg mb-1">{project.name}</h3>
-								<p className="font-cabinet text-sm text-black/90 dark:text-white/80 mb-2">
+								<p className="font-cabinet text-sm text-black dark:text-white mb-2">
 									{project.description}
 								</p>
 								<div className="flex gap-4 text-sm">
@@ -130,7 +130,7 @@ function WorkPage() {
 										href={project.githubUrl}
 										target="_blank"
 										rel="noopener noreferrer"
-										className="text-black/70 dark:text-white/70 hover:text-black dark:hover:text-white transition-colors underline"
+										className="text-black/80 dark:text-white/80 hover:text-black dark:hover:text-white transition-colors underline"
 									>
 										GitHub
 									</a>
@@ -138,7 +138,7 @@ function WorkPage() {
 										href={project.liveUrl}
 										target="_blank"
 										rel="noopener noreferrer"
-										className="text-black/70 dark:text-white/70 hover:text-black dark:hover:text-white transition-colors underline"
+										className="text-black/80 dark:text-white/80 hover:text-black dark:hover:text-white transition-colors underline"
 									>
 										Live Site
 									</a>
@@ -149,12 +149,12 @@ function WorkPage() {
 				</div>
 
 				<div>
-					<div className="flex items-center gap-3 text-sm font-link uppercase tracking-[0.16em] text-black/60 dark:text-white/60">
+					<div className="flex items-center gap-3 text-sm font-link uppercase tracking-[0.16em] text-black/75 dark:text-white/75">
 						Github RSS feed · auto-pulled · cached for a while
 					</div>
 				</div>
 				{repos.length === 0 ? (
-					<div className="border border-black/10 dark:border-white/10 rounded-2xl p-6 bg-white/70 dark:bg-slate-900/60 backdrop-blur font-cabinet text-black/70 dark:text-white/80">
+					<div className="border border-black/10 dark:border-white/10 rounded-2xl p-6 bg-white/70 dark:bg-slate-900/60 backdrop-blur font-cabinet text-black/80 dark:text-white">
 						No repositories found right now. Check back soon.
 					</div>
 				) : (
@@ -170,7 +170,7 @@ function WorkPage() {
 							>
 								<article className="relative pl-8 md:pl-10 py-6 pr-6 border border-black/10 dark:border-white/10 rounded-2xl bg-white/80 dark:bg-slate-900/60 shadow-sm overflow-hidden backdrop-blur transition-transform duration-150 group-hover:-translate-y-1 group-hover:border-primary/50 group-hover:shadow-sm">
 									<div className="absolute animate-pulse left-4 top-8 w-1 h-1 md:w-3 md:h-3 rounded-full bg-primary ring-4 ring-primary/20 group-hover:ring-primary/30 transition-all duration-200"></div>
-									<div className="flex justify-between items-center w-full flex-wrap gap-3 text-xs md:text-sm font-link uppercase tracking-[0.12em] text-black/70 dark:text-white/70">
+									<div className="flex justify-between items-center w-full flex-wrap gap-3 text-xs md:text-sm font-link uppercase tracking-[0.12em] text-black/80 dark:text-white/80">
 										<span className="px-3 py-1 bg-black text-white rounded-full dark:bg-white dark:text-black">
 											{repo.language ?? 'Misc'}
 										</span>
@@ -181,6 +181,7 @@ function WorkPage() {
 													viewBox="0 0 20 20"
 													fill="none"
 													xmlns="http://www.w3.org/2000/svg"
+													aria-hidden="true"
 												>
 													<path
 														d="M10 3C6.13401 3 3 6.13401 3 10C3 13.866 6.13401 17 10 17C13.866 17 17 13.866 17 10"
@@ -198,7 +199,7 @@ function WorkPage() {
 												</svg>
 												<span>{timeAgo(repo.updated)}</span>
 											</span>
-											<span className="text-black/50 dark:text-white/50">
+											<span className="text-black/70 dark:text-white/70">
 												{formatDate.format(new Date(repo.updated))}
 											</span>
 										</span>
@@ -206,19 +207,20 @@ function WorkPage() {
 									<h3 className="font-header text-2xl md:text-3xl mt-3 mb-2 group-hover:text-primary transition-colors duration-150">
 										{repo.name}
 									</h3>
-									<p className="font-cabinet text-base md:text-lg text-black dark:text-white/80 leading-relaxed">
+									<p className="font-cabinet text-base md:text-lg text-black dark:text-white leading-relaxed">
 										{repo.description ?? 'No description provided.'}
 									</p>
 									<div className="mt-4 flex flex-wrap items-center gap-3 md:gap-4 text-xs md:text-sm font-link uppercase tracking-[0.12em] text-black dark:text-white">
 										<span className="px-3 py-1 bg-primary text-white rounded-full group-hover:bg-black dark:group-hover:bg-white dark:group-hover:text-black transition-colors duration-200">
 											View repo
 										</span>
-										<span className="flex items-center gap-1 text-black/60 dark:text-white/70">
+										<span className="flex items-center gap-1 text-black/75 dark:text-white/75">
 											<svg
 												className="w-4 h-4"
 												viewBox="0 0 24 24"
 												fill="none"
 												xmlns="http://www.w3.org/2000/svg"
+												aria-hidden="true"
 											>
 												<path
 													d="M12 6.5L12 17.5"

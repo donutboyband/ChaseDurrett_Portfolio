@@ -1,15 +1,15 @@
 export default function About() {
 	return (
 		<>
-			<p className="text-black dark:text-white/90">
+			<p className="text-black dark:text-white">
 				I&apos;m a full-stack developer based in Oklahoma City.
 			</p>
 
-			<p className="text-black dark:text-white/90">
+			<p className="text-black dark:text-white">
 				I am a builder that loves creating things in whatever medium I can-be it coding or music.
 			</p>
 
-			<p className="text-black dark:text-white/90">
+			<p className="text-black dark:text-white">
 				You can reach me on{' '}
 				<a
 					href="https://www.linkedin.com/in/chasedurrett/"

@@ -117,7 +117,7 @@ export default function BuildingEyeglass() {
 					Eyeglass
 				</a>
 				{' '}
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" className="inline-block w-8 h-8 ml-2">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" className="inline-block w-8 h-8 ml-2" aria-hidden="true">
 					<defs>
 						<linearGradient id="lensGrad" x1="0%" y1="0%" x2="100%" y2="100%">
 							<stop offset="0%" style={{ stopColor: '#60a5fa', stopOpacity: 0.3 }} />
@@ -134,7 +134,7 @@ export default function BuildingEyeglass() {
 					<path d="M 65 45 L 65 60 L 69 56 L 74 63 L 76 61 L 71 54 L 76 54 Z" fill="#3b82f6" />
 				</svg>
 			</h1>
-			<p className="text-black dark:text-white/90">
+			<p className="text-black dark:text-white">
 				I was exploring the tool—and rapidly evolving Agentic semantic understanding standard—{' '}
 				<a
 					href="https://agentation.dev"
@@ -149,7 +149,7 @@ export default function BuildingEyeglass() {
 				Agentation.
 			</p>
 
-			<p className="text-black dark:text-white/90">
+			<p className="text-black dark:text-white">
 				As I used it, I wanted more and more to not leave the browser for the requests. Agentation
 				uses copy/paste as the main vehicle for getting the context to the agent. There&apos;s also
 				an MCP integration, but to my knowledge there isn&apos;t a way to sync agent communications back to the browser. It sounds spoiled, but I imagined there were real benefits from not leaving
@@ -158,13 +158,13 @@ export default function BuildingEyeglass() {
 				<strong className="font-header">Eyeglass</strong> was born.
 			</p>
 
-			<p className="text-black dark:text-white/90">
+			<p className="text-black dark:text-white">
 				Over one week I feverishly recreated Agentation in my own way with <em>one goal</em>:
 				two-way communication from the browser.
 			</p>
 
 			<div className="my-6 md:my-8 p-4 md:p-6 border border-black/10 dark:border-white/10 rounded-xl bg-black/5 dark:bg-white/5">
-				<p className="text-black dark:text-white/90 mb-3">
+				<p className="text-black dark:text-white mb-3">
 					<strong className="font-header">Why?</strong>
 				</p>
 				<ul className="space-y-2 text-sm md:text-base text-black/80 dark:text-white/80">
@@ -174,7 +174,7 @@ export default function BuildingEyeglass() {
 					</li>
 					<li>→ The only limit in development is now imagination</li>
 				</ul>
-				<p className="text-xs md:text-sm text-black/60 dark:text-white/60 mt-4 italic">
+				<p className="text-xs md:text-sm text-black/75 dark:text-white/75 mt-4 italic">
 					Though, you get better (and{' '}
 					<a
 						className="text-blue-500"
@@ -188,7 +188,7 @@ export default function BuildingEyeglass() {
 				</p>
 			</div>
 
-			<p className="text-black dark:text-white/90">
+			<p className="text-black dark:text-white">
 				AI coding agents are incredible, but as Benji Taylor, the creator of Agentation, pointed
 				out:
 			</p>
@@ -206,7 +206,7 @@ export default function BuildingEyeglass() {
 				</p>
 			</div>
 
-			<p className="text-black dark:text-white/90">
+			<p className="text-black dark:text-white">
 				So, I gave myself a challenge: build a dev tool like Agentation that communicates a semantic
 				snapshot to an agent via an MCP server, and create the UI so that the dev/user never has to
 				leave the browser. 96 hours later, <strong className="font-header">Eyeglass</strong> was
@@ -218,7 +218,7 @@ export default function BuildingEyeglass() {
 				The Challenge
 			</h2>
 
-			<p className="text-black dark:text-white/90 mb-6">
+			<p className="text-black dark:text-white mb-6">
 				How do you make an agent respond to browser events without the user leaving the page?
 			</p>
 
@@ -227,12 +227,12 @@ export default function BuildingEyeglass() {
 				{/* First Approach - Failed */}
 				<div className="p-4 md:p-5 border border-red-500/30 dark:border-red-400/30 rounded-xl bg-white dark:bg-black">
 					<div className="flex items-center gap-2 mb-3">
-						<span className="text-black/40 dark:text-white/40 text-lg md:text-xl">✕</span>
+						<span className="text-black/70 dark:text-white/70 text-lg md:text-xl">✕</span>
 						<span className="font-header text-sm md:text-base text-black dark:text-white">
 							Approach 1: MCP Sampling
 						</span>
 					</div>
-					<p className="text-xs md:text-sm text-black/60 dark:text-white/60">
+					<p className="text-xs md:text-sm text-black/75 dark:text-white/75">
 						The MCP protocol has nascent support for <em>sampling</em>, which allows an MCP server
 						to prompt an agent directly. However, even Claude Code doesn&apos;t support this yet.
 					</p>
@@ -246,7 +246,7 @@ export default function BuildingEyeglass() {
 							Approach 2: Long-Polling
 						</span>
 					</div>
-					<p className="text-xs md:text-sm text-black/70 dark:text-white/70">
+					<p className="text-xs md:text-sm text-black/80 dark:text-white/80">
 						Put the agent in a waiting state that <em>doesn&apos;t consume tokens</em>. When the
 						browser sends a request, the agent wakes up and processes it.
 					</p>
@@ -290,7 +290,7 @@ export default function BuildingEyeglass() {
 											${
 												isActive
 													? 'bg-black dark:bg-white text-white dark:text-black scale-125 shadow-lg'
-													: 'bg-white dark:bg-black border-2 border-black/30 dark:border-white/30 text-black/50 dark:text-white/50'
+													: 'bg-white dark:bg-black border-2 border-black/30 dark:border-white/30 text-black/75 dark:text-white/75'
 											}
 										`}
 									>
@@ -317,7 +317,7 @@ export default function BuildingEyeglass() {
 						{/* Center content */}
 						<div className="absolute inset-0 flex items-center justify-center">
 							<div key={currentStep} className="text-center max-w-[140px] animate-fade-in">
-								<p className="text-sm text-black/70 dark:text-white/70 leading-relaxed">
+								<p className="text-sm text-black/80 dark:text-white/80 leading-relaxed">
 									{LOOP_STEPS[currentStep].action}
 								</p>
 							</div>
@@ -411,7 +411,7 @@ export default function BuildingEyeglass() {
 				}
 			`}</style>
 
-			<p className="text-black dark:text-white/90">
+			<p className="text-black dark:text-white">
 				To my surprise, long-polling was very effective as a strategy in accomplishing the full
 				loop. Claude Code picked it up best, followed by Codex, then Copilot.
 			</p>
@@ -421,15 +421,15 @@ export default function BuildingEyeglass() {
 				The Architecture
 			</h2>
 
-			<p className="text-black dark:text-white/90">I structured Eyeglass into four packages:</p>
+			<p className="text-black dark:text-white">I structured Eyeglass into four packages:</p>
 
 			<div className="my-8 font-mono text-sm">
 				{/* Package Tree */}
 				<div className="border border-black/10 dark:border-white/10 rounded-lg overflow-hidden">
 					{/* Header */}
 					<div className="px-4 py-3 bg-black/[0.02] dark:bg-white/[0.02] border-b border-black/10 dark:border-white/10">
-						<span className="text-black/40 dark:text-white/40">eyeglass/</span>
-						<span className="text-black/60 dark:text-white/60">packages</span>
+						<span className="text-black/70 dark:text-white/70">eyeglass/</span>
+						<span className="text-black/75 dark:text-white/75">packages</span>
 					</div>
 
 					{/* Bridge */}
@@ -438,9 +438,9 @@ export default function BuildingEyeglass() {
 							<div className="flex items-baseline gap-3">
 								<span className="text-black/30 dark:text-white/30">├──</span>
 								<span className="text-black dark:text-white font-medium">@eyeglass/bridge</span>
-								<span className="text-black/40 dark:text-white/40 text-xs">Node.js</span>
+								<span className="text-black/70 dark:text-white/70 text-xs">Node.js</span>
 							</div>
-							<p className="mt-2 ml-8 font-sans text-black/70 dark:text-white/70 text-sm leading-relaxed">
+							<p className="mt-2 ml-8 font-sans text-black/80 dark:text-white/80 text-sm leading-relaxed">
 								The MCP bridge that connects the client and the agent. Contains all the tooling for
 								the agent to call during eyeglass operations. Built in Node, it supports both Stdio
 								MCP and HTTP for agents like Codex.
@@ -455,12 +455,12 @@ export default function BuildingEyeglass() {
 							<div className="flex items-baseline gap-3">
 								<span className="text-black/30 dark:text-white/30">├──</span>
 								<span className="text-black dark:text-white font-medium">@eyeglass/inspector</span>
-								<span className="text-black/40 dark:text-white/40 text-xs">Vanilla TS</span>
+								<span className="text-black/70 dark:text-white/70 text-xs">Vanilla TS</span>
 								<span className="text-xs px-2 py-0.5 bg-black dark:bg-white text-white dark:text-black rounded">
 									main focus
 								</span>
 							</div>
-							<p className="mt-2 ml-8 font-sans text-black/70 dark:text-white/70 text-sm leading-relaxed">
+							<p className="mt-2 ml-8 font-sans text-black/80 dark:text-white/80 text-sm leading-relaxed">
 								The main attraction—where I focused most of my efforts. Because it&apos;s a dev
 								tool, I built it in vanilla JS/TS and CSS for the smallest possible bundle size.
 								User preferences persist via localStorage.
@@ -474,9 +474,9 @@ export default function BuildingEyeglass() {
 							<div className="flex items-baseline gap-3">
 								<span className="text-black/30 dark:text-white/30">├──</span>
 								<span className="text-black dark:text-white font-medium">@eyeglass/cli</span>
-								<span className="text-black/40 dark:text-white/40 text-xs">CLI</span>
+								<span className="text-black/70 dark:text-white/70 text-xs">CLI</span>
 							</div>
-							<p className="mt-2 ml-8 font-sans text-black/70 dark:text-white/70 text-sm leading-relaxed">
+							<p className="mt-2 ml-8 font-sans text-black/80 dark:text-white/80 text-sm leading-relaxed">
 								Created to make setup into existing projects simple. It works okay—still ironing out
 								bugs with different frameworks.
 							</p>
@@ -489,9 +489,9 @@ export default function BuildingEyeglass() {
 							<div className="flex items-baseline gap-3">
 								<span className="text-black/30 dark:text-white/30">└──</span>
 								<span className="text-black dark:text-white font-medium">@eyeglass/types</span>
-								<span className="text-black/40 dark:text-white/40 text-xs">TypeScript</span>
+								<span className="text-black/70 dark:text-white/70 text-xs">TypeScript</span>
 							</div>
-							<p className="mt-2 ml-8 font-sans text-black/70 dark:text-white/70 text-sm leading-relaxed">
+							<p className="mt-2 ml-8 font-sans text-black/80 dark:text-white/80 text-sm leading-relaxed">
 								Shared type interfaces.
 							</p>
 						</div>
@@ -499,7 +499,7 @@ export default function BuildingEyeglass() {
 				</div>
 			</div>
 
-			<p className="text-black dark:text-white/90">
+			<p className="text-black dark:text-white">
 				And create the following interface for the semantic snapshot that the agent receives:
 			</p>
 
@@ -522,7 +522,7 @@ export default function BuildingEyeglass() {
 				Capturing the Snapshot
 			</h2>
 
-			<p className="text-black dark:text-white/90">
+			<p className="text-black dark:text-white">
 				The semantic snapshot combines multiple sources of truth about an element:
 			</p>
 
@@ -553,18 +553,18 @@ export default function BuildingEyeglass() {
 						key={i}
 						className="flex gap-4 p-4 border border-black/5 dark:border-white/5 rounded-lg hover:border-black/10 dark:hover:border-white/10 transition-colors"
 					>
-						<div className="flex-shrink-0 w-8 h-8 rounded bg-black/5 dark:bg-white/5 flex items-center justify-center font-mono text-sm text-black/40 dark:text-white/40">
+						<div className="flex-shrink-0 w-8 h-8 rounded bg-black/5 dark:bg-white/5 flex items-center justify-center font-mono text-sm text-black/70 dark:text-white/70">
 							{i + 1}
 						</div>
 						<div>
 							<p className="font-header text-black dark:text-white text-sm">{item.title}</p>
-							<p className="text-black/60 dark:text-white/60 text-sm mt-1">{item.desc}</p>
+							<p className="text-black/75 dark:text-white/75 text-sm mt-1">{item.desc}</p>
 						</div>
 					</div>
 				))}
 			</div>
 
-			<p className="text-black dark:text-white/90">
+			<p className="text-black dark:text-white">
 				The neighborhood context was a late addition but has proven useful. An agent trying to
 				center a button needs to know if its parent is a flex container with{' '}
 				<code className="px-1.5 py-0.5 bg-black/5 dark:bg-white/10 rounded text-sm font-mono">
@@ -579,7 +579,7 @@ export default function BuildingEyeglass() {
 				Using it
 			</h2>
 
-			<p className="text-black dark:text-white/90">
+			<p className="text-black dark:text-white">
 				With the MVP of Eyeglass built, I used it to build the{' '}
 				<a
 					className="text-blue-500 hover:underline"
@@ -594,14 +594,14 @@ export default function BuildingEyeglass() {
 				it&apos;s flowing, it enables a different type of frontend development.
 			</p>
 
-			<p className="text-black dark:text-white/90">
+			<p className="text-black dark:text-white">
 				You can talk in technical terms—flexbox, grid, design tokens. Or get abstract—&quot;make
 				this feel lighter&quot;, &quot;the spacing feels cramped&quot;. The agent has enough context
 				to understand both. I built this entire blog page with Eyeglass.
 			</p>
 
 			<div className="my-6 md:my-8 p-4 md:p-6 border border-black/10 dark:border-white/10 rounded-xl bg-black/[0.02] dark:bg-white/[0.02]">
-				<p className="text-black dark:text-white/90 mb-3">
+				<p className="text-black dark:text-white mb-3">
 					<strong className="font-header">What I learned:</strong>
 				</p>
 				<ul className="space-y-2 text-sm md:text-base text-black/80 dark:text-white/80">
@@ -617,7 +617,7 @@ export default function BuildingEyeglass() {
 				Try It Yourself
 			</h2>
 
-			<p className="text-black dark:text-white/90">
+			<p className="text-black dark:text-white">
 				Eyeglass is open source and available for anyone to use. If you&apos;re interested in trying
 				it out or contributing, here&apos;s where to start:
 			</p>
@@ -641,12 +641,12 @@ export default function BuildingEyeglass() {
 						key={i}
 						className="flex gap-4 p-4 border border-black/5 dark:border-white/5 rounded-lg hover:border-black/10 dark:hover:border-white/10 transition-colors"
 					>
-						<div className="flex-shrink-0 w-8 h-8 rounded bg-black/5 dark:bg-white/5 flex items-center justify-center font-mono text-sm text-black/40 dark:text-white/40">
+						<div className="flex-shrink-0 w-8 h-8 rounded bg-black/5 dark:bg-white/5 flex items-center justify-center font-mono text-sm text-black/70 dark:text-white/70">
 							{i + 1}
 						</div>
 						<div>
 							<p className="font-header text-black dark:text-white text-sm">{item.title}</p>
-							<p className="text-black/60 dark:text-white/60 text-sm mt-1">{item.desc}</p>
+							<p className="text-black/75 dark:text-white/75 text-sm mt-1">{item.desc}</p>
 							<a
 								href={item.link}
 								target="_blank"
@@ -660,7 +660,7 @@ export default function BuildingEyeglass() {
 				))}
 			</div>
 
-			<p className="text-black dark:text-white/90">
+			<p className="text-black dark:text-white">
 				The quickest way to get started is to use the CLI tool to install it:
 			</p>
 
@@ -670,13 +670,13 @@ export default function BuildingEyeglass() {
 				</pre>
 				<button
 					onClick={copyToClipboard}
-					className="absolute top-2 right-2 px-2 py-1 text-xs font-mono bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 border border-black/10 dark:border-white/10 rounded transition-colors text-black/60 dark:text-white/60"
+					className="absolute top-2 right-2 px-2 py-1 text-xs font-mono bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 border border-black/10 dark:border-white/10 rounded transition-colors text-black/75 dark:text-white/75"
 				>
 					{copied ? 'Copied!' : 'Copy'}
 				</button>
 			</div>
 
-			<p className="text-black/60 dark:text-white/60 text-sm mt-6 md:mt-8">
+			<p className="text-black/75 dark:text-white/75 text-sm mt-6 md:mt-8">
 				Built by{' '}
 				<a
 					href="https://github.com/donutboyband"

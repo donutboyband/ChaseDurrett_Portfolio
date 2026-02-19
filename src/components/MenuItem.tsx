@@ -32,6 +32,7 @@ export default function MenuItem({
 	return (
 		<button
 			type="button"
+			role="menuitem"
 			className={`relative w-full flex items-center justify-center py-4 sm:py-2 cursor-pointer md:hover:text-black transition-all duration-200 group min-h-[56px] sm:min-h-0 ${
 				borders ? 'border-b border-t border-white' : ''
 			} ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}

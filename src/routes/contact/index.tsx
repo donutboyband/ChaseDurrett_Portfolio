@@ -223,13 +223,13 @@ function ContactPage() {
 			<div className="max-w-6xl mx-auto grid lg:grid-cols-[1.1fr,1fr] gap-8 md:gap-12">
 				<div className="order-1">
 					<div className="space-y-6">
-						<p className="font-link text-xs tracking-[0.25em] uppercase text-black/60 dark:text-white/60">
+						<p className="font-link text-xs tracking-[0.25em] uppercase text-black/75 dark:text-white/75">
 							Contact
 						</p>
 						<h1 className="font-header text-3xl sm:text-4xl md:text-5xl leading-tight">
 							Let&apos;s get connected!
 						</h1>
-						<p className="font-cabinet text-lg text-black dark:text-white/70 leading-relaxed max-w-2xl">
+						<p className="font-cabinet text-lg text-black dark:text-white leading-relaxed max-w-2xl">
 							(if you want)
 						</p>
 
@@ -237,7 +237,7 @@ function ContactPage() {
 							<div className="p-4 border border-black/10 dark:border-white/10 rounded-2xl bg-white/80 dark:bg-slate-900/60 shadow-sm">
 								<div className="flex items-center justify-start gap-2">
 									<div className="animate-pulse w-2 h-2 rounded-full bg-primary ring-2 ring-primary/20"></div>
-									<p className="font-link text-xs uppercase tracking-[0.18em] text-black/60 dark:text-white/60">
+									<p className="font-link text-xs uppercase tracking-[0.18em] text-black/75 dark:text-white/75">
 										Email
 									</p>
 								</div>
@@ -248,7 +248,7 @@ function ContactPage() {
 							<div className="p-4 border border-black/10 dark:border-white/10 rounded-2xl bg-white/80 dark:bg-slate-900/60 shadow-sm">
 								<div className="flex items-center justify-start gap-2">
 									<div className="animate-pulse w-2 h-2 rounded-full bg-primary ring-2 ring-primary/20"></div>
-									<p className="font-link text-xs uppercase tracking-[0.18em] text-black/60 dark:text-white/60">
+									<p className="font-link text-xs uppercase tracking-[0.18em] text-black/75 dark:text-white/75">
 										Based in
 									</p>
 								</div>
@@ -268,7 +268,7 @@ function ContactPage() {
 					>
 						<div className="space-y-2">
 							<label
-								className="font-link text-xs uppercase tracking-[0.18em] text-black/60 dark:text-white/60"
+								className="font-link text-xs uppercase tracking-[0.18em] text-black/75 dark:text-white/75"
 								htmlFor="email"
 							>
 								Email
@@ -286,7 +286,7 @@ function ContactPage() {
 
 						<div className="space-y-2">
 							<label
-								className="font-link text-xs uppercase tracking-[0.18em] text-black/60 dark:text-white/60"
+								className="font-link text-xs uppercase tracking-[0.18em] text-black/75 dark:text-white/75"
 								htmlFor="project"
 							>
 								Details
@@ -306,7 +306,7 @@ function ContactPage() {
 						>
 							Send email
 						</button>
-						<p className="font-cabinet text-sm text-black/90 dark:text-white/70 text-center">
+						<p className="font-cabinet text-sm text-black dark:text-white text-center">
 							This opens your email client with the details pre-filled.
 						</p>
 					</form>

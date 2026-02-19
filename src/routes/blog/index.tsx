@@ -89,7 +89,7 @@ function BlogPage() {
 								className={`font-cabinet text-sm whitespace-nowrap pb-2 border-b-2 transition-colors ${
 									selectedPost.id === post.id
 										? 'text-black dark:text-white border-black dark:border-white'
-										: 'text-black/60 dark:text-white/60 border-transparent'
+										: 'text-black/75 dark:text-white/75 border-transparent'
 								}`}
 							>
 								{post.title}
@@ -108,7 +108,7 @@ function BlogPage() {
 								className={`flex items-center gap-2 w-full text-left font-cabinet text-sm transition-colors py-1 ${
 									selectedPost.id === post.id
 										? 'text-black dark:text-white'
-										: 'text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white'
+										: 'text-black/75 dark:text-white/75 hover:text-black dark:hover:text-white'
 								}`}
 							>
 								<span
@@ -127,7 +127,7 @@ function BlogPage() {
 				{/* Main Content */}
 				<div className="flex-1 max-w-2xl" ref={contentRef}>
 					<div className="space-y-6 md:space-y-8 font-cabinet text-base md:text-lg leading-relaxed">
-						<p className="text-black/50 dark:text-white/50 text-sm">Updated {selectedPost.date}</p>
+						<p className="text-black/70 dark:text-white/70 text-sm">Updated {selectedPost.date}</p>
 
 						{selectedPost.content}
 					</div>

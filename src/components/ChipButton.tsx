@@ -20,10 +20,10 @@ interface ChipButtonProps {
 
 const toneClasses: Record<ChipTone, string> = {
 	default:
-		'border-black/15 dark:border-white/20 bg-white/80 dark:bg-white/10 text-black dark:text-white hover:bg-white',
+		'border-black/20 dark:border-white/25 bg-white/80 dark:bg-white/10 text-black dark:text-white hover:bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-slate-900',
 	primary:
-		'border-primary/40 bg-primary text-white hover:bg-black hover:border-black dark:hover:bg-white dark:hover:text-black',
-	ghost: 'border-white/25 bg-white/5 text-white hover:bg-white/10'
+		'border-primary/40 bg-primary text-white hover:bg-black hover:border-black dark:hover:bg-white dark:hover:text-black focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-slate-900',
+	ghost: 'border-white/30 bg-white/5 text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black'
 };
 
 const sizeClasses: Record<ChipSize, string> = {
