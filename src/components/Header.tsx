@@ -10,7 +10,6 @@ const contactArr = ['IDEAS', 'GOALS', 'DREAMS', 'IDEAS', 'GOALS', 'DREAMS'];
 
 export default function Header() {
 	const [isOpen, setIsOpen] = useState(false);
-	const [isNavigating, setIsNavigating] = useState(false);
 	const [showLogo, setShowLogo] = useState(false);
 	const [showHamburger, setShowHamburger] = useState(false);
 	const { theme, toggle: toggleTheme } = useTheme();
@@ -26,12 +25,8 @@ export default function Header() {
 	}, []);
 
 	const handleNavigate = (href: string) => {
-		if (isNavigating) return;
-		setIsNavigating(true);
 		setIsOpen(false);
-		navigate({ to: href })
-			.catch(() => {})
-			.finally(() => setIsNavigating(false));
+		navigate({ to: href }).catch(() => {});
 	};
 
 	return (

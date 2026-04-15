@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 export default function MouseBlob() {
-	const [position, setPosition] = useState({ x: 0, y: 0 });
+	const blobRef = useRef<HTMLDivElement>(null);
 	const rafRef = useRef(0);
 	const stateRef = useRef({
 		tx: 0,
@@ -31,7 +31,6 @@ export default function MouseBlob() {
 		state.tx = state.cx;
 		state.ty = state.cy;
 		state.lastMove = performance.now();
-		setPosition({ x: state.cx, y: state.cy });
 
 		function onPointerMove(e: PointerEvent) {
 			state.tx = e.clientX;
@@ -95,7 +94,9 @@ export default function MouseBlob() {
 				state.vy = -Math.abs(state.vy) * bounceElasticity;
 			}
 
-			setPosition({ x: state.cx, y: state.cy });
+			if (blobRef.current) {
+				blobRef.current.style.transform = `translate3d(${state.cx - size / 2}px, ${state.cy - size / 2}px, 0)`;
+			}
 			rafRef.current = requestAnimationFrame(animate);
 		}
 
@@ -110,9 +111,10 @@ export default function MouseBlob() {
 
 	return (
 		<div
+			ref={blobRef}
 			className="mouse-blob"
 			style={{
-				transform: `translate3d(${position.x - size / 2}px, ${position.y - size / 2}px, 0)`,
+				transform: `translate3d(${(window.innerWidth - 420) / 2}px, ${(window.innerHeight - 420) / 2}px, 0)`,
 				width: `${size}px`,
 				height: `${size}px`
 			}}
