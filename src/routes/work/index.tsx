@@ -13,7 +13,7 @@ interface Repo {
 interface FeaturedProject {
 	name: string;
 	description: string;
-	githubUrl: string;
+	githubUrl?: string;
 	liveUrl: string;
 }
 
@@ -34,6 +34,11 @@ const username = 'donutboyband';
 const apiUrl = `https://api.github.com/users/${username}/repos?sort=updated&direction=desc&per_page=24`;
 
 const featuredProjects: FeaturedProject[] = [
+	{
+		name: 'Soup Agency',
+		description: 'Portfolio for Soup Agency',
+		liveUrl: 'https://weeatsoup.com'
+	},
 	{
 		name: 'Eyeglass',
 		description: 'A devtool for seamless agentic frontend workflow',
@@ -126,14 +131,16 @@ function WorkPage() {
 									{project.description}
 								</p>
 								<div className="flex gap-4 text-sm">
-									<a
-										href={project.githubUrl}
-										target="_blank"
-										rel="noopener noreferrer"
-										className="text-black/80 dark:text-white/80 hover:text-black dark:hover:text-white transition-colors underline"
-									>
-										GitHub
-									</a>
+									{project.githubUrl && (
+										<a
+											href={project.githubUrl}
+											target="_blank"
+											rel="noopener noreferrer"
+											className="text-black/80 dark:text-white/80 hover:text-black dark:hover:text-white transition-colors underline"
+										>
+											GitHub
+										</a>
+									)}
 									<a
 										href={project.liveUrl}
 										target="_blank"
