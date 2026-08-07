@@ -225,6 +225,58 @@ const work = [
 					animation: reveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
 					animation-delay: calc(var(--i, 0) * 55ms);
 				}
+
+				/* Apple-Intelligence-style shimmer: the iridescent band is the text's
+				   OWN fill, swept through the glyphs via background-clip: text. Basing
+				   the gradient on currentColor keeps every line its normal colour at
+				   rest — only the moving band adds colour. */
+				.name,
+				.meta,
+				.bio p,
+				.list h2,
+				.row .title,
+				.row .right {
+					background-image: linear-gradient(
+						100deg,
+						currentColor 0%,
+						currentColor 28%,
+						#6ea8ff 40%,
+						#b58cff 50%,
+						#ff9ccf 60%,
+						currentColor 72%,
+						currentColor 100%
+					);
+					background-color: currentColor;
+					background-repeat: no-repeat;
+					background-size: 320% 100%;
+					background-position: 110% 0;
+					background-clip: text;
+					-webkit-background-clip: text;
+					-webkit-text-fill-color: transparent;
+				}
+
+				/* Fade-up text blocks run the reveal and the shine together. */
+				.name,
+				.meta,
+				.bio p,
+				.list h2 {
+					animation:
+						reveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) both,
+						shine 3.6s ease-out both;
+					animation-delay: calc(var(--i, 0) * 55ms), calc(var(--i, 0) * 55ms + 0.1s);
+				}
+
+				/* Row cells shimmer on their own colour; the row handles the fade-up. */
+				.row .title,
+				.row .right {
+					animation: shine 3.6s ease-out both;
+					animation-delay: calc(var(--i, 0) * 55ms + 0.1s);
+				}
+
+				/* Keep links solid and legible while the surrounding text shimmers. */
+				.bio a {
+					-webkit-text-fill-color: currentColor;
+				}
 			}
 
 			@keyframes reveal {
@@ -235,6 +287,15 @@ const work = [
 				to {
 					opacity: 1;
 					transform: translateY(0);
+				}
+			}
+
+			@keyframes shine {
+				from {
+					background-position: 110% 0;
+				}
+				to {
+					background-position: -10% 0;
 				}
 			}
 
