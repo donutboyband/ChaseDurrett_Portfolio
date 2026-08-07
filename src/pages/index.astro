@@ -1,0 +1,250 @@
+---
+const updated = 'Aug 7, 2026';
+
+const work = [
+	{
+		title: 'Willow',
+		href: 'https://willow.fm',
+		meta: 'willow.fm'
+	},
+	{
+		title: 'eccreativ',
+		href: 'https://eccreativ.com',
+		meta: 'eccreativ.com'
+	},
+	{
+		title: 'Soup Agency',
+		href: 'https://weeatsoup.com',
+		meta: 'weeatsoup.com'
+	}
+];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Chase Durrett</title>
+		<meta
+			name="description"
+			content="Chase Durrett — full-stack developer based in Oklahoma City."
+		/>
+
+		<link rel="icon" href="/favicon.ico" sizes="any" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<link rel="manifest" href="/site.webmanifest" />
+
+		<meta name="theme-color" content="#ffffff" />
+		<meta property="og:title" content="Chase Durrett" />
+		<meta
+			property="og:description"
+			content="Full-stack developer based in Oklahoma City."
+		/>
+		<meta property="og:type" content="website" />
+		<meta property="og:image" content="/og-image.png" />
+	</head>
+
+	<body>
+		<main>
+			<header class="intro">
+				<p class="name reveal" style="--i: 0">Chase Durrett</p>
+				<p class="meta reveal" style="--i: 1">@donutboyband</p>
+			</header>
+
+			<section class="bio">
+				<p class="reveal" style="--i: 2">
+					I&rsquo;m a full-stack developer based in Oklahoma City, working remotely.
+				</p>
+
+				<p class="reveal" style="--i: 3">
+					I build enterprise applications at Baltimore Life Insurance Company.
+					Before that I worked as a freelance developer under{' '}
+					<a href="https://weeatsoup.com" target="_blank" rel="noopener noreferrer">Soup Agency</a>{' '}
+					across whatever stack the client used &mdash; WordPress, Svelte, plain HTML &mdash; and
+					before that I ran IT at Audigent (Experian).
+				</p>
+
+				<p class="reveal" style="--i: 4">
+					On the side I'm always tinkering and making things. I am working on <a href="https://open.spotify.com/artist/4e0F3Bqyp0BpE3VmNh4qKS?si=_0xQmRUSSWu95WSv-keyng" target="_blank" rel="noopener noreferrer">Willow</a>, a peer-to-peer music marketplace for trading equity in your music for the work it needs. I also make
+					music with my band{' '}
+					<a href="https://open.spotify.com/artist/4e0F3Bqyp0BpE3VmNh4qKS?si=_0xQmRUSSWu95WSv-keyng" target="_blank" rel="noopener noreferrer">J. Pastel</a>.
+				</p>
+
+				<p class="reveal" style="--i: 5">
+					I care about clean, maintainable code and interfaces that feel good to use.
+				</p>
+
+				<p class="reveal" style="--i: 6">
+					You can find me on{' '}
+					<a href="https://github.com/donutboyband" target="_blank" rel="noopener noreferrer">GitHub</a>,{' '}
+					<a href="https://www.linkedin.com/in/chasedurrett/" target="_blank" rel="noopener noreferrer">LinkedIn</a>,{' '}
+					<a href="https://open.spotify.com/artist/4e0F3Bqyp0BpE3VmNh4qKS" target="_blank" rel="noopener noreferrer">Spotify</a>, or reach me via <a href="mailto:chase@cdinfosec.com">email</a>.
+				</p>
+			</section>
+
+			<section class="list" aria-label="Selected work">
+				<h2 class="reveal" style="--i: 7">Work</h2>
+				{
+					work.map((item, i) => {
+						const external = item.href.startsWith('http');
+						return (
+							<a
+								class="row reveal"
+								href={item.href}
+								style={`--i: ${8 + i}`}
+								target={external ? '_blank' : undefined}
+								rel={external ? 'noopener noreferrer' : undefined}
+							>
+								<span class="title">{item.title}</span>
+								<span class="right">{item.meta}</span>
+							</a>
+						);
+					})
+				}
+			</section>
+		</main>
+
+		<style>
+			:root {
+				--text: #1a1a1a;
+				--muted: #9a9a9a;
+				--rule: #ececec;
+				--underline: #cfcfcf;
+				--bg: #ffffff;
+			}
+
+			* {
+				box-sizing: border-box;
+			}
+
+			html {
+				-webkit-text-size-adjust: 100%;
+			}
+
+			body {
+				margin: 0;
+				background: var(--bg);
+				color: var(--text);
+				font-family:
+					-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+				font-size: 16px;
+				line-height: 1.62;
+				-webkit-font-smoothing: antialiased;
+				text-rendering: optimizeLegibility;
+			}
+
+			main {
+				max-width: 40rem;
+				margin: 0 auto;
+				padding: 5.5rem 1.5rem 8rem;
+			}
+
+			.intro {
+				margin-bottom: 2.25rem;
+			}
+
+			.name {
+				margin: 0;
+			}
+
+			.meta {
+				margin: 0;
+				color: var(--muted);
+			}
+
+			.bio p {
+				margin: 0 0 1.35rem;
+			}
+
+			.bio a {
+				color: inherit;
+				text-decoration: underline;
+				text-decoration-color: var(--underline);
+				text-decoration-thickness: 1px;
+				text-underline-offset: 2px;
+				transition: text-decoration-color 0.15s ease;
+			}
+
+			.bio a:hover {
+				text-decoration-color: var(--text);
+			}
+
+			.list {
+				margin-top: 3.5rem;
+			}
+
+			.list h2 {
+				margin: 0;
+				padding-bottom: 0.85rem;
+				border-bottom: 1px solid var(--rule);
+				font-size: 1rem;
+				font-weight: 400;
+				color: var(--muted);
+			}
+
+			.row {
+				display: grid;
+				grid-template-columns: 1fr auto;
+				gap: 1rem;
+				align-items: baseline;
+				padding: 0.9rem 0;
+				border-bottom: 1px solid var(--rule);
+				color: var(--text);
+				text-decoration: none;
+			}
+
+			.row .title {
+				text-decoration: underline;
+				text-decoration-color: transparent;
+				text-decoration-thickness: 1px;
+				text-underline-offset: 2px;
+				transition: text-decoration-color 0.15s ease;
+			}
+
+			.row:hover .title {
+				text-decoration-color: var(--text);
+			}
+
+			.row .right {
+				color: var(--muted);
+				text-align: right;
+			}
+
+			:focus-visible {
+				outline: 2px solid #1a1a1a;
+				outline-offset: 3px;
+				border-radius: 2px;
+			}
+
+			/* Staggered reveal on load. Gated behind no-preference so that
+			   reduced-motion visitors get the fully-visible page immediately. */
+			@media (prefers-reduced-motion: no-preference) {
+				.reveal {
+					opacity: 0;
+					animation: reveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+					animation-delay: calc(var(--i, 0) * 55ms);
+				}
+			}
+
+			@keyframes reveal {
+				from {
+					opacity: 0;
+					transform: translateY(9px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+			@media (prefers-reduced-motion: reduce) {
+				* {
+					transition: none !important;
+				}
+			}
+		</style>
+	</body>
+</html>

@@ -16,16 +16,9 @@ Thumbs.db
 !.env.example
 !.env.test
 
-# Vite
-vite.config.js.timestamp-*
-vite.config.ts.timestamp-*
-
-# TanStack Router
-src/routeTree.gen.ts
+# Astro
+.astro/
 
 .gogo
 .claude
 .copilot/
-repomix-output.xml
-
-.tanstack/temp
