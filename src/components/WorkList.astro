@@ -1,0 +1,24 @@
+---
+import Link from './Link.astro';
+import type { WorkItem } from '../data/work';
+
+interface Props {
+	items: WorkItem[];
+	// Reveal index the heading starts at; rows continue from there.
+	start: number;
+}
+
+const { items, start } = Astro.props;
+---
+
+<section class="list" aria-label="Selected work">
+	<h2 class="reveal" style={`--i: ${start}`}>Work</h2>
+	{
+		items.map((item, i) => (
+			<Link class="row reveal" href={item.href} style={`--i: ${start + 1 + i}`}>
+				<span class="title">{item.title}</span>
+				<span class="right">{item.meta}</span>
+			</Link>
+		))
+	}
+</section>

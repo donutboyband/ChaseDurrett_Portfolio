@@ -1,0 +1,14 @@
+---
+// Anchor that opens external URLs in a new tab with safe rel attributes.
+type Props = astroHTML.JSX.AnchorHTMLAttributes & { href: string };
+
+const { href, ...rest } = Astro.props;
+const external = href.startsWith('http');
+---
+
+<a
+	href={href}
+	target={external ? '_blank' : undefined}
+	rel={external ? 'noopener noreferrer' : undefined}
+	{...rest}><slot /></a
+>
